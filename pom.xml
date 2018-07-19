@@ -251,6 +251,14 @@
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>${gae.version}</version>
+				<!--<configuration>-->
+					<!--<jvmFlags>-->
+						<!--<jvmFlag>-Xdebug</jvmFlag>-->
+						<!--<jvmFlag>-Xnoagent</jvmFlag>-->
+						<!--<jvmFlag>-Xrunjdwp:transport=dt_socket,address=4001,suspend=y,server=y-->
+						<!--</jvmFlag>-->
+					<!--</jvmFlags>-->
+				<!--</configuration>-->
 				<executions>
 					<execution>
 						<id>start-appengine</id>
