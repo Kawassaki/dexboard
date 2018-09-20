@@ -168,6 +168,7 @@
             </activation>
             <properties>
                 <gae.application.version>release</gae.application.version>
+                <gae.application.id>dexboard-reload</gae.application.id>
                 <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
                 <dxb.bcc>jose.guedes@dextra-sw.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
@@ -184,8 +185,9 @@
             </activation>
             <properties>
                 <gae.application.version>release</gae.application.version>
-                <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
-                <dxb.bcc>fernando@dextra-sw.com</dxb.bcc>
+                <gae.application.id>dexboard-mutant</gae.application.id>
+                <dxb.spreadsheet>13OsiZ1TEgs5tpsjWDdZqkh5t_QhQcrl2-eDmRO9Fg0U</dxb.spreadsheet>
+                <dxb.bcc>gabriel.reis@mutantbr.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>mutantbr.com</dxb.domain>
             </properties>
         </profile>
@@ -200,6 +202,7 @@
             <properties>
                 <skip.integration.tests>false</skip.integration.tests>
                 <integration.test>true</integration.test>
+                <gae.application.id>dexboard-reload</gae.application.id>
                 <dxb.bcc>fernando@dextra-sw.com</dxb.bcc>
             </properties>
         </profile>
