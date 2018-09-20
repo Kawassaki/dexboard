@@ -170,6 +170,7 @@
                 <gae.application.version>release</gae.application.version>
                 <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
                 <dxb.bcc>jose.guedes@dextra-sw.com,fernando@dextra-sw.com</dxb.bcc>
+                <dxb.domain>dextra-sw.com</dxb.domain>
             </properties>
         </profile>
 
@@ -185,6 +186,7 @@
                 <gae.application.version>release</gae.application.version>
                 <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
                 <dxb.bcc>fernando@dextra-sw.com</dxb.bcc>
+                <dxb.domain>mutantbr.com</dxb.domain>
             </properties>
         </profile>
 

@@ -14,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import br.com.dextra.dexboard.utils.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -139,10 +140,7 @@ public class NotificacaoDao {
     }
 
     private void addBccs(Message msg) throws MessagingException, UnsupportedEncodingException {
-        String bccProperty = System.getProperty("dxb.bcc");
-        if (bccProperty == null) {
-            return;
-        }
+        String bccProperty = Config.getProperty("dxb.bcc", "fernando@dextra-sw.com");
         String[] bccs = bccProperty.replaceAll("\\s+", "").split(",");
         for (String bcc : bccs) {
             msg.addRecipient(Message.RecipientType.BCC, new InternetAddress(bcc, bcc));
