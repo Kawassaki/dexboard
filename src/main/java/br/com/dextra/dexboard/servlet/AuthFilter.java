@@ -86,6 +86,10 @@ public class AuthFilter implements Filter {
     }
 
     private boolean isValidOrgUser(User user) {
+        UserService service = UserServiceFactory.getUserService();
+        if (service.isUserAdmin()) {
+            return true;
+        }
         return user.getEmail().endsWith("@" + ORG_DOMAIN);
     }
 
