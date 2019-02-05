@@ -1,14 +1,13 @@
 package br.com.dextra.dexboard.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import br.com.dextra.dexboard.json.ProjetoJson;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
 
-import br.com.dextra.dexboard.json.ProjetoJson;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Projeto {
@@ -23,8 +22,19 @@ public class Projeto {
 	private String equipe;
 
 	private String email;
-	
+
 	private String apresentacao;
+	@Ignore // Lazy
+	private ProjetoJson projetoJson;
+
+	public static List<ProjetoJson> toProjetoJson(List<Projeto> projetos) {
+		ArrayList<ProjetoJson> projetosJson = new ArrayList<ProjetoJson>(projetos.size());
+		for (Projeto p : projetos) {
+			projetosJson.add(p.toProjetoJson());
+		}
+
+		return projetosJson;
+	}
 
 	public Long getIdPma() {
 		return idPma;
@@ -58,12 +68,12 @@ public class Projeto {
 		this.ativo = ativo;
 	}
 
-	public void setEquipe(String equipe) {
-		this.equipe = equipe.toUpperCase();
-	}
-
 	public String getEquipe() {
 		return equipe;
+	}
+
+	public void setEquipe(String equipe) {
+		this.equipe = equipe.toUpperCase();
 	}
 
 	public String getEmail() {
@@ -73,31 +83,19 @@ public class Projeto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getApresentacao() {
 		return apresentacao;
 	}
-	
+
 	public void setApresentacao(String apresentacao) {
 		this.apresentacao = apresentacao;
 	}
-	
-	@Ignore // Lazy
-	private ProjetoJson projetoJson;
-	
+
 	public ProjetoJson toProjetoJson() {
 		if (this.projetoJson == null) {
-			this.projetoJson = new ProjetoJson(this); 
+			this.projetoJson = new ProjetoJson(this);
 		}
 		return this.projetoJson;
-	}
-	
-	public static List<ProjetoJson> toProjetoJson(List<Projeto> projetos) {
-		ArrayList<ProjetoJson> projetosJson = new ArrayList<ProjetoJson>(projetos.size());
-		for (Projeto p : projetos) {
-			projetosJson.add(p.toProjetoJson());
-		}
-		
-		return projetosJson;
 	}
 }

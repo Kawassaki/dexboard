@@ -1,10 +1,10 @@
 package br.com.dextra.dexboard.planilha;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.utils.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndicadores {
 

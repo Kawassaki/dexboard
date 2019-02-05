@@ -1,30 +1,26 @@
 package br.com.dextra.dexboard.servlet;
 
-import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
+import br.com.dextra.dexboard.dao.ProjetoDao;
+import br.com.dextra.dexboard.domain.Projeto;
+import br.com.dextra.dexboard.json.ProjetoJson;
+import br.com.dextra.dexboard.repository.ProjetoComparator;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import flexjson.JSONSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
-
-import br.com.dextra.dexboard.dao.ProjetoDao;
-import br.com.dextra.dexboard.domain.Projeto;
-import br.com.dextra.dexboard.json.ProjetoJson;
-import br.com.dextra.dexboard.repository.ProjetoComparator;
-import flexjson.JSONSerializer;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class QueryServlet extends HttpServlet {
 
-	private static final String EQUIPE_HTTP_PARAMETER = "equipe";
-
-	private static final long serialVersionUID = -1248500946944090403L;
-
 	public static final int CACHE_EXPIRATION_SECONDS = 60 * 60;
+	private static final String EQUIPE_HTTP_PARAMETER = "equipe";
+	private static final long serialVersionUID = -1248500946944090403L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,7 +32,7 @@ public class QueryServlet extends HttpServlet {
 	private String getJsonProjetosWithCache(String equipe) {
 		MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
-		if(useCache(equipe)) {
+		if (useCache(equipe)) {
 			String cacheJson = (String) memcacheService.get(ProjetoDao.KEY_CACHE);
 			if (cacheJson != null) {
 				return cacheJson;
@@ -45,7 +41,7 @@ public class QueryServlet extends HttpServlet {
 
 		String json = getJsonProjetos(equipe);
 
-		if(useCache(equipe)) {
+		if (useCache(equipe)) {
 			memcacheService.put(ProjetoDao.KEY_CACHE, json);
 		}
 

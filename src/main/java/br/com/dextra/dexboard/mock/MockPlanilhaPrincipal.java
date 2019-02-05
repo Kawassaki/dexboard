@@ -1,20 +1,30 @@
 package br.com.dextra.dexboard.mock;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.planilha.PlanilhaPrincipal;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MockPlanilhaPrincipal implements PlanilhaPrincipal {
+
+	private static Projeto p(long id, String nome, String equipe, String email, double cpi) {
+		Projeto projeto = new Projeto();
+		projeto.setIdPma(id);
+		projeto.setNome(nome);
+		projeto.setEquipe(equipe);
+		projeto.setEmail(email);
+		projeto.setCpi(cpi);
+		return projeto;
+	}
 
 	@Override
 	public Map<Long, Projeto> buscarDadosDosProjetos() {
 		Map<Long, Projeto> map = new HashMap<>();
-		
+
 		// TODO: trazer da build
 		String email = "fernando@dextra-sw.com";
-		
+
 		map.put(495l, p(495l, "A4C", "Chaos", email, 1.01d));
 		map.put(565l, p(565l, "Confidence", "Rocket", email, 0.99d));
 		map.put(530l, p(530l, "DPaschoal", "Heisenberg", email, 1.05d));
@@ -38,18 +48,8 @@ public class MockPlanilhaPrincipal implements PlanilhaPrincipal {
 		map.put(583l, p(583l, "Wareline: Editor", "Mustache", email, 1.18d));
 		map.put(585l, p(585l, "ADV: Fase II", "Mustache", email, 1.39d));
 		map.put(24l, p(24l, "TI Dextra", "TI", email, 1.00d));
-		
+
 		return map;
 	}
-	
-	private static Projeto p(long id, String nome, String equipe, String email, double cpi) {
-		Projeto projeto = new Projeto();
-		projeto.setIdPma(id);
-		projeto.setNome(nome);
-		projeto.setEquipe(equipe);
-		projeto.setEmail(email);
-		projeto.setCpi(cpi);
-		return projeto;
-	}
-	
+
 }

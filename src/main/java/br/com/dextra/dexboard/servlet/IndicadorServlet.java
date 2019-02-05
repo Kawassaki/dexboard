@@ -1,21 +1,18 @@
 package br.com.dextra.dexboard.servlet;
 
-import java.io.IOException;
-import java.util.Date;
+import br.com.dextra.dexboard.dao.ProjetoDao;
+import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import br.com.dextra.dexboard.dao.ProjetoDao;
-import br.com.dextra.dexboard.domain.RegistroAlteracao;
-
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
-
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
+import java.io.IOException;
+import java.util.Date;
 
 public class IndicadorServlet extends HttpServlet {
 
@@ -42,7 +39,7 @@ public class IndicadorServlet extends HttpServlet {
 
 		ProjetoDao dao = new ProjetoDao();
 		RegistroAlteracao registro = dao.salvaAlteracao(idProjeto, idIndicador, regAlteracao);
-		
+
 		JSONSerializer serializer = new JSONSerializer();
 		resp.getWriter().println(serializer.serialize(registro));
 	}

@@ -1,5 +1,10 @@
 package br.com.dextra.dexboard.json;
 
+import br.com.dextra.dexboard.domain.Classificacao;
+import br.com.dextra.dexboard.domain.Indicador;
+import br.com.dextra.dexboard.domain.Projeto;
+import br.com.dextra.dexboard.domain.RegistroAlteracao;
+
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -7,11 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import br.com.dextra.dexboard.domain.Classificacao;
-import br.com.dextra.dexboard.domain.Indicador;
-import br.com.dextra.dexboard.domain.Projeto;
-import br.com.dextra.dexboard.domain.RegistroAlteracao;
 
 public class HistoricoJson {
 

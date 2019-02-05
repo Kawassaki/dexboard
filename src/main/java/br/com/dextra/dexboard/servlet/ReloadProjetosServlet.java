@@ -1,25 +1,23 @@
 package br.com.dextra.dexboard.servlet;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.planilha.PlanilhaFactory;
 import br.com.dextra.dexboard.planilha.PlanilhaIndicadores;
 import br.com.dextra.dexboard.service.ProjetoPlanilhaService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ReloadProjetosServlet extends HttpServlet {
 
@@ -37,7 +35,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 
 	public void doReload() {
 		ProjetoDao dao = new ProjetoDao();
-		
+
 		PlanilhaIndicadores planilhaIndicadores = PlanilhaFactory.indicadores();
 		LOG.info("Buscando lista de indicadores ...");
 		this.indicadores = planilhaIndicadores.criarListaDeIndicadores();
@@ -71,7 +69,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 	}
 
 	private void adicionaProjetosNovos(Map<Long, Projeto> mapProjetosDataStore, Collection<Projeto> ativos) {
-		
+
 		ProjetoDao dao = new ProjetoDao();
 
 		for (Projeto p : ativos) {
@@ -93,7 +91,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 	}
 
 	private void atualizaProjetosAtivos(Map<Long, Projeto> projetosPlanilha, List<Projeto> projetosEmCache) {
-		
+
 		ProjetoDao dao = new ProjetoDao();
 
 		if (projetosEmCache == null) {

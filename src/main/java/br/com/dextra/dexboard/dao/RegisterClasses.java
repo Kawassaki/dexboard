@@ -4,7 +4,6 @@ import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.Notificacao;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
-
 import com.googlecode.objectify.ObjectifyService;
 
 public class RegisterClasses {

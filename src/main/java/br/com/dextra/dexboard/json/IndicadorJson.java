@@ -1,18 +1,13 @@
 package br.com.dextra.dexboard.json;
 
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import br.com.dextra.dexboard.dao.NotificacaoDao;
 import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.Classificacao;
 import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
 import flexjson.JSON;
+
+import java.util.*;
 
 public class IndicadorJson {
 

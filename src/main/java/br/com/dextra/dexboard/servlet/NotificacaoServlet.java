@@ -1,15 +1,14 @@
 package br.com.dextra.dexboard.servlet;
 
-import java.io.IOException;
-import java.util.List;
+import br.com.dextra.dexboard.dao.NotificacaoDao;
+import br.com.dextra.dexboard.domain.Projeto;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import br.com.dextra.dexboard.dao.NotificacaoDao;
-import br.com.dextra.dexboard.domain.Projeto;
+import java.io.IOException;
+import java.util.List;
 
 public class NotificacaoServlet extends HttpServlet {
 
@@ -23,7 +22,7 @@ public class NotificacaoServlet extends HttpServlet {
 	}
 
 	private void notificarProjetosAtrasados() {
-		
+
 		NotificacaoDao dao = new NotificacaoDao();
 
 		List<Projeto> projetos = dao.buscarProjetosParaNotificar();

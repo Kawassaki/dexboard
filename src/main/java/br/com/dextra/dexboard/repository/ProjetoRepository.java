@@ -1,28 +1,20 @@
 package br.com.dextra.dexboard.repository;
 
+import br.com.dextra.dexboard.domain.ListaProjeto;
+import br.com.dextra.dexboard.domain.Projeto;
+import com.google.appengine.api.datastore.*;
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import br.com.dextra.dexboard.domain.ListaProjeto;
-import br.com.dextra.dexboard.domain.Projeto;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Text;
-
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
-
 public class ProjetoRepository {
 
 	public static Projeto buscarPorId(int id, List<Projeto> projetos) {
-		
+
 		for (Projeto projeto : projetos) {
 			if (projeto.getIdPma() == id)
 				return projeto;
@@ -55,8 +47,8 @@ public class ProjetoRepository {
 
 		Collections.sort(projetos, new ProjetoComparator());
 		ListaProjeto lista = new ListaProjeto(projetos);
-		
-		
+
+
 		JSONSerializer serializer = new JSONSerializer();
 		serializer.exclude("*.class");
 		String data = serializer.deepSerialize(lista);

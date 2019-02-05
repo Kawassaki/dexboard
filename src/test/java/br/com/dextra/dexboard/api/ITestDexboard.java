@@ -1,130 +1,128 @@
 package br.com.dextra.dexboard.api;
 
-import static org.junit.Assert.assertEquals;
+import br.com.dextra.dexboard.domain.Classificacao;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import org.junit.Assert;
+import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-import org.junit.Assert;
-import org.junit.Test;
-import org.slf4j.LoggerFactory;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import br.com.dextra.dexboard.domain.Classificacao;
+import static org.junit.Assert.assertEquals;
 
 public class ITestDexboard extends ApiTest {
 
-	private static final int ID_PROJETO_CONTPLAY = 495;
-	private static final int ID_INDICADOR_1 = 1;
-	private static final int ID_INDICADOR_2 = 2;
-	
-	private static final String APRESENTACAO = "https://docs.google.com/presentation/d/1ID6Oh3Dm0HHFQb9h8A32WJYy5Z-gufbLiTEcrdKAtM8/embed";
+    private static final int ID_PROJETO_CONTPLAY = 495;
+    private static final int ID_INDICADOR_1 = 1;
+    private static final int ID_INDICADOR_2 = 2;
 
-	@Test
-	public void testQueryProjetos() {
-		JsonArray projetos = queryProjetosJson(null);
+    private static final String APRESENTACAO = "https://docs.google.com/presentation/d/1ID6Oh3Dm0HHFQb9h8A32WJYy5Z-gufbLiTEcrdKAtM8/embed";
 
-		assertEquals(23, projetos.size());
-		
-		LoggerFactory.getLogger(this.getClass()).info(projetos.toString());
+    @Test
+    public void testQueryProjetos() {
+        JsonArray projetos = queryProjetosJson(null);
 
-		JsonObject a4c = projetos.get(0).getAsJsonObject();
-		JsonObject adv = projetos.get(1).getAsJsonObject();
-		JsonObject facti = projetos.get(4).getAsJsonObject();
+        assertEquals(23, projetos.size());
 
-		assertProjeto(495, "A4C", "CHAOS", 1.01, a4c);
-		assertProjeto(585, "ADV: Fase II", "MUSTACHE", 1.39, adv);
-		assertEquals(APRESENTACAO, facti.get("apresentacao").getAsString());
-	}
+        LoggerFactory.getLogger(this.getClass()).info(projetos.toString());
 
-	@Test
-	public void testQueryProjetosEquipe() {
-		JsonArray projetos = queryProjetosJson("Rocket");
+        JsonObject a4c = projetos.get(0).getAsJsonObject();
+        JsonObject adv = projetos.get(1).getAsJsonObject();
+        JsonObject facti = projetos.get(4).getAsJsonObject();
 
-		assertEquals(2, projetos.size());
+        assertProjeto(495, "A4C", "CHAOS", 1.01, a4c);
+        assertProjeto(585, "ADV: Fase II", "MUSTACHE", 1.39, adv);
+        assertEquals(APRESENTACAO, facti.get("apresentacao").getAsString());
+    }
 
-		JsonObject confidence = projetos.get(0).getAsJsonObject();
-		JsonObject movile = projetos.get(1).getAsJsonObject();
+    @Test
+    public void testQueryProjetosEquipe() {
+        JsonArray projetos = queryProjetosJson("Rocket");
 
-		assertProjeto(565, "Confidence", "ROCKET", 0.99, confidence);
-		assertProjeto(579, "Movile", "ROCKET", 1.70, movile);
+        assertEquals(2, projetos.size());
 
-	}
+        JsonObject confidence = projetos.get(0).getAsJsonObject();
+        JsonObject movile = projetos.get(1).getAsJsonObject();
 
-	private JsonArray queryProjetosJson(String equipe) {
-		Map<String, String> query = new HashMap<>();
-		if (equipe != null && !equipe.isEmpty()) {
-			query.put("equipe", equipe);
-		}
+        assertProjeto(565, "Confidence", "ROCKET", 0.99, confidence);
+        assertProjeto(579, "Movile", "ROCKET", 1.70, movile);
 
-		return service.get("/query", query).getAsJsonArray();
-	}
+    }
 
-	private void assertProjeto(int idPma, String nome, String equipe, double cpi, JsonObject projetoJson) {
-		assertEquals(idPma, projetoJson.get("idPma").getAsInt());
-		assertEquals(nome, projetoJson.get("nome").getAsString());
-		assertEquals(equipe, projetoJson.get("equipe").getAsString());
-		assertEquals(cpi, projetoJson.get("cpi").getAsDouble(), 0.001);
-	}
+    private JsonArray queryProjetosJson(String equipe) {
+        Map<String, String> query = new HashMap<>();
+        if (equipe != null && !equipe.isEmpty()) {
+            query.put("equipe", equipe);
+        }
 
-	@Test
-	public void testAlterarIndicadores() {
-		alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, ID_INDICADOR_1, Classificacao.OK);
-		verificaSeProjetoEstaComIndicadorPreenchido(ID_PROJETO_CONTPLAY, ID_INDICADOR_1, Classificacao.OK);
-	}
-	
-	@Test
-	public void testAlterarIndicadores2() {
-		alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, ID_INDICADOR_2, Classificacao.ATENCAO);
-		verificaSeProjetoEstaComIndicadorPreenchido(ID_PROJETO_CONTPLAY, ID_INDICADOR_2, Classificacao.ATENCAO);
-	}
+        return service.get("/query", query).getAsJsonArray();
+    }
 
-	@Test
-	public void testAtrasoIndicadorJson() {
-		for (int i = 1; i <= 6; i++) {
-			alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, i, Classificacao.ATENCAO);
-		}
-		
-		JsonObject projeto = getProjeto((long) ID_PROJETO_CONTPLAY);
-		JsonArray indicadores = projeto.get("indicadores").getAsJsonArray();
-		JsonObject indicador = indicadores.get(0).getAsJsonObject();
-		
-		Assert.assertFalse(indicador.get("atrasado").getAsBoolean());
-	}
+    private void assertProjeto(int idPma, String nome, String equipe, double cpi, JsonObject projetoJson) {
+        assertEquals(idPma, projetoJson.get("idPma").getAsInt());
+        assertEquals(nome, projetoJson.get("nome").getAsString());
+        assertEquals(equipe, projetoJson.get("equipe").getAsString());
+        assertEquals(cpi, projetoJson.get("cpi").getAsDouble(), 0.001);
+    }
 
-	private void verificaSeProjetoEstaComIndicadorPreenchido(int idProjeto, 
-			int idIndicadorAlterado, Classificacao classificacao) {
-		
-		
-		JsonObject projeto = this.getProjeto(idProjeto);
-		JsonArray indicadores = projeto.get("indicadores").getAsJsonArray();
-		
-		JsonObject indicadorAlterado = encontraIndicadorDeId(indicadores, idIndicadorAlterado);
-		
-		String classificacaoAlterada = indicadorAlterado.get("classificacao").getAsString();
-		JsonArray registrosAlterados = indicadorAlterado.get("registros").getAsJsonArray();
-		JsonObject ultimaAlteracao = registrosAlterados.get(0).getAsJsonObject();
-		JsonElement dataAlterada = ultimaAlteracao.get("data");
-		String usuarioAlterado = ultimaAlteracao.get("usuario").getAsString();
+    @Test
+    public void testAlterarIndicadores() {
+        alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, ID_INDICADOR_1, Classificacao.OK);
+        verificaSeProjetoEstaComIndicadorPreenchido(ID_PROJETO_CONTPLAY, ID_INDICADOR_1, Classificacao.OK);
+    }
 
-		Assert.assertEquals(classificacao, Classificacao.valueOf(classificacaoAlterada));
-		Assert.assertNotNull(dataAlterada);
-		Assert.assertEquals("test@dextra-sw.com", usuarioAlterado);
+    @Test
+    public void testAlterarIndicadores2() {
+        alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, ID_INDICADOR_2, Classificacao.ATENCAO);
+        verificaSeProjetoEstaComIndicadorPreenchido(ID_PROJETO_CONTPLAY, ID_INDICADOR_2, Classificacao.ATENCAO);
+    }
 
-	}
+    @Test
+    public void testAtrasoIndicadorJson() {
+        for (int i = 1; i <= 6; i++) {
+            alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, i, Classificacao.ATENCAO);
+        }
 
-	private JsonObject encontraIndicadorDeId(JsonArray indicadores, int idParaEncontrar) {
-		for (JsonElement el : indicadores) {
-			JsonObject indicador = el.getAsJsonObject();
-			int id = indicador.get("id").getAsInt();
-			if (id == idParaEncontrar) {
-				return indicador;
-			}
-		}
-		throw new NoSuchElementException(Integer.toString(idParaEncontrar));
-	}
+        JsonObject projeto = getProjeto((long) ID_PROJETO_CONTPLAY);
+        JsonArray indicadores = projeto.get("indicadores").getAsJsonArray();
+        JsonObject indicador = indicadores.get(0).getAsJsonObject();
+
+        Assert.assertFalse(indicador.get("atrasado").getAsBoolean());
+    }
+
+    private void verificaSeProjetoEstaComIndicadorPreenchido(int idProjeto,
+                                                             int idIndicadorAlterado, Classificacao classificacao) {
+
+
+        JsonObject projeto = this.getProjeto(idProjeto);
+        JsonArray indicadores = projeto.get("indicadores").getAsJsonArray();
+
+        JsonObject indicadorAlterado = encontraIndicadorDeId(indicadores, idIndicadorAlterado);
+
+        String classificacaoAlterada = indicadorAlterado.get("classificacao").getAsString();
+        JsonArray registrosAlterados = indicadorAlterado.get("registros").getAsJsonArray();
+        JsonObject ultimaAlteracao = registrosAlterados.get(0).getAsJsonObject();
+        JsonElement dataAlterada = ultimaAlteracao.get("data");
+        String usuarioAlterado = ultimaAlteracao.get("usuario").getAsString();
+
+        Assert.assertEquals(classificacao, Classificacao.valueOf(classificacaoAlterada));
+        Assert.assertNotNull(dataAlterada);
+        Assert.assertEquals("test@dextra-sw.com", usuarioAlterado);
+
+    }
+
+    private JsonObject encontraIndicadorDeId(JsonArray indicadores, int idParaEncontrar) {
+        for (JsonElement el : indicadores) {
+            JsonObject indicador = el.getAsJsonObject();
+            int id = indicador.get("id").getAsInt();
+            if (id == idParaEncontrar) {
+                return indicador;
+            }
+        }
+        throw new NoSuchElementException(Integer.toString(idParaEncontrar));
+    }
 }

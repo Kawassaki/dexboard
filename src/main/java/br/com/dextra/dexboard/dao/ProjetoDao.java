@@ -1,31 +1,27 @@
 package br.com.dextra.dexboard.dao;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import br.com.dextra.dexboard.domain.Indicador;
+import br.com.dextra.dexboard.domain.Projeto;
+import br.com.dextra.dexboard.domain.RegistroAlteracao;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.LoadResult;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import br.com.dextra.dexboard.domain.Indicador;
-import br.com.dextra.dexboard.domain.Projeto;
-import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class ProjetoDao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ProjetoDao.class);
-
 	public static final String KEY_CACHE = "dexboard.cache.key";
 	public static final String HISTORY_CACHE = "dexlife.cache.key";
-
+	private static final Logger LOG = LoggerFactory.getLogger(ProjetoDao.class);
 	private Objectify ofy;
 
 	public ProjetoDao() {
@@ -62,23 +58,23 @@ public class ProjetoDao {
 		if (list == null || list.size() == 0) {
 			return new ArrayList<RegistroAlteracao>();
 		}
-		
+
 		Collections.reverse(list);
 
-		if (list.size() <= limit-1) {
+		if (list.size() <= limit - 1) {
 			return list;
 		} else {
 			return list.subList(0, limit);
 		}
 	}
-	
+
 	public List<Projeto> buscarTodosProjetos() {
 		Query<Projeto> query = ofy.load()
 				.type(Projeto.class)
 				.filter("ativo", true);
 		return query.list();
 	}
-	
+
 	public List<Projeto> buscarProjetosInativos() {
 		Query<Projeto> query = ofy.load()
 				.type(Projeto.class)
@@ -90,17 +86,17 @@ public class ProjetoDao {
 		Query<Projeto> query = ofy.load()
 				.type(Projeto.class)
 				.filter("equipe", equipe.toUpperCase());
-		
+
 		List<Projeto> list = query.list();
 		List<Projeto> ativos = new ArrayList<>();
 		list.size();
-		
+
 		for (Projeto projeto : list) {
 			if (projeto.isAtivo()) {
 				ativos.add(projeto);
 			}
 		}
-		
+
 		return ativos;
 	}
 
@@ -149,7 +145,7 @@ public class ProjetoDao {
 		registroAlteracao.setProjeto(keyProjeto);
 		registroAlteracao.defineId();
 		ofy.save().entity(registroAlteracao).now();
-		
+
 		return registroAlteracao;
 	}
 
