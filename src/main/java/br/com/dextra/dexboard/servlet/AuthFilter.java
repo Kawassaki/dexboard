@@ -51,7 +51,6 @@ public class AuthFilter implements Filter {
 		}
 
 		chain.doFilter(request, response);
-		return;
 	}
 
 	private boolean isAdminPath(String uri) {
