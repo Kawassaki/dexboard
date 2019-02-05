@@ -14,12 +14,11 @@ import java.util.List;
 public class ProjetoJson {
 
 	private Projeto projeto;
-	private List<IndicadorJson> indicadores = new ArrayList<IndicadorJson>();
+	private List<IndicadorJson> indicadores = new ArrayList<>();
 	private Classificacao classificacao;
 	private boolean atrasado;
 
 	public ProjetoJson() {
-		super();
 	}
 
 	public ProjetoJson(Projeto projeto) {
@@ -96,7 +95,6 @@ public class ProjetoJson {
 		Classificacao retorno = Classificacao.OK;
 
 		for (IndicadorJson indicador : this.getIndicadores()) {
-
 			Classificacao classificacao = indicador.getClassificacao();
 
 			if (classificacao.equals(Classificacao.PERIGO)) {

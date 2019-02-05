@@ -19,9 +19,7 @@ public class IndicadorServlet extends HttpServlet {
 	private static final long serialVersionUID = -7416705488396246559L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 

@@ -71,8 +71,7 @@ public class IndicadorJson {
 		calendar.setTime(data);
 		calendar.add(Calendar.DAY_OF_MONTH, NotificacaoDao.getValidadeAlteracao());
 
-		boolean validade = calendar.getTime().compareTo(new Date()) > -1;
-		return validade;
+		return calendar.getTime().compareTo(new Date()) > -1;
 	}
 
 }

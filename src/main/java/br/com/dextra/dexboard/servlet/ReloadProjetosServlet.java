@@ -9,7 +9,6 @@ import br.com.dextra.dexboard.service.ProjetoPlanilhaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +26,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 	private List<Indicador> indicadores = null;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setContentType("application/json");
 		this.doReload();
 		resp.getWriter().print("{\"status\": \"success\"}");
@@ -61,7 +60,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 	}
 
 	private Map<Long, Projeto> createMapProjetos(List<Projeto> projetos) {
-		Map<Long, Projeto> map = new HashMap<Long, Projeto>();
+		Map<Long, Projeto> map = new HashMap<>();
 		for (Projeto p : projetos) {
 			map.put(p.getIdPma(), p);
 		}
@@ -69,7 +68,6 @@ public class ReloadProjetosServlet extends HttpServlet {
 	}
 
 	private void adicionaProjetosNovos(Map<Long, Projeto> mapProjetosDataStore, Collection<Projeto> ativos) {
-
 		ProjetoDao dao = new ProjetoDao();
 
 		for (Projeto p : ativos) {
@@ -91,7 +89,6 @@ public class ReloadProjetosServlet extends HttpServlet {
 	}
 
 	private void atualizaProjetosAtivos(Map<Long, Projeto> projetosPlanilha, List<Projeto> projetosEmCache) {
-
 		ProjetoDao dao = new ProjetoDao();
 
 		if (projetosEmCache == null) {

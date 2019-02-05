@@ -60,7 +60,7 @@ public class HistoryServlet extends HttpServlet {
 		cal.add(Calendar.DAY_OF_MONTH, -30);
 
 		List<RegistroAlteracao> buscarHistoricoAlteracoes = getDao().buscarHistoricoAlteracoes(cal.getTime(), 16);
-		List<HistoricoJson> historico = new ArrayList<HistoricoJson>();
+		List<HistoricoJson> historico = new ArrayList<>();
 
 		for (RegistroAlteracao h : buscarHistoricoAlteracoes) {
 			historico.add(new HistoricoJson(h, getProjeto(h.getProjeto()), getIndicador(h.getIndicador())));
@@ -68,8 +68,7 @@ public class HistoryServlet extends HttpServlet {
 
 		JSONSerializer serializer = new JSONSerializer();
 		serializer.exclude("*.class", "*.projeto");
-		String json = serializer.deepSerialize(historico);
-		return json;
+		return serializer.deepSerialize(historico);
 	}
 
 	private Indicador getIndicador(Key<Indicador> key) {

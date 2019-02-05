@@ -8,7 +8,6 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import flexjson.JSONSerializer;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +22,7 @@ public class QueryServlet extends HttpServlet {
 	private static final long serialVersionUID = -1248500946944090403L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
 		resp.getWriter().print(getJsonProjetosWithCache(req.getParameter(EQUIPE_HTTP_PARAMETER)));
@@ -56,8 +55,7 @@ public class QueryServlet extends HttpServlet {
 		List<ProjetoJson> projetosJson = Projeto.toProjetoJson(projetos);
 		JSONSerializer serializer = new JSONSerializer();
 		serializer.exclude("*.class", "*.projeto");
-		String json = serializer.deepSerialize(projetosJson);
-		return json;
+		return serializer.deepSerialize(projetosJson);
 	}
 
 	private boolean useCache(String equipe) {

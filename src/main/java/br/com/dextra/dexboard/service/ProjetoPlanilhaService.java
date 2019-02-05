@@ -5,14 +5,10 @@ import br.com.dextra.dexboard.planilha.PlanilhaFactory;
 import br.com.dextra.dexboard.planilha.PlanilhaPrincipal;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
 public class ProjetoPlanilhaService {
-
-	public final static Logger LOG = LoggerFactory.getLogger(ProjetoPlanilhaService.class);
 
 	public static Map<Long, Projeto> buscarDadosProjetosAtivos() {
 		PlanilhaPrincipal planilhaPrincipal = PlanilhaFactory.principal();

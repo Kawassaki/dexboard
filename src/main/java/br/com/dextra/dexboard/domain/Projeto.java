@@ -28,7 +28,7 @@ public class Projeto {
 	private ProjetoJson projetoJson;
 
 	public static List<ProjetoJson> toProjetoJson(List<Projeto> projetos) {
-		ArrayList<ProjetoJson> projetosJson = new ArrayList<ProjetoJson>(projetos.size());
+		ArrayList<ProjetoJson> projetosJson = new ArrayList<>(projetos.size());
 		for (Projeto p : projetos) {
 			projetosJson.add(p.toProjetoJson());
 		}

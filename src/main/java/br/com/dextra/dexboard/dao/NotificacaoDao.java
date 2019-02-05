@@ -42,8 +42,7 @@ public class NotificacaoDao {
 
 	public List<Projeto> buscarProjetosParaNotificar() {
 		List<Projeto> projetosAtrasados = buscarProjetosAtrasados();
-
-		List<Projeto> projetosParaNotificar = new ArrayList<Projeto>();
+		List<Projeto> projetosParaNotificar = new ArrayList<>();
 
 		for (Projeto projeto : projetosAtrasados) {
 
@@ -52,7 +51,6 @@ public class NotificacaoDao {
 			if (notificacao == null || calculaDiasAtras(notificacao.getDate()) >= DIAS_PARA_RENOTIFICAR) {
 				projetosParaNotificar.add(projeto);
 			}
-
 		}
 
 		return projetosParaNotificar;
@@ -63,7 +61,7 @@ public class NotificacaoDao {
 	}
 
 	private List<Projeto> buscarProjetosAtrasados() {
-		List<Projeto> projetosAtrasados = new ArrayList<Projeto>();
+		List<Projeto> projetosAtrasados = new ArrayList<>();
 		int validadeAlteracao = getValidadeAlteracao();
 
 		List<Projeto> projetos = buscarProjetos();
@@ -141,12 +139,10 @@ public class NotificacaoDao {
 	}
 
 	private String createMessageBody(Projeto projeto) {
-		StringBuilder msgBody = new StringBuilder();
-		msgBody.append(String.format("<p><b>%s</b>, n&atilde;o deixe seu projeto <b>%s</b> ficar desatualizado...</p>",
-				projeto.getEquipe(), projeto.getNome()));
-		msgBody.append("<p>Acesse o dexboard para atualiz&aacute;-lo: <a href=\"http://dexboard-reload.appspot.com\">dexboard-reload.appspot.com</a></p>");
-		msgBody.append("<img width=300 src=\"" + getImg() + "\"/>");
-		return msgBody.toString();
+		return String.format("<p><b>%s</b>, n&atilde;o deixe seu projeto <b>%s</b> ficar desatualizado...</p>",
+				projeto.getEquipe(), projeto.getNome()) +
+				"<p>Acesse o dexboard para atualiz&aacute;-lo: <a href=\"http://dexboard-reload.appspot.com\">dexboard-reload.appspot.com</a></p>" +
+				"<img width=300 src=\"" + getImg() + "\"/>";
 	}
 
 	private String getImg() {

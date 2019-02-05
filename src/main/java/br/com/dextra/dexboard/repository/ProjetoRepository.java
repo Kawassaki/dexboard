@@ -14,10 +14,10 @@ import java.util.List;
 public class ProjetoRepository {
 
 	public static Projeto buscarPorId(int id, List<Projeto> projetos) {
-
 		for (Projeto projeto : projetos) {
-			if (projeto.getIdPma() == id)
+			if (projeto.getIdPma() == id) {
 				return projeto;
+			}
 		}
 
 		return null;
@@ -33,18 +33,17 @@ public class ProjetoRepository {
 			Text text = (Text) entity.getProperty("json");
 
 			if (text != null) {
-				JSONDeserializer<ListaProjeto> des = new JSONDeserializer<ListaProjeto>();
+				JSONDeserializer<ListaProjeto> des = new JSONDeserializer<>();
 				projetos = des.deserialize(text.getValue(), ListaProjeto.class);
 			}
 		} catch (EntityNotFoundException e) {
-			return new ArrayList<Projeto>();
+			return new ArrayList<>();
 		}
 
 		return projetos.getValue();
 	}
 
 	public static void persisteProjetos(List<Projeto> projetos) {
-
 		Collections.sort(projetos, new ProjetoComparator());
 		ListaProjeto lista = new ListaProjeto(projetos);
 

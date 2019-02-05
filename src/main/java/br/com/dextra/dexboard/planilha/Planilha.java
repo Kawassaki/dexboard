@@ -22,8 +22,7 @@ abstract class Planilha {
 		this.spreadSheet = new GoogleAPI().spreadsheet(chave);
 
 		if (this.spreadSheet == null) {
-			throw new RuntimeException("SpreadSheet " + chave + " does "
-					+ "not exist or certificate lacks permission to view it.");
+			throw new RuntimeException("SpreadSheet " + chave + " does not exist or certificate lacks permission to view it.");
 		}
 
 		if (!spreadSheet.hasWorksheet(sheetName)) {
@@ -75,8 +74,7 @@ abstract class Planilha {
 		symbols.setGroupingSeparator('.');
 		df.setDecimalFormatSymbols(symbols);
 		try {
-			String conteudo = value;
-			return df.parse(conteudo).doubleValue();
+			return df.parse(value).doubleValue();
 		} catch (ParseException e) {
 			throw new RuntimeException(e);
 		}
