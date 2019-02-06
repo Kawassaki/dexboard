@@ -74,6 +74,7 @@ dexboard.slides = (function($, Handlebars) {
 		var openResume = function () {
 			var source = $("#slides-apresentacao-resumo").html();
 			var template = Handlebars.compile(source);
+            $("#presentation-overlay").addClass("presentation-resumo");
 			$("#presentation-overlay").html(template({
 				"indicadores" : projeto.indicadores
 			}));
@@ -116,7 +117,7 @@ dexboard.slides = (function($, Handlebars) {
 		
 		var closeSlides = function() {
 			body.removeClass(presentationMode);
-			
+            $("#presentation-overlay").removeClass("presentation-resumo");
 			column.css("transition", "");
 			column.css("transition-delay", "");
 			column.css("transform", "");

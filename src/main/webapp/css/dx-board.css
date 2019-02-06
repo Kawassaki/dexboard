@@ -595,6 +595,10 @@ div.ui-dialog-titlebar {
 	float: right;
 }
 
+.presentation-resumo .reveal .slides {
+    overflow-y: scroll;
+}
+
 /******************** FIM POPUP ********************/
 
 #reload-projects {
