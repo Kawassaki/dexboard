@@ -583,6 +583,18 @@ div.ui-dialog-titlebar {
 
 .historico .desatualizado { background-color: #c0c0c0; }
 
+.resumoClicavel {
+	text-align: center;
+	border: 1px solid #DDD;
+	border-radius: 3px;
+	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.23) inset;
+	max-height: 170px;
+	max-width: 170px;
+	padding: 4px;
+	margin: 10px;
+	float: right;
+}
+
 /******************** FIM POPUP ********************/
 
 #reload-projects {

@@ -71,6 +71,14 @@ dexboard.slides = (function($, Handlebars) {
 			}
 		};
 		
+		var openResume = function () {
+			var source = $("#slides-apresentacao-resumo").html();
+			var template = Handlebars.compile(source);
+			$("#presentation-overlay").html(template({
+				"indicadores" : projeto.indicadores
+			}));
+		};
+		
 		var openSlides = function() {
 			fixOverlappingSlides();
 			
@@ -99,9 +107,11 @@ dexboard.slides = (function($, Handlebars) {
 				"help" : false
 			});
 			window.Reveal.sync();
-			
 			Reveal.addEventListener("ready", highlightIndicador);
 			Reveal.addEventListener("slidechanged", highlightIndicador);
+			$(".resumoClicavel").click(function(){
+				openResume();
+			});
 		};
 		
 		var closeSlides = function() {
