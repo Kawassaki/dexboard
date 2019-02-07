@@ -160,14 +160,14 @@
 	<div class="reveal">
         <div class="slides">
 			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo">
-				<p> {{projeto.nome}} </p>
+				<p class="texto-projeto-name"> {{projeto.nome}} </p>
 			</div>
             {{#each projeto.indicadores}}
 			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-				<p class="texto-pequeno"><i><b>{{nome}}</b></i></p>
+				<p class="texto-indicador-medio">{{nome}}</p>
 				{{#if registros.[0]}}
                 	{{#with registros.[0]}}
-						<p class="texto-pequeno">{{comentario}}</p>
+						<p class="texto-indicador-pequeno">{{comentario}}</p>
                 	{{/with}}
             	{{/if}}
 			</div>

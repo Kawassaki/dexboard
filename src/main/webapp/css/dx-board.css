@@ -630,9 +630,20 @@ div.ui-dialog-titlebar {
 	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.reveal .slides .texto-pequeno {
-	font-size: 30px;
+.reveal .slides .texto-indicador-medio {
+	font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
 }
+
+.reveal .slides .texto-indicador-pequeno {
+	font-size: 15px;
+}
+
+.reveal .slides .texto-projeto-name {
+	font-size: 60px;
+}
+
 /******************** FIM POPUP ********************/
 
 #reload-projects {
