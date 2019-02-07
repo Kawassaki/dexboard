@@ -89,9 +89,18 @@ dexboard.slides = (function($, Handlebars) {
             var thead = projetos.container.find("thead");
             tbody.hide();
             thead.find(".statusQuantidade").hide();
-            
+            $(".projeto-atual").click(function(){
+                //TODO: Refatorar código de fechamento do resumo.
+                closeSlides();
+				var tbody = projetos.container.find("tbody");
+                var thead = projetos.container.find("thead");
+                tbody.show();
+                thead.find(".statusQuantidade").show();
+                $("#presentation-overlay").css("width", "calc(100% - 53vh)");
+                $("#presentation-overlay").css("margin-left", "53vh");
+			});
 		};
-		
+
 		var openSlides = function() {
 			fixOverlappingSlides();
 			
