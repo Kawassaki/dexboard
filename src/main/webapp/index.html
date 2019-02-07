@@ -31,7 +31,7 @@
             <input type="text" placeholder="Busca de Projetos e Equipes">
         </th>
         {{#each indicadores}}
-        <th>
+        <th class="statusQuantidade">
             <span class="title">{{nome}}</span>
             <div class="heatbar">
                 {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
@@ -157,15 +157,20 @@
 </script>
 
 <script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
-    <div class="reveal">
+	<div class="reveal">
         <div class="slides">
-            {{#each indicadores}}
-			<p>{{nome}}</p><br>
-            {{#if registros.[0]}}
-                {{#with registros.[0]}}
-					<p>{{comentario}}</p><br>
-                {{/with}}
-            {{/if}}
+			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo">
+				<p> {{projeto.nome}} </p>
+			</div>
+            {{#each projeto.indicadores}}
+			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
+				<p class="texto-pequeno"><i><b>{{nome}}</b></i></p>
+				{{#if registros.[0]}}
+                	{{#with registros.[0]}}
+						<p class="texto-pequeno">{{comentario}}</p>
+                	{{/with}}
+            	{{/if}}
+			</div>
             {{/each}}
         </div>
     </div>

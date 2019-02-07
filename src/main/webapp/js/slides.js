@@ -31,7 +31,9 @@ dexboard.slides = (function($, Handlebars) {
                 var tbody = projetos.container.find("tbody");
                 var thead = projetos.container.find("thead");
                 tbody.show();
-                thead.show();
+                thead.find(".statusQuantidade").show();
+                $("#presentation-overlay").css("width", "calc(100% - 53vh)");
+                $("#presentation-overlay").css("margin-left", "53vh");
 			}
 		}
 	});
@@ -79,13 +81,15 @@ dexboard.slides = (function($, Handlebars) {
 			var source = $("#slides-apresentacao-resumo").html();
 			var template = Handlebars.compile(source);
             $("#presentation-overlay").addClass("presentation-resumo");
+            console.log(projeto);
 			$("#presentation-overlay").html(template({
-				"indicadores" : projeto.indicadores
+				"projeto" : projeto
 			}));
             var tbody = projetos.container.find("tbody");
             var thead = projetos.container.find("thead");
             tbody.hide();
-            thead.hide();
+            thead.find(".statusQuantidade").hide();
+            
 		};
 		
 		var openSlides = function() {
