@@ -28,6 +28,10 @@ dexboard.slides = (function($, Handlebars) {
 			var column = projetos.container.find("tr.chosen");
 			if (column.length === 1) {
 				(new view.Main(column)).toggle(false);
+                var tbody = projetos.container.find("tbody");
+                var thead = projetos.container.find("thead");
+                tbody.show();
+                thead.show();
 			}
 		}
 	});
@@ -78,6 +82,10 @@ dexboard.slides = (function($, Handlebars) {
 			$("#presentation-overlay").html(template({
 				"indicadores" : projeto.indicadores
 			}));
+            var tbody = projetos.container.find("tbody");
+            var thead = projetos.container.find("thead");
+            tbody.hide();
+            thead.hide();
 		};
 		
 		var openSlides = function() {
@@ -99,7 +107,9 @@ dexboard.slides = (function($, Handlebars) {
 			column.css("transition", "1s");
 			column.css("transition-delay", "1s");
 			column.css("transform", "translateX(-" + offset + "px)");
-			
+            $(".resumoClicavel").click(function(){
+				openResume();
+			});
 			window.Reveal.initialize({
 				"controls" : false,
 				"progress" : false,
@@ -110,9 +120,6 @@ dexboard.slides = (function($, Handlebars) {
 			window.Reveal.sync();
 			Reveal.addEventListener("ready", highlightIndicador);
 			Reveal.addEventListener("slidechanged", highlightIndicador);
-			$(".resumoClicavel").click(function(){
-				openResume();
-			});
 		};
 		
 		var closeSlides = function() {
