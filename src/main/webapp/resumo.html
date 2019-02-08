@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DexBoard Reload</title>
+    <script type="text/javascript" src="js/lib/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/lib/handlebars-v4.0.5.js"></script>
+    <script type="text/javascript" src="js/projeto-resumo.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/dx-board.css"/>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link href='img/favicon.png' rel='shortcut icon' type='image/png'/>
+</head>
+<body>
+<div id="tabela-principal" class="dx-table dx-table-flip">
+	<table>
+	    <thead>
+		    <tr>
+		        <th class="logo">
+		        	<a href="index.html">
+		            	<img src="img/header-logo.png" alt="dxb - DexBoard">
+					</a>	            	
+		        </th>
+		    </tr>
+	    </thead>
+    </table>
+</div>
+<div id="resumo-overlay"></div>
+<script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
+	<div class="box">
+        <div class="slides">
+			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo projeto-atual">
+				<p class="texto-projeto-name"> {{projeto.nome}} </p>
+			</div>
+            {{#each projeto.indicadores}}
+			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
+				<p class="texto-indicador-medio">{{nome}}</p>
+				{{#if registros.[0]}}
+                	{{#with registros.[0]}}
+						<p class="texto-indicador-pequeno">{{comentario}}</p>
+                	{{/with}}
+            	{{/if}}
+			</div>
+            {{/each}}
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript">
+    dexboard.resumo.view.init();
+</script>
+
+<script src="js/lib/reveal.js"></script>
+
+</body>
+</html>
+

@@ -11,6 +11,7 @@ table {
   display: block;
   vertical-align: top;
   white-space: nowrap;
+  position: absolute;
 }
 
 input, textarea {
@@ -596,62 +597,61 @@ div.ui-dialog-titlebar {
 	cursor: pointer;
 }
 
-.presentation-resumo .reveal .slides {
-    overflow-y: scroll;
+.box .slides .borda-resumo {
+	margin: 10px;
+	border: 1px solid;
+	border-radius: 8px;
+	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.reveal .slides .ok {
+.presentation-resumo .box .slides {
+    text-align: center;
+}
+
+.box .slides .ok {
 	background-color: #59be00;
-  	border-color: #00ff00 !important;
+  	border-color: #00ff00;
   	color: black;
 }
 
-.reveal .slides .perigo {
+.box .slides .perigo {
 	background-color: #eb0000;
-	border-color: red !important;
+	border-color: red;
 	color: black;
 }
 
-.reveal .slides .atencao {
+.box .slides .atencao {
 	background-color: #f6d700;
-	border-color: yellow !important;
+	border-color: yellow;
 	color: black;
 }
 
-.reveal .slides .atrasado {
-  background-color: initial;
-  color: white;
-}
-
-.reveal .slides .borda-resumo-titulo {
-	margin: 10px;
-	border: 1px solid;
-	border-radius: 8px;
-	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
-	cursor: pointer;
-}
-
-.reveal .slides .borda-resumo {
-	margin: 10px;
-	border: 1px solid;
-	border-radius: 8px;
-	text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
-}
-
-.reveal .slides .texto-indicador-medio {
+.box .slides .texto-indicador-medio {
 	font-size: 20px;
     font-style: italic;
     font-weight: bold;
 }
 
-.reveal .slides .texto-indicador-pequeno {
+.box .slides .texto-indicador-pequeno {
 	font-size: 15px;
 }
 
-.reveal .slides .texto-projeto-name {
+.box .slides .texto-projeto-name {
 	font-size: 60px;
 }
 
+.box .slides .atrasado {
+  background-color: initial;
+  color: white;
+}
+
+#resumo-overlay {
+	box-sizing: border-box;
+	margin-left: 53vh;
+	opacity: 1;
+	width: calc(100% - 53vh);
+	z-index: -10;
+}
 /******************** FIM POPUP ********************/
 
 #reload-projects {
