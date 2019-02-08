@@ -22,18 +22,22 @@ dexboard.slides = (function($, Handlebars) {
 		}
 	};
 	
+	var fecharResumo = function(projetos) {
+		var tbody = projetos.container.find("tbody");
+        var thead = projetos.container.find("thead");
+        tbody.show();
+        thead.find(".statusQuantidade").show();
+        $("#presentation-overlay").css("width", "calc(100% - 53vh)");
+        $("#presentation-overlay").css("margin-left", "53vh");
+	}
+	
 	$(document).keydown(function(e) {
 		if (e.which === 27) {
 			var projetos = new dexboard.projeto.view.Projeto();
 			var column = projetos.container.find("tr.chosen");
 			if (column.length === 1) {
 				(new view.Main(column)).toggle(false);
-                var tbody = projetos.container.find("tbody");
-                var thead = projetos.container.find("thead");
-                tbody.show();
-                thead.find(".statusQuantidade").show();
-                $("#presentation-overlay").css("width", "calc(100% - 53vh)");
-                $("#presentation-overlay").css("margin-left", "53vh");
+				fecharResumo(projetos);
 			}
 		}
 	});
@@ -90,14 +94,8 @@ dexboard.slides = (function($, Handlebars) {
             tbody.hide();
             thead.find(".statusQuantidade").hide();
             $(".projeto-atual").click(function(){
-                //TODO: Refatorar código de fechamento do resumo.
                 closeSlides();
-				var tbody = projetos.container.find("tbody");
-                var thead = projetos.container.find("thead");
-                tbody.show();
-                thead.find(".statusQuantidade").show();
-                $("#presentation-overlay").css("width", "calc(100% - 53vh)");
-                $("#presentation-overlay").css("margin-left", "53vh");
+                fecharResumo(projetos);
 			});
 		};
 
