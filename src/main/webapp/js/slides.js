@@ -82,21 +82,7 @@ dexboard.slides = (function($, Handlebars) {
 		};
 		
 		var openResume = function () {
-			var source = $("#slides-apresentacao-resumo").html();
-			var template = Handlebars.compile(source);
-            $("#presentation-overlay").addClass("presentation-resumo");
-            console.log(projeto);
-			$("#presentation-overlay").html(template({
-				"projeto" : projeto
-			}));
-            var tbody = projetos.container.find("tbody");
-            var thead = projetos.container.find("thead");
-            tbody.hide();
-            thead.find(".statusQuantidade").hide();
-            $(".projeto-atual").click(function(){
-                closeSlides();
-                fecharResumo(projetos);
-			});
+			window.open(`http://localhost:8080/resumo.html?projeto=${projeto.nome}`, '_blank');
 		};
 
 		var openSlides = function() {

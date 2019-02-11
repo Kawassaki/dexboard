@@ -627,13 +627,14 @@ div.ui-dialog-titlebar {
 }
 
 .box .slides .texto-indicador-medio {
-	font-size: 20px;
+	font-size: 30px;
     font-style: italic;
     font-weight: bold;
 }
 
 .box .slides .texto-indicador-pequeno {
-	font-size: 15px;
+	font-size: 20px;
+	padding: 10px;
 }
 
 .box .slides .texto-projeto-name {
@@ -647,10 +648,13 @@ div.ui-dialog-titlebar {
 
 #resumo-overlay {
 	box-sizing: border-box;
-	margin-left: 53vh;
 	opacity: 1;
-	width: calc(100% - 53vh);
+	width: 100%;
 	z-index: -10;
+}
+
+.logo-resumo {
+  width: 10vh;
 }
 /******************** FIM POPUP ********************/
 

@@ -13,34 +13,35 @@
 </head>
 <body>
 <div id="tabela-principal" class="dx-table dx-table-flip">
-	<table>
-	    <thead>
-		    <tr>
-		        <th class="logo">
-		        	<a href="index.html">
-		            	<img src="img/header-logo.png" alt="dxb - DexBoard">
-					</a>	            	
-		        </th>
-		    </tr>
-	    </thead>
-    </table>
+    <!-- <table>
+        <thead>
+            <tr>
+                <th class="logo-resumo">
+                    <a href="index.html">
+                        <img src="img/header-logo.png" alt="dxb - DexBoard">
+                    </a>
+                </th>
+            </tr>
+        </thead>
+    </table> -->
 </div>
 <div id="resumo-overlay"></div>
 <script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
-	<div class="box">
+    <div class="box">
         <div class="slides">
-			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo projeto-atual">
-				<p class="texto-projeto-name"> {{projeto.nome}} </p>
-			</div>
+            <div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo projeto-atual">
+                <p class="texto-projeto-name"> {{projeto.nome}} </p>
+            </div>
             {{#each projeto.indicadores}}
-			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-				<p class="texto-indicador-medio">{{nome}}</p>
-				{{#if registros.[0]}}
-                	{{#with registros.[0]}}
-						<p class="texto-indicador-pequeno">{{comentario}}</p>
-                	{{/with}}
-            	{{/if}}
-			</div>
+            <div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
+                <p class="texto-indicador-medio">{{nome}} {{#ifCond @index 0}}<span
+                        class="cpi">({{../projeto.cpi}})</span>{{/ifCond}}</p>
+                {{#if registros.[0]}}
+                {{#with registros.[0]}}
+                <p class="texto-indicador-pequeno">{{comentario}}</p>
+                {{/with}}
+                {{/if}}
+            </div>
             {{/each}}
         </div>
     </div>
@@ -48,6 +49,7 @@
 
 <script type="text/javascript">
     dexboard.resumo.view.init();
+
 </script>
 
 <script src="js/lib/reveal.js"></script>

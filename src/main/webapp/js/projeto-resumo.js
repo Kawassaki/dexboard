@@ -143,15 +143,15 @@ dexboard.resumo = (function ($, Handlebars) {
     };
 
 	view.render = function(projetos) {
-		var projetoQuery = queryProjeto();
-		var teste = projetos.projetos.find(item => {
+		var projetoQuery = decodeURIComponent(queryProjeto());
+		var projeto = projetos.projetos.find(item => {
 			return item.nome.toLowerCase() == projetoQuery.toLowerCase();
 		})
 		var source = $("#slides-apresentacao-resumo").html();
 		var template = Handlebars.compile(source);
         $("#resumo-overlay").addClass("presentation-resumo");
 		$("#resumo-overlay").html(template({
-			"projeto" : teste
+			"projeto" : projeto
 		}));
 	}
     return {
