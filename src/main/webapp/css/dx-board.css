@@ -474,6 +474,15 @@ div.ui-dialog-titlebar {
   padding: 7px 14px;
 }
 
+
+.dialog-content h5 {
+  color: #000000;
+  margin: 0 0 10px 0;
+  padding: 7px 14px;
+  font-weight: normal;
+}
+
+
 .dialog-content h4 span {
   float: right;
   font-weight: normal;
@@ -653,6 +662,12 @@ div.ui-dialog-titlebar {
     opacity: 1;
     width: 100%;
     z-index: -10;
+}
+
+.statusQuantidade .iconeHelp {
+    float: right;
+    margin-right: 5px;
+    margin-top: 15px;
 }
 /******************** FIM POPUP ********************/
 

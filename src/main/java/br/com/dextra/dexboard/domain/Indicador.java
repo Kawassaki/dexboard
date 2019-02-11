@@ -14,14 +14,16 @@ public class Indicador {
 	@Index
 	private Key<Projeto> projeto;
 	private String nome;
+	private String descricao;
 
 	public Indicador() {
 		super();
 	}
 
-	public Indicador(Long id, String nomeIndicador) {
+	public Indicador(Long id, String nomeIndicador, String descricao) {
 		this.id = id;
 		this.nome = nomeIndicador;
+		this.descricao = descricao;
 	}
 
 	public Long getId() {
@@ -43,6 +45,8 @@ public class Indicador {
 	public void setProjeto(Key<Projeto> projeto) {
 		this.projeto = projeto;
 	}
+
+	public String getDescricao() { return this.descricao; }
 
 	public void defineComposeId() {
 		String value = String.format("%s;%s", this.getProjeto().getId(), this.getId().toString());
