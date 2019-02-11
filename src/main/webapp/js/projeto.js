@@ -84,13 +84,12 @@ dexboard.projeto = (function ($, Handlebars) {
     };
 
     model.Indicador = function (jsonIndicador) {
-
         var self = this;
 
         this.id = jsonIndicador.id;
         this.nome = jsonIndicador.nome;
         this.status = new model.StatusHistogram();
-
+        this.descricao = jsonIndicador.descricao;
     };
 
     model.Indicador.fromProjetos = function (projetos) {

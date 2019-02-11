@@ -656,6 +656,12 @@ div.ui-dialog-titlebar {
 .logo-resumo {
   width: 10vh;
 }
+
+.statusQuantidade .iconeHelp {
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
 /******************** FIM POPUP ********************/
 
 #reload-projects {
