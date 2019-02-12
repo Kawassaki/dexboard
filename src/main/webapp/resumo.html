@@ -33,15 +33,14 @@
                 <p class="texto-projeto-name"> {{projeto.nome}} </p>
             </div>
             {{#each projeto.indicadores}}
-            <div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-                <p class="texto-indicador-medio">{{nome}} {{#ifCond @index 0}}<span
-                        class="cpi">({{../projeto.cpi}})</span>{{/ifCond}}</p>
-                {{#if registros.[0]}}
-                {{#with registros.[0]}}
-                <p class="texto-indicador-pequeno">{{comentario}}</p>
-                {{/with}}
-                {{/if}}
-            </div>
+                <div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
+                    <p class="texto-indicador-medio">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
+                    {{#if registros.[0]}}
+                        {{#with registros.[0]}}
+                            <p class="texto-indicador-pequeno">{{comentario}}</p>
+                        {{/with}}
+                    {{/if}}
+                </div>
             {{/each}}
         </div>
     </div>
