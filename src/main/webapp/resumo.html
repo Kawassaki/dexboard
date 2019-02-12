@@ -29,15 +29,15 @@
 <script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
     <div class="box">
         <div class="slides">
-            <div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo projeto-atual">
+            <div>
                 <p class="texto-projeto-name"> {{projeto.nome}} </p>
             </div>
             {{#each projeto.indicadores}}
                 <div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-                    <p class="texto-indicador-medio">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
+                    <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
                     {{#if registros.[0]}}
                         {{#with registros.[0]}}
-                            <p class="texto-indicador-pequeno">{{comentario}}</p>
+                            <p class="texto-indicador-15px">{{comentario}}</p>
                         {{/with}}
                     {{/if}}
                 </div>
