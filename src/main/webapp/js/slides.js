@@ -22,12 +22,22 @@ dexboard.slides = (function($, Handlebars) {
 		}
 	};
 	
+	var fecharResumo = function(projetos) {
+		var tbody = projetos.container.find("tbody");
+		var thead = projetos.container.find("thead");
+		tbody.show();
+		thead.find(".statusQuantidade").show();
+		$("#presentation-overlay").css("width", "calc(100% - 53vh)");
+		$("#presentation-overlay").css("margin-left", "53vh");
+	}
+
 	$(document).keydown(function(e) {
 		if (e.which === 27) {
 			var projetos = new dexboard.projeto.view.Projeto();
 			var column = projetos.container.find("tr.chosen");
 			if (column.length === 1) {
 				(new view.Main(column)).toggle(false);
+				fecharResumo(projetos);
 			}
 		}
 	});
@@ -71,6 +81,10 @@ dexboard.slides = (function($, Handlebars) {
 			}
 		};
 		
+		var openResume = function () {
+			window.open(`http://localhost:8080/resumo.html?projeto=${projeto.nome}`, '_blank');
+		};
+
 		var openSlides = function() {
 			fixOverlappingSlides();
 			
@@ -90,7 +104,9 @@ dexboard.slides = (function($, Handlebars) {
 			column.css("transition", "1s");
 			column.css("transition-delay", "1s");
 			column.css("transform", "translateX(-" + offset + "px)");
-			
+			$(".resumoClicavel").click(function(){
+				openResume();
+			});
 			window.Reveal.initialize({
 				"controls" : false,
 				"progress" : false,
@@ -99,14 +115,13 @@ dexboard.slides = (function($, Handlebars) {
 				"help" : false
 			});
 			window.Reveal.sync();
-			
 			Reveal.addEventListener("ready", highlightIndicador);
 			Reveal.addEventListener("slidechanged", highlightIndicador);
 		};
 		
 		var closeSlides = function() {
 			body.removeClass(presentationMode);
-			
+            $("#presentation-overlay").removeClass("presentation-resumo");
 			column.css("transition", "");
 			column.css("transition-delay", "");
 			column.css("transform", "");

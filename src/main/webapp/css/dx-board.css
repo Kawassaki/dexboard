@@ -11,6 +11,7 @@ table {
   display: block;
   vertical-align: top;
   white-space: nowrap;
+  position: absolute;
 }
 
 input, textarea {
@@ -287,7 +288,7 @@ body.presentation-mode #presentation-overlay {
 #presentation-overlay iframe.extra {
   height: 700px;
   width: 960px
-} 
+}
 
 /******************** HEATBAR ********************/
 
@@ -425,7 +426,7 @@ div.ui-dialog-titlebar {
   text-decoration: underline;
 }
 
-.dialog-close-button:active { 
+.dialog-close-button:active {
   background-color: #ccc;
 }
 
@@ -538,7 +539,7 @@ div.ui-dialog-titlebar {
 
 .dialog-content .options>input:hover { color: #000; }
 
-.dialog-content .options>input:active { 
+.dialog-content .options>input:active {
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 35px 35px -10px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
@@ -583,20 +584,91 @@ div.ui-dialog-titlebar {
 
 .historico .desatualizado { background-color: #c0c0c0; }
 
+.resumoClicavel {
+    text-align: center;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.23) inset;
+    max-height: 170px;
+    max-width: 170px;
+    padding: 4px;
+    margin: 10px;
+    float: right;
+    cursor: pointer;
+}
+
+.box .slides .borda-resumo {
+    margin: 10px;
+    border: 1px solid;
+    border-radius: 8px;
+    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
+}
+.box .slides .borda-resumo p {
+    margin: 4px;
+}
+
+.presentation-resumo .box .slides {
+    text-align: center;
+}
+
+.box .slides .ok {
+    background-color: #59be00;
+    border-color: #00ff00;
+    color: black;
+}
+
+.box .slides .perigo {
+    background-color: #eb0000;
+    border-color: red;
+    color: black;
+}
+
+.box .slides .atencao {
+    background-color: #f6d700;
+    border-color: yellow;
+    color: black;
+}
+
+.box .slides .texto-indicador-italico {
+    font-size: 15px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.box .slides .texto-indicador-15px {
+    font-size: 15px;
+}
+
+.box .slides .texto-projeto-name {
+    font-size: 30px;
+    margin: 20px;
+}
+
+.box .slides .atrasado {
+    background-color: initial;
+    color: white;
+}
+
+#resumo-overlay {
+    box-sizing: border-box;
+    opacity: 1;
+    width: 100%;
+    z-index: -10;
+}
 /******************** FIM POPUP ********************/
 
 #reload-projects {
-  bottom: 2vh;
-  color: rgba(255,255,255,0.1);
-  cursor: pointer;
-  font-size: 1.6vh;
-  height: 1.6vh;
-  left: 20px;
-  margin: 1vh;
-  position: absolute;
-  width: 1.6vh;
+    bottom: 2vh;
+    color: rgba(255,255,255,0.1);
+    cursor: pointer;
+    font-size: 1.6vh;
+    height: 1.6vh;
+    left: 20px;
+    margin: 1vh;
+    position: absolute;
+    width: 1.6vh;
 }
 
 #reload-projects:hover {
-  color: rgba(255,255,255,0.5);
+    color: rgba(255,255,255,0.5);
 }

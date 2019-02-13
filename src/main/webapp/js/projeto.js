@@ -28,6 +28,11 @@ dexboard.projeto = (function ($, Handlebars) {
         return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
     };
 
+    var queryResumo = function () {
+        var query = document.location.search.substr(1).split("=");
+        return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
+    };
+    
     var semanasEmPerigo = function (indicador) {
         if (indicador.registros.length === 0) {
             return -1;
@@ -234,7 +239,6 @@ dexboard.projeto = (function ($, Handlebars) {
             displayScrollPosition(0);
             return self;
         };
-
     };
 
     view.Projeto = function () {
