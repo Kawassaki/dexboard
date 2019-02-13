@@ -24,13 +24,13 @@ dexboard.slides = (function($, Handlebars) {
 	
 	var fecharResumo = function(projetos) {
 		var tbody = projetos.container.find("tbody");
-        var thead = projetos.container.find("thead");
-        tbody.show();
-        thead.find(".statusQuantidade").show();
-        $("#presentation-overlay").css("width", "calc(100% - 53vh)");
-        $("#presentation-overlay").css("margin-left", "53vh");
+		var thead = projetos.container.find("thead");
+		tbody.show();
+		thead.find(".statusQuantidade").show();
+		$("#presentation-overlay").css("width", "calc(100% - 53vh)");
+		$("#presentation-overlay").css("margin-left", "53vh");
 	}
-	
+
 	$(document).keydown(function(e) {
 		if (e.which === 27) {
 			var projetos = new dexboard.projeto.view.Projeto();
@@ -104,7 +104,7 @@ dexboard.slides = (function($, Handlebars) {
 			column.css("transition", "1s");
 			column.css("transition-delay", "1s");
 			column.css("transform", "translateX(-" + offset + "px)");
-            $(".resumoClicavel").click(function(){
+			$(".resumoClicavel").click(function(){
 				openResume();
 			});
 			window.Reveal.initialize({

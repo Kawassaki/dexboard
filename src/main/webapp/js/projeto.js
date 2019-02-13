@@ -278,7 +278,7 @@ dexboard.projeto = (function ($, Handlebars) {
                 var dialog = new dexboard.indicador.view.Dialog();
                 dialog.open(projeto, indicador);
             });
-            
+
             if (view.Projeto.updateIndicador) {
                 self.container[0].removeEventListener("update-indicador", view.Projeto.updateIndicador);
             }
