@@ -10,8 +10,8 @@ table {
   border-spacing: 0;
   display: block;
   vertical-align: top;
-  white-space: nowrap;
   position: absolute;
+  white-space: nowrap;
 }
 
 input, textarea {
@@ -62,6 +62,10 @@ ul {
   box-sizing: border-box;
   font-weight: bold;
   position: relative;
+}
+
+.statusQuantidade {
+    white-space: initial;
 }
 
 .dx-table td .cpi, .dx-table th .title {
@@ -205,7 +209,7 @@ ul {
 
 .dx-table td, .dx-table th {
   font-size: 2vh;
-  height: 8.5vh;
+  height: 5.5vh;
   margin: 1.5vh 0;
   padding-top: 2.5vh;
 }

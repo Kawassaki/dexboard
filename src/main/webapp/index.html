@@ -32,7 +32,7 @@
         </th>
         {{#each indicadores}}
         <th class="statusQuantidade">
-            <span class="title">{{nome}}</span>
+            <p class="title">{{nome}}</p>
             <div class="heatbar">
                 {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
                 {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
