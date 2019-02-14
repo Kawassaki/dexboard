@@ -14,9 +14,12 @@ public class MockPlanilhaIndicadores implements PlanilhaIndicadores {
                 new Indicador(1L, "Satisfa\u00E7\u00E3o do cliente"),
                 new Indicador(2L, "Satisfa\u00E7\u00E3o da equipe"),
                 new Indicador(3L, "Foco em entrega do valor"),
-                new Indicador(4L, "Qualidade funcional"),
-                new Indicador(5L, "Qualidade do c\u00F3digo"),
-                new Indicador(6L, "CPI")
+                // new Indicador(4L, "Qualidade funcional"),
+                new Indicador(5L, "Qualidade"),
+                new Indicador(6L, "CPI"),
+                new Indicador(7L, "Processo Ágil: Scrum Master"),
+                new Indicador(8L, "Processo Ágil: Retrospectiva"),
+                new Indicador(9L, "Processo Ágil: Backlog & Estimativas")
         );
     }
 
