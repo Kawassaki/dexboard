@@ -27,7 +27,7 @@
         <property name="gapi.use.appengine.credentials" value="true"/>
         <property name="dxb.spreadsheet" value="${dxb.spreadsheet}"/>
         <property name="dxb.bcc" value="${dxb.bcc}"/>
-        <property name="dxb.domain" value="${dxb.damain}"/>
+        <property name="dxb.domain" value="${dxb.domain}"/>
     </system-properties>
 
     <sessions-enabled>false</sessions-enabled>
