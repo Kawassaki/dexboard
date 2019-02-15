@@ -82,9 +82,9 @@ dexboard.slides = (function($, Handlebars) {
 		};
 		
 		var openResume = function () {
-			window.open(`http://localhost:8080/resumo.html?projeto=${projeto.nome}`, '_blank');
+			window.open(`/resumo.html?projeto=${projeto.nome}`, '_blank');
 		};
-
+''
 		var openSlides = function() {
 			fixOverlappingSlides();
 			
