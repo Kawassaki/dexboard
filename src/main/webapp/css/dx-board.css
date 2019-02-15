@@ -10,6 +10,10 @@ table {
   border-spacing: 0;
   display: block;
   vertical-align: top;
+<<<<<<< HEAD
+=======
+  position: absolute;
+>>>>>>> 0d09c4f0f6f62a89b355eb20038771d68a945b6c
   white-space: nowrap;
 }
 
@@ -208,7 +212,11 @@ ul {
 
 .dx-table td, .dx-table th {
   font-size: 2vh;
+<<<<<<< HEAD
   height: 6.2vh;
+=======
+  height: 5.5vh;
+>>>>>>> 0d09c4f0f6f62a89b355eb20038771d68a945b6c
   margin: 1.5vh 0;
   padding-top: 2.5vh;
 }
