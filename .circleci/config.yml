@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    triggers:
+      - schedule:
+          cron: "0 4 * * 1-5"
+    docker:
+      - image: circleci/openjdk:8-jdk-node-browsers-legacy
+        environment:
+          GAPI_SERVICE_ACCOUNT_EMAIL: 695278949897-gsaeq4av3f55mp3ban77ksv1i0827tnj@developer.gserviceaccount.com
+          GAPI_SERVICE_ACCOUNT_KEY: ../.keys/google-wavez-key.p12
+          CLOUD_SDK_REPO: cloud-sdk-bionic
+          MAVEN_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "web/pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run:
+          name: Backend Build and Tets
+          command: 'mvn clean install -f web/pom.xml'
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "web/pom.xml" }}
