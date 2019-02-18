@@ -42,7 +42,6 @@ public class ITestDexboard extends ApiTest {
     @Test
     public void testQueryProjetosEquipe() {
         JsonArray projetos = queryProjetosJson("Rocket");
-
         assertEquals(2, projetos.size());
 
         JsonObject confidence = projetos.get(0).getAsJsonObject();
