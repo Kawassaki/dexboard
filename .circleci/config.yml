@@ -16,7 +16,7 @@ jobs:
             - v1-dependencies-
       - run:
           name: Backend Build and Tets
-          command: 'mvn clean install -Pintegration-test'
+          command: 'mvn integration-test -Dit'
       - save_cache:
           paths:
             - ~/.m2

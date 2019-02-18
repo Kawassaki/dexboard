@@ -30,9 +30,9 @@ public class ITestDexboard extends ApiTest {
 
         LoggerFactory.getLogger(this.getClass()).info(projetos.toString());
 
-        JsonObject adv = projetos.get(0).getAsJsonObject();
-        JsonObject facti = projetos.get(3).getAsJsonObject();
-        JsonObject a4c = projetos.get(22).getAsJsonObject();
+        JsonObject a4c = projetos.get(0).getAsJsonObject();
+        JsonObject adv = projetos.get(1).getAsJsonObject();
+        JsonObject facti = projetos.get(4).getAsJsonObject();
 
         assertProjeto(495, "A4C", "CHAOS", 1.01, a4c);
         assertProjeto(585, "ADV: Fase II", "MUSTACHE", 1.39, adv);
