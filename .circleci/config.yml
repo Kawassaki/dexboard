@@ -16,12 +16,12 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "web/pom.xml" }}
+            - v1-dependencies-{{ checksum "pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run:
           name: Backend Build and Tets
-          command: 'mvn clean install -f web/pom.xml'
+          command: 'mvn clean install -f pom.xml'
       - save_cache:
           paths:
             - ~/.m2
