@@ -46,7 +46,6 @@ public class ApiTest {
 
     public static void carregaProjetos() {
         JsonObject response = service.get("/reload/projetos").getAsJsonObject();
-        System.out.println(response);
         String status = response.get("status").getAsString();
 
         assertEquals("success", status);
