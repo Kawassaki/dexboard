@@ -10,18 +10,9 @@ jobs:
     steps:
       - checkout
       # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
       - run:
           name: Decrypt p12
           command: './cmd/decrypt.sh'
       - run:
           name: Backend Build and Tets
           command: 'mvn integration-test -Dit'
-      - save_cache:
-          paths:
-            - ~/.m2
-          key: v1-dependencies-{{ checksum "web/pom.xml" }}
