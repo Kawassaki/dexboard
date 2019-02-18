@@ -4,6 +4,7 @@ jobs:
     triggers:
       - schedule:
           cron: "0 4 * * 1-5"
+          
     docker:
       - image: circleci/openjdk:8-jdk-node-browsers-legacy
     steps:
