@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/reveal-theme-black.css">
     <link rel="stylesheet" type="text/css" href="css/dx-board.css"/>
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link href='img/favicon.png' rel='shortcut icon' type='image/png'/>
 </head>
 <body>
@@ -31,8 +32,8 @@
             <input type="text" placeholder="Busca de Projetos e Equipes">
         </th>
         {{#each indicadores}}
-        <th class="statusQuantidade">
-            <p class="title">{{nome}}</p>
+        <th class="statusQuantidade" title="{{descricao}}">
+            <span class="title">{{nome}}</span> <span class="iconeHelp"><i class="far fa-question-circle"></i></span>
             <div class="heatbar">
                 {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
                 {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
@@ -79,7 +80,7 @@
         <div class="card">
 
             <h4>{{indicador.nome}}<span>{{projeto.nome}}</span></h4>
-
+            <h5>{{indicador.descricao}}</h5>
             <fieldset>
                 <legend>Novo status</legend>
                 <textarea rows="3" cols="35" tabindex="1"></textarea>
@@ -152,26 +153,6 @@
                         allowfullscreen="true"></iframe>
             </section>
             {{/if}}
-        </div>
-    </div>
-</script>
-
-<script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
-	<div class="reveal">
-        <div class="slides">
-			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo-titulo projeto-atual">
-				<p class="texto-projeto-name"> {{projeto.nome}} </p>
-			</div>
-            {{#each projeto.indicadores}}
-			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-				<p class="texto-indicador-medio">{{nome}}</p>
-				{{#if registros.[0]}}
-                	{{#with registros.[0]}}
-						<p class="texto-indicador-pequeno">{{comentario}}</p>
-                	{{/with}}
-            	{{/if}}
-			</div>
-            {{/each}}
         </div>
     </div>
 </script>
