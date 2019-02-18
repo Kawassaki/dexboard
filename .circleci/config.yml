@@ -6,7 +6,7 @@ jobs:
           cron: "0 4 * * 1-5"
           
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:8u171-jdk
     steps:
       - checkout
       # Download and cache dependencies
