@@ -20,9 +20,6 @@ jobs:
           command: './cmd/decrypt.sh'
       - run:
           name: Backend Build and Tets
-          command: 'mvn clean install -f pom.xml'
-      - run:
-          name: Backend Build and Tets
           command: 'mvn integration-test -Dit'
       - save_cache:
           paths:
