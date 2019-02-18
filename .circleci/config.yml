@@ -7,9 +7,6 @@ jobs:
           
     docker:
       - image: circleci/openjdk:8-jdk-node-browsers-legacy
-        environment:
-          GAPI_SERVICE_ACCOUNT_EMAIL: teste-611@dexboard-reload.iam.gserviceaccount.com
-          GAPI_SERVICE_ACCOUNT_KEY: ./src/main/resources/dexboard-reload-a4ade2e84e5e.p12
     steps:
       - checkout
       # Download and cache dependencies
