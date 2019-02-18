@@ -6,6 +6,9 @@ jobs:
           cron: "0 4 * * 1-5"
     docker:
       - image: circleci/openjdk:8-jdk-node-browsers-legacy
+        environment:
+          GAPI_SERVICE_ACCOUNT_EMAIL: teste-611@dexboard-reload.iam.gserviceaccount.com
+          GAPI_SERVICE_ACCOUNT_KEY: ./src/main/resources/dexboard-reload-a4ade2e84e5e.p12
     steps:
       - checkout
       # Download and cache dependencies
@@ -14,6 +17,9 @@ jobs:
             - v1-dependencies-{{ checksum "pom.xml" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
+      - run:
+          name: Decrypt p12
+          command: './cmd/decrypt.sh'
       - run:
           name: Backend Build and Tets
           command: 'mvn integration-test -Dit'
