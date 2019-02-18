@@ -19,8 +19,8 @@ jobs:
           name: Decrypt p12
           command: './cmd/decrypt.sh'
       - run:
-          name: Install dependencies
-          command: 'mvn clean install'
+          name: Backend Build and Tets
+          command: 'mvn clean install -f pom.xml'
       - run:
           name: Backend Build and Tets
           command: 'mvn integration-test -Dit'
