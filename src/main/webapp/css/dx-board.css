@@ -63,6 +63,10 @@ ul {
   position: relative;
 }
 
+.statusQuantidade {
+    white-space: initial;
+}
+
 .dx-table td .cpi, .dx-table th .title {
   margin: auto;
   position: absolute;
@@ -204,7 +208,7 @@ ul {
 
 .dx-table td, .dx-table th {
   font-size: 2vh;
-  height: 8.5vh;
+  height: 6.2vh;
   margin: 1.5vh 0;
   padding-top: 2.5vh;
 }
@@ -682,6 +686,10 @@ div.ui-dialog-titlebar {
     margin: 1vh;
     position: absolute;
     width: 1.6vh;
+}
+
+.realodProjetos {
+    margin-top: 10px;
 }
 
 #reload-projects:hover {
