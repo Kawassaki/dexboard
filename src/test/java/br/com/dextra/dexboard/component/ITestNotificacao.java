@@ -3,8 +3,10 @@ package br.com.dextra.dexboard.component;
 import br.com.dextra.dexboard.dao.NotificacaoDao;
 import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.Classificacao;
+import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.mock.MockPlanilhaIndicadores;
 import br.com.dextra.dexboard.servlet.ReloadProjetosServlet;
 import org.junit.Test;
 
@@ -41,6 +43,7 @@ public class ITestNotificacao extends ComponentTest {
 		ProjetoDao dao = new ProjetoDao();
 
 		List<Projeto> projetos = dao.buscarTodosProjetos();
+		List<Indicador> indicarores = new MockPlanilhaIndicadores().criarListaDeIndicadores();
 
 		for (Projeto projeto : projetos) {
 
@@ -49,8 +52,8 @@ public class ITestNotificacao extends ComponentTest {
 				Calendar c = Calendar.getInstance();
 				c.add(Calendar.DAY_OF_MONTH, -17);
 
-				for (int i = 1; i <= 6; i++) {
-					dao.salvaAlteracao(projeto.getIdPma(), (long) i, criaRegistroAlteracaoNaData(c));
+				for (Indicador ind : indicarores) {
+					dao.salvaAlteracao(projeto.getIdPma(), ind.getId(), criaRegistroAlteracaoNaData(c));
 				}
 				continue;
 			}
@@ -58,9 +61,8 @@ public class ITestNotificacao extends ComponentTest {
 			if (projeto.getIdPma().equals(ID_PROJETO_CONTPLAY)) {
 				continue;
 			}
-
-			for (int i = 1; i <= 6; i++) {
-				dao.salvaAlteracao(projeto.getIdPma(), (long) i, criaRegistroAlteracao());
+			for (Indicador ind : indicarores) {
+				dao.salvaAlteracao(projeto.getIdPma(), ind.getId(), criaRegistroAlteracao());
 			}
 		}
 	}
