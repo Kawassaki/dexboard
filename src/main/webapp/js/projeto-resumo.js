@@ -142,7 +142,6 @@ dexboard.resumo = (function ($, Handlebars) {
 
 		projeto.indicadores.forEach((indicador) => {
 			indicador.registros.forEach((registro) => {
-				registro.comentarioFormatado = [];
 				registro.comentarioFormatado = registro.comentario.split("\n");
 			});
 		});
