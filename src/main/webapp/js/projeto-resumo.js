@@ -139,6 +139,14 @@ dexboard.resumo = (function ($, Handlebars) {
 		var projeto = projetos.projetos.find(item => {
 			return item.nome.toLowerCase() == projetoQuery.toLowerCase();
 		})
+
+		projeto.indicadores.forEach((indicador) => {
+			indicador.registros.forEach((registro) => {
+				registro.comentarioFormatado = [];
+				registro.comentarioFormatado = registro.comentario.split("\n");
+			});
+		});
+
 		var source = $("#slides-apresentacao-resumo").html();
 		var template = Handlebars.compile(source);
         $("#resumo-overlay").addClass("presentation-resumo");
