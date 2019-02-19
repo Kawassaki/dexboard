@@ -33,7 +33,7 @@
         </th>
         {{#each indicadores}}
         <th class="statusQuantidade" title="{{descricao}}">
-            <span class="title">{{nome}}</span> <span class="iconeHelp"><i class="far fa-question-circle"></i></span>
+            <span class="title">{{nome}}</span> <span class="iconeHelp"></span>
             <div class="heatbar">
                 {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
                 {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
