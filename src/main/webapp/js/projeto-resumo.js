@@ -143,14 +143,9 @@ dexboard.resumo = (function ($, Handlebars) {
 		projeto.indicadores.forEach((indicador) => {
 			indicador.registros.forEach((registro) => {
 				registro.comentarioFormatado = [];
-				let registroSeparado = registro.comentario.split("\n");
-				registroSeparado.forEach((item) => {
-					registro.comentarioFormatado.push(item);
-				});
+				registro.comentarioFormatado = registro.comentario.split("\n");
 			});
 		});
-
-		console.log(projeto);
 
 		var source = $("#slides-apresentacao-resumo").html();
 		var template = Handlebars.compile(source);
