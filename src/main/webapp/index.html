@@ -19,7 +19,7 @@
 <div id="dialog-overlay"></div>
 <div id="presentation-overlay"></div>
 <div id="tabela-principal" class="dx-table dx-table-flip"></div>
-<div id="reload-projects"><i class="fa fa-refresh"></i></div>
+<div id="reload-projects"><i class="fa fa-refresh realodProjetos"></i></div>
 <div id="dialog"></div>
 
 <script type="text/x-handlebars-template" id="dexboard-template">
@@ -31,8 +31,8 @@
             <input type="text" placeholder="Busca de Projetos e Equipes">
         </th>
         {{#each indicadores}}
-        <th class="statusQuantidade">
-            <span class="title">{{nome}}</span>
+        <th class="statusQuantidade" title="{{descricao}}">
+            <span class="title">{{nome}}</span> <span class="iconeHelp"></span>
             <div class="heatbar">
                 {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
                 {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
@@ -79,7 +79,7 @@
         <div class="card">
 
             <h4>{{indicador.nome}}<span>{{projeto.nome}}</span></h4>
-
+            <h5>{{indicador.descricao}}</h5>
             <fieldset>
                 <legend>Novo status</legend>
                 <textarea rows="3" cols="35" tabindex="1"></textarea>
@@ -152,26 +152,6 @@
                         allowfullscreen="true"></iframe>
             </section>
             {{/if}}
-        </div>
-    </div>
-</script>
-
-<script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
-	<div class="reveal">
-        <div class="slides">
-			<div class="{{lowercase projeto.classificacao}} {{#if projeto.atrasado}}atrasado{{/if}} borda-resumo-titulo projeto-atual">
-				<p class="texto-projeto-name"> {{projeto.nome}} </p>
-			</div>
-            {{#each projeto.indicadores}}
-			<div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
-				<p class="texto-indicador-medio">{{nome}}</p>
-				{{#if registros.[0]}}
-                	{{#with registros.[0]}}
-						<p class="texto-indicador-pequeno">{{comentario}}</p>
-                	{{/with}}
-            	{{/if}}
-			</div>
-            {{/each}}
         </div>
     </div>
 </script>

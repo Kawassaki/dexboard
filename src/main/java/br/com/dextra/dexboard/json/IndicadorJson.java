@@ -40,6 +40,10 @@ public class IndicadorJson {
 		return this.indicador.getNome();
 	}
 
+	public String getDescricao() {
+		return this.indicador.getDescricao();
+	}
+
 	public boolean getAtrasado() {
 		if (this.registros.isEmpty()) {
 			return true;

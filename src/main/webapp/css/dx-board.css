@@ -63,6 +63,10 @@ ul {
   position: relative;
 }
 
+.statusQuantidade {
+    white-space: initial;
+}
+
 .dx-table td .cpi, .dx-table th .title {
   margin: auto;
   position: absolute;
@@ -204,7 +208,7 @@ ul {
 
 .dx-table td, .dx-table th {
   font-size: 2vh;
-  height: 8.5vh;
+  height: 6.2vh;
   margin: 1.5vh 0;
   padding-top: 2.5vh;
 }
@@ -474,6 +478,15 @@ div.ui-dialog-titlebar {
   padding: 7px 14px;
 }
 
+
+.dialog-content h5 {
+  color: #000000;
+  margin: 0 0 10px 0;
+  padding: 7px 14px;
+  font-weight: normal;
+}
+
+
 .dialog-content h4 span {
   float: right;
   font-weight: normal;
@@ -598,12 +611,16 @@ div.ui-dialog-titlebar {
 
 .box .slides .borda-resumo {
     margin: 10px;
+    position: relative;
     border: 1px solid;
     border-radius: 8px;
     text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
 }
 .box .slides .borda-resumo p {
-    margin: 4px;
+    margin-left: 70px;
+    text-align: initial;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .presentation-resumo .box .slides {
@@ -654,6 +671,29 @@ div.ui-dialog-titlebar {
     width: 100%;
     z-index: -10;
 }
+
+.statusQuantidade .iconeHelp {
+    float: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+#info {
+    width: 40px;
+    left: 10px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    margin: 0;
+}
+
+.logoResumo {
+    position: absolute;
+    width: 90px;
+    margin-left: 10px;
+    display: flex;
+}
 /******************** FIM POPUP ********************/
 
 #reload-projects {
@@ -666,6 +706,10 @@ div.ui-dialog-titlebar {
     margin: 1vh;
     position: absolute;
     width: 1.6vh;
+}
+
+.realodProjetos {
+    margin-top: 10px;
 }
 
 #reload-projects:hover {
