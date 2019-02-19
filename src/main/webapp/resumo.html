@@ -20,7 +20,12 @@
                 <p class="texto-projeto-name"> {{projeto.nome}} </p>
             </div>
             {{#each projeto.indicadores}}
-                <div class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo">
+                <div class="{{lowercase classificacao}} atrasado borda-resumo">
+                    {{#if registros.[0]}}
+                        {{#with registros.[0]}}
+                            <div id="info" class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo"></div>
+                        {{/with}}
+                    {{/if}}
                     <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
                     {{#if registros.[0]}}
                         {{#with registros.[0]}}
