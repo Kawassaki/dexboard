@@ -8,7 +8,7 @@ Indicadores de projetos da Dextra
 Para rodar o projeto você precisar ter as seguintes dependências instaladas:
 
 * [Java - 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* [Maven - 3.6](https://maven.apache.org/download.cgi) 
+* [Maven - 3.6](https://maven.apache.org/download.cgi)
 
 
 # Rodando projeto
@@ -25,13 +25,26 @@ Depois execute
 Se tudo estiver ok, você poderá acessar a URL:
 
 
-[localhost:8080/index.html](http://localhost:8080/index.html) 
+[localhost:8080/index.html](http://localhost:8080/index.html)
 
 
 Irá aparecer uma tela de login, onde é necessário utilizar um email `@dextra-sw.com` válido.
 
 
-A princípio os projetos não serão listados. Para isso você precisa atualizar os projetos. 
-Isso pode ser feito chamando a URL: [localhost:8080/reload/projetos](http://localhost:8080/reload/projetos) 
+A princípio os projetos não serão listados. Para isso você precisa atualizar os projetos.
+Isso pode ser feito chamando a URL: [localhost:8080/reload/projetos](http://localhost:8080/reload/projetos)
 
+## Deploy
+
+Há dois ambientes, um para a Dextra e outro para a Mutant. Você também pode forkar e criar seus próprios ambientes se quiser!
+
+Basta adicionar um profile do maven conforme os que já existem lá.
+
+Para deployar, rode:
+
+```bash
+  mvn appengine:update -P<profile>
+```
+
+Por exemplo, `-Pdextra`.
 
