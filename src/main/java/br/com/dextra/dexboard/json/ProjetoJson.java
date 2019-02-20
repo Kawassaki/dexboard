@@ -39,15 +39,6 @@ public class ProjetoJson {
 		}
 	}
 
-	private void ordenaIndicadores() {
-		Collections.sort(this.indicadores, new Comparator<IndicadorJson>() {
-			@Override
-			public int compare(IndicadorJson i1, IndicadorJson i2) {
-				return i1.getNome().compareToIgnoreCase(i2.getNome());
-			}
-		});
-	}
-
 	public boolean getAtrasado() {
 		return atrasado;
 	}
