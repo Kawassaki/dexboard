@@ -25,7 +25,6 @@ public class ProjetoJson {
 		this.projeto = projeto;
 
 		inicializaIndicadores();
-		ordenaIndicadores();
 
 		this.classificacao = defineClassificacao();
 		this.atrasado = defineAtrasado();
@@ -38,15 +37,6 @@ public class ProjetoJson {
 		for (Indicador i : indicadoresDataStore) {
 			this.indicadores.add(new IndicadorJson(i));
 		}
-	}
-
-	private void ordenaIndicadores() {
-		Collections.sort(this.indicadores, new Comparator<IndicadorJson>() {
-			@Override
-			public int compare(IndicadorJson i1, IndicadorJson i2) {
-				return i1.getNome().compareToIgnoreCase(i2.getNome());
-			}
-		});
 	}
 
 	public boolean getAtrasado() {
