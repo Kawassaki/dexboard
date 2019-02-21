@@ -90,6 +90,7 @@ dexboard.projeto = (function ($, Handlebars) {
         this.nome = jsonIndicador.nome;
         this.status = new model.StatusHistogram();
         this.descricao = jsonIndicador.descricao;
+        this.situacao = jsonIndicador.situacao;
     };
 
     model.Indicador.fromProjetos = function (projetos) {

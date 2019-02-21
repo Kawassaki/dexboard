@@ -31,16 +31,18 @@
             <input type="text" placeholder="Busca de Projetos e Equipes">
         </th>
         {{#each indicadores}}
-        <th class="statusQuantidade" title="{{descricao}}">
-            <span class="title">{{nome}}</span> <span class="iconeHelp"></span>
-            <div class="heatbar">
-                {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
-                {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
-                {{#if status.quantidadeAtencao}}<span class="atencao"
-                                                      style="width: {{status.quantidadeAtencao}}px"></span>{{/if}}
-                {{#if status.quantidadeOk}}<span class="ok" style="width: {{status.quantidadeOk}}px"></span>{{/if}}
-            </div>
-        </th>
+            {{#ifCond situacao "Ativo"}}
+                <th class="statusQuantidade" title="{{descricao}}">
+                    <span class="title">{{nome}}</span> <span class="iconeHelp"></span>
+                    <div class="heatbar">
+                        {{#if status.quantidadeAtraso}}<span style="width: {{status.quantidadeAtraso}}px"></span>{{/if}}
+                        {{#if status.quantidadePerigo}}<span class="perigo" style="width: {{status.quantidadePerigo}}px"></span>{{/if}}
+                        {{#if status.quantidadeAtencao}}<span class="atencao"
+                                                              style="width: {{status.quantidadeAtencao}}px"></span>{{/if}}
+                        {{#if status.quantidadeOk}}<span class="ok" style="width: {{status.quantidadeOk}}px"></span>{{/if}}
+                    </div>
+                </th>
+            {{/ifCond}}
         {{/each}}
     </tr>
     </thead>
@@ -51,10 +53,12 @@
             <div class="vertical">{{nome}}</div>
         </td>
         {{#each indicadores}}
-        <td data-index="{{@index}}" class="indicador {{lowercase classificacao}}{{#if atrasado}} atrasado{{/if}}">
-            {{#ifCond @index 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
-            {{#ifCond @index 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
-        </td>
+            {{#ifCond situacao "Ativo"}}
+                <td data-index="{{@index}}" class="indicador {{lowercase classificacao}}{{#if atrasado}} atrasado{{/if}}">
+                    {{#ifCond @index 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
+                    {{#ifCond @index 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
+                </td>
+            {{/ifCond}}
         {{/each}}
     </tr>
     {{/each}}
