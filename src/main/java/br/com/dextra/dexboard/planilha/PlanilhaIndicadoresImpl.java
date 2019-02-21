@@ -29,10 +29,12 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 		Long i = 1L;
 		while (true) {
 			String nomeIndicador = buscarNomeDoIndicador(i.intValue());
-			String descricao = buscarDescricaoDoIndicador(i.intValue());
-			String situacao = buscarSituacaoDoIndicador(i.intValue());
 			if (!StringUtils.isNullOrEmpty(nomeIndicador)) {
-				indicadores.add(new Indicador(i, nomeIndicador, descricao, situacao));
+				String descricao = buscarDescricaoDoIndicador(i.intValue());
+				String situacao = buscarSituacaoDoIndicador(i.intValue());
+				Boolean sitBool = (situacao.equals("Ativo")) ? true : false;
+
+				indicadores.add(new Indicador(i, nomeIndicador, descricao, sitBool));
 				i++;
 			} else {
 				return indicadores;

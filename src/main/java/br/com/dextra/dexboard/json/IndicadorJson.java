@@ -44,8 +44,8 @@ public class IndicadorJson {
 		return this.indicador.getDescricao();
 	}
 
-	public String getSituacao() {
-		return this.indicador.getSituacao();
+	public boolean getAtivo() {
+		return this.indicador.getAtivo();
 	}
 
 	public boolean getAtrasado() {

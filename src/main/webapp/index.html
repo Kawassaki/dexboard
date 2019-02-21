@@ -31,7 +31,7 @@
             <input type="text" placeholder="Busca de Projetos e Equipes">
         </th>
         {{#each indicadores}}
-            {{#ifCond situacao "Ativo"}}
+            {{#if ativo}}
                 <th class="statusQuantidade" title="{{descricao}}">
                     <span class="title">{{nome}}</span> <span class="iconeHelp"></span>
                     <div class="heatbar">
@@ -42,7 +42,7 @@
                         {{#if status.quantidadeOk}}<span class="ok" style="width: {{status.quantidadeOk}}px"></span>{{/if}}
                     </div>
                 </th>
-            {{/ifCond}}
+            {{/if}}
         {{/each}}
     </tr>
     </thead>
@@ -53,12 +53,12 @@
             <div class="vertical">{{nome}}</div>
         </td>
         {{#each indicadores}}
-            {{#ifCond situacao "Ativo"}}
+            {{#if ativo}}
                 <td data-index="{{@index}}" class="indicador {{lowercase classificacao}}{{#if atrasado}} atrasado{{/if}}">
                     {{#ifCond @index 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
                     {{#ifCond @index 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
                 </td>
-            {{/ifCond}}
+            {{/if}}
         {{/each}}
     </tr>
     {{/each}}
