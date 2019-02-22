@@ -24,12 +24,7 @@ public class IndicadorJson {
 		ProjetoDao projetoDao = new ProjetoDao();
 		this.registros = projetoDao.buscarRegistrosDeAlteracoes(indicador);
 
-		Collections.sort(this.registros, new Comparator<RegistroAlteracao>() {
-			@Override
-			public int compare(RegistroAlteracao r1, RegistroAlteracao r2) {
-				return r2.getData().compareTo(r1.getData());
-			}
-		});
+		Collections.sort(this.registros, (r1, r2) -> r2.getData().compareTo(r1.getData()));
 	}
 
 	public Long getId() {
