@@ -97,16 +97,16 @@ dexboard.projeto = (function ($, Handlebars) {
         if (!projetos[0]) return [];
 
         var map = {};
-        var indicadores = projetos[0].indicadores.map(function (jsonIndicador) {
+        var indicadores = projetos[0].indicadores.filter(e => e.ativo).map(function (jsonIndicador) {
             var indicador = new model.Indicador(jsonIndicador);
             map[jsonIndicador.id] = indicador;
             return indicador;
         });
 
         projetos.forEach(function (projeto) {
-            projeto.indicadores.forEach(function (json) {
-                var status = json.atrasado ? "ATRASADO" : json.classificacao;
-                map[json.id].status.addQuantidade(status);
+            projeto.indicadores.filter(e => e.ativo).forEach(function (json) {
+				var status = json.atrasado ? "ATRASADO" : json.classificacao;
+				map[json.id].status.addQuantidade(status);
             });
         });
 

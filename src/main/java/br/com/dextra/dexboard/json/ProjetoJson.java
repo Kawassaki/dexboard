@@ -25,6 +25,7 @@ public class ProjetoJson {
 		this.projeto = projeto;
 
 		inicializaIndicadores();
+		ordenaIndicadores();
 
 		this.classificacao = defineClassificacao();
 		this.atrasado = defineAtrasado();
@@ -35,8 +36,14 @@ public class ProjetoJson {
 
 		List<Indicador> indicadoresDataStore = dao.buscarIndicadoresDoProjeto(getIdPma());
 		for (Indicador i : indicadoresDataStore) {
-			this.indicadores.add(new IndicadorJson(i));
+			if (i.getAtivo()) {
+				this.indicadores.add(new IndicadorJson(i));
+			}
 		}
+	}
+
+	private void ordenaIndicadores() {
+		this.indicadores.sort(Comparator.comparing(IndicadorJson::getId));
 	}
 
 	public boolean getAtrasado() {
