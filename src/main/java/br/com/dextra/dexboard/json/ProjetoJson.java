@@ -25,7 +25,6 @@ public class ProjetoJson {
 		this.projeto = projeto;
 
 		inicializaIndicadores();
-
 		ordenaIndicadores();
 
 		this.classificacao = defineClassificacao();

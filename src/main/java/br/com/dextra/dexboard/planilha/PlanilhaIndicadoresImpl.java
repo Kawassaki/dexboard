@@ -32,7 +32,7 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 			if (!StringUtils.isNullOrEmpty(nomeIndicador)) {
 				String descricao = buscarDescricaoDoIndicador(i.intValue());
 				String situacao = buscarSituacaoDoIndicador(i.intValue());
-				Boolean sitBool = (situacao.equals("Ativo")) ? true : false;
+				Boolean sitBool = (situacao.equalsIgnoreCase("Ativo")) ? true : false;
 
 				indicadores.add(new Indicador(i, nomeIndicador, descricao, sitBool));
 				i++;
