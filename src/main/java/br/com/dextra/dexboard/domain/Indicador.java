@@ -15,15 +15,17 @@ public class Indicador {
 	private Key<Projeto> projeto;
 	private String nome;
 	private String descricao;
+	private boolean ativo;
 
 	public Indicador() {
 		super();
 	}
 
-	public Indicador(Long id, String nomeIndicador, String descricao) {
+	public Indicador(Long id, String nomeIndicador, String descricao, boolean ativo) {
 		this.id = id;
 		this.nome = nomeIndicador;
 		this.descricao = descricao;
+		this.ativo = ativo;
 	}
 
 	public Long getId() {
@@ -47,6 +49,10 @@ public class Indicador {
 	}
 
 	public String getDescricao() { return this.descricao; }
+
+	public boolean getAtivo() { return ativo; }
+
+	public void setAtivo(boolean ativo) { this.ativo = ativo; }
 
 	public void defineComposeId() {
 		String value = String.format("%s;%s", this.getProjeto().getId(), this.getId().toString());

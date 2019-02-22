@@ -13,10 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ReloadProjetosServlet extends HttpServlet {
 
@@ -88,14 +85,14 @@ public class ReloadProjetosServlet extends HttpServlet {
 		}
 	}
 
-	private void atualizaProjetosAtivos(Map<Long, Projeto> projetosPlanilha, List<Projeto> projetosEmCache) {
+	private void atualizaProjetosAtivos(Map<Long, Projeto> projetosPlanilha, List<Projeto> projetosDataStore) {
 		ProjetoDao dao = new ProjetoDao();
 
-		if (projetosEmCache == null) {
+		if (projetosDataStore == null) {
 			return;
 		}
 
-		for (Projeto projetoEmCache : projetosEmCache) {
+		for (Projeto projetoEmCache : projetosDataStore) {
 			Projeto projetoAtual = projetosPlanilha.get(projetoEmCache.getIdPma());
 			if (projetoAtual != null) {
 				if (alterouInformacoesProjeto(projetoEmCache, projetoAtual)) {
@@ -109,6 +106,10 @@ public class ReloadProjetosServlet extends HttpServlet {
 					dao.salvarProjeto(projetoEmCache);
 					LOG.info(String.format("Projeto \"%s\" salvo", projetoAtual.getNome()));
 				}
+
+				indicadores.forEach(indicador -> {
+					dao.salvaIndicador(projetoAtual.getIdPma(), indicador);
+				});
 			} else if (projetoEmCache.isAtivo()) {
 				LOG.info(String.format("Desativando projeto \"%s\"", projetoEmCache.getNome()));
 				projetoEmCache.setAtivo(false);
