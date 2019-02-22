@@ -21,21 +21,23 @@
                 <p class="texto-projeto-name"> {{projeto.nome}} </p>
             </div>
             {{#each projeto.indicadores}}
-                <div class="{{lowercase classificacao}} atrasado borda-resumo">
-                    {{#if registros.[0]}}
-                        {{#with registros.[0]}}
-                            <div id="info" class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo"></div>
-                        {{/with}}
-                    {{/if}}
-                    <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
-                    {{#if registros.[0]}}
-                        {{#with registros.[0]}}
-                            {{#each comentarioFormatado}}
-                                <p class="texto-indicador-15px">{{this}}</p>
-                            {{/each}}
-                        {{/with}}
-                    {{/if}}
-                </div>
+                {{#if ativo}}
+                    <div class="{{lowercase classificacao}} atrasado borda-resumo">
+                        {{#if registros.[0]}}
+                            {{#with registros.[0]}}
+                                <div id="info" class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo"></div>
+                            {{/with}}
+                        {{/if}}
+                        <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
+                        {{#if registros.[0]}}
+                            {{#with registros.[0]}}
+                                {{#each comentarioFormatado}}
+                                    <p class="texto-indicador-15px">{{this}}</p>
+                                {{/each}}
+                            {{/with}}
+                        {{/if}}
+                    </div>
+                {{/if}}
             {{/each}}
         </div>
     </div>

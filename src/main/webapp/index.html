@@ -139,16 +139,16 @@
 	<div class="reveal">
         <div class="slides">
             {{#each indicadores}}
-            {{#if registros.[0]}}
-            <section data-indicador="{{@index}}">
-                {{#with registros.[0]}}
-                <p>{{comentario}}</p><br>
-                {{/with}}
-                {{#with registros.[1]}}
-                <small><u>Anterior ({{ultimaAlteracaoString}}) {{classificacao}}</u><br> {{comentario}}</small>
-                {{/with}}
-            </section>
-            {{/if}}
+                {{#if registros.[0]}}
+                <section data-indicador="{{@index}}">
+                    {{#with registros.[0]}}
+                    <p>{{comentario}}</p><br>
+                    {{/with}}
+                    {{#with registros.[1]}}
+                    <small><u>Anterior ({{ultimaAlteracaoString}}) {{classificacao}}</u><br> {{comentario}}</small>
+                    {{/with}}
+                </section>
+                {{/if}}
             {{/each}}
             {{#if slidesExtras}}
             <section>

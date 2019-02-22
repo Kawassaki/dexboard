@@ -90,10 +90,11 @@ dexboard.slides = (function($, Handlebars) {
 			
 			column.addClass("chosen");
 			body.addClass(presentationMode);
-			
+
+			var indicadores = projeto.indicadores.filter(e => e.ativo);
 			$("#presentation-overlay").html(template({
 				"slidesExtras" : projeto.apresentacao,
-				"indicadores" : projeto.indicadores
+				"indicadores" : indicadores
 			}));
 			
 			// TODO recalcular no redimensionamento

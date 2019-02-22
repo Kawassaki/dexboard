@@ -150,11 +150,11 @@ dexboard.indicador = (function($, Handlebars) {
 			indicador.classificacao = registro.classificacao;
 			indicador.registros.unshift(registro);
 			
-			projeto.atrasado = projeto.indicadores.some(function(i) {
+			projeto.atrasado = projeto.indicadores.filter(e => e.ativo).some(function(i) {
 				return i.atrasado;
 			});
 			
-			projeto.classificacao = projeto.indicadores.reduce(function(classificacao, i) {
+			projeto.classificacao = projeto.indicadores.filter(e => e.ativo).reduce(function(classificacao, i) {
 				if (classificacao === "PERIGO" || i.classificacao === "PERIGO") {
 					return "PERIGO";
 					
