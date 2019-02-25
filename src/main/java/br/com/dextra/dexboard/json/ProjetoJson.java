@@ -25,7 +25,7 @@ public class ProjetoJson {
 		this.projeto = projeto;
 
 		inicializaIndicadores();
-		// ordenaIndicadores();
+		ordenaIndicadores();
 
 		this.classificacao = defineClassificacao();
 		this.atrasado = defineAtrasado();
@@ -43,7 +43,7 @@ public class ProjetoJson {
 	}
 
 	private void ordenaIndicadores() {
-		this.indicadores.sort(Comparator.comparing(IndicadorJson::getNome));
+		this.indicadores.sort(Comparator.comparing(IndicadorJson::getPosicao));
 	}
 
 	public boolean getAtrasado() {
