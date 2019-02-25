@@ -54,8 +54,6 @@ dexboard.slides = (function($, Handlebars) {
 			var column = $(this).parent();
 			var index = column.data("index");
 			var isOpen = $("body").hasClass(presentationMode);
-			console.log("Vai printar o index do negocio");
-			console.log(index);
 			var main = new view.Main(column, projetos[index]);
 			main.toggle(!isOpen);
 		});
