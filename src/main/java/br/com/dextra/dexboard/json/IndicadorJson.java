@@ -43,6 +43,8 @@ public class IndicadorJson {
 		return this.indicador.getAtivo();
 	}
 
+	public int getPosicao() { return this.indicador.getPosicao(); }
+
 	public boolean getAtrasado() {
 		if (this.registros.isEmpty()) {
 			return true;

@@ -16,16 +16,17 @@ public class Indicador {
 	private String nome;
 	private String descricao;
 	private boolean ativo;
-
+	private int posicao;
 	public Indicador() {
 		super();
 	}
 
-	public Indicador(Long id, String nomeIndicador, String descricao, boolean ativo) {
+	public Indicador(Long id, String nomeIndicador, String descricao, boolean ativo, int posicao) {
 		this.id = id;
 		this.nome = nomeIndicador;
 		this.descricao = descricao;
 		this.ativo = ativo;
+		this.posicao = posicao;
 	}
 
 	public Long getId() {
@@ -53,6 +54,14 @@ public class Indicador {
 	public boolean getAtivo() { return ativo; }
 
 	public void setAtivo(boolean ativo) { this.ativo = ativo; }
+
+	public int getPosicao() {
+		return posicao;
+	}
+
+	public void setPosicao(int posicao) {
+		this.posicao = posicao;
+	}
 
 	public void defineComposeId() {
 		String value = String.format("%s;%s", this.getProjeto().getId(), this.getId().toString());
