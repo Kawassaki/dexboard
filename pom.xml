@@ -158,6 +158,24 @@
             </properties>
         </profile>
 
+
+        <profile>
+            <id>dextra-homolog</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <gae.application.version>release</gae.application.version>
+                <gae.application.id>dexboard-reload-homolog</gae.application.id>
+                <dxb.spreadsheet>1FscxFI4WAg12QhzVdj4SsYxHNeuXZch3BzompOHQBtk</dxb.spreadsheet>
+                <dxb.bcc>luan.nico@dextra-sw.com,elias.reis@dextra-sw.com</dxb.bcc>
+                <dxb.domain>dextra-sw.com</dxb.domain>
+            </properties>
+        </profile>
+
         <profile>
             <id>dextra</id>
             <activation>
