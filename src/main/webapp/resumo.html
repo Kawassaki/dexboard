@@ -28,7 +28,7 @@
                                 <div id="info" class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo"></div>
                             {{/with}}
                         {{/if}}
-                        <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
+                        <p class="texto-indicador-italico">{{nome}} {{#ifCond nome "CPI"}}<span class="cpi">({{../projeto.cpi}})</span>{{/ifCond}}</p>
                         {{#if registros.[0]}}
                             {{#with registros.[0]}}
                                 {{#each comentarioFormatado}}

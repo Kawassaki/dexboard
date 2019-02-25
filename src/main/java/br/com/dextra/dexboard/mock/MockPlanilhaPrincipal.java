@@ -49,6 +49,7 @@ public class MockPlanilhaPrincipal implements PlanilhaPrincipal {
 		map.put(583L, p(583L, "Wareline: Editor", "Mustache", email, 1.18d, apresentacao));
 		map.put(585L, p(585L, "ADV: Fase II", "Mustache", email, 1.39d, apresentacao));
 		map.put(24L, p(24L, "TI Dextra", "TI", email, 1.00d, apresentacao));
+		map.put(240L, p(240L, "Projeto de teste", "Teste", email, 1.00d, ""));
 
 		return map;
 	}
