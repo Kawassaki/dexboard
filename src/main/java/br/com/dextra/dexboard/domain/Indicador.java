@@ -17,6 +17,7 @@ public class Indicador {
 	private String descricao;
 	private boolean ativo;
 	private int posicao;
+
 	public Indicador() {
 		super();
 	}

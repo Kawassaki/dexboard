@@ -11,12 +11,11 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toList;
 
 public class ProjetoDao {
 
@@ -57,7 +56,7 @@ public class ProjetoDao {
 		list = queryByDate.list();
 
 		if (list == null || list.size() == 0) {
-			return new ArrayList<RegistroAlteracao>();
+			return new ArrayList<>();
 		}
 
 		Collections.reverse(list);
@@ -89,8 +88,7 @@ public class ProjetoDao {
 				.filter("equipe", equipe.toUpperCase());
 
 		List<Projeto> list = query.list();
-		List<Projeto> ativos = new ArrayList<>();
-		return list.stream().filter(Projeto::isAtivo).collect(Collectors.toList());
+		return list.stream().filter(Projeto::isAtivo).collect(toList());
 	}
 
 	public List<Projeto> buscarProjetosTribo(String tribo) {
@@ -99,9 +97,8 @@ public class ProjetoDao {
 				.filter("tribo", tribo.toUpperCase());
 
 		List<Projeto> list = query.list();
-		List<Projeto> ativos = new ArrayList<>();
 
-		return list.stream().filter(Projeto::isAtivo).collect(Collectors.toList());
+		return list.stream().filter(Projeto::isAtivo).collect(toList());
 	}
 
 	public List<Projeto> buscarTodosProjetos(String equipe, String tribo) {
@@ -122,7 +119,7 @@ public class ProjetoDao {
 	public List<RegistroAlteracao> buscarRegistrosDeAlteracoes(Indicador indicador) {
 		List<RegistroAlteracao> list = ofy.load().type(RegistroAlteracao.class).filter("indicador", indicador).list();
 		if (list == null) {
-			list = new ArrayList<RegistroAlteracao>();
+			list = new ArrayList<>();
 		}
 
 		if (indicador.getProjeto().getId() == 619) {

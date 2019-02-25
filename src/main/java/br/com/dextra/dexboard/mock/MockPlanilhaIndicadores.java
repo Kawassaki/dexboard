@@ -10,8 +10,8 @@ public class MockPlanilhaIndicadores implements PlanilhaIndicadores {
 	@Override
 	public List<Indicador> criarListaDeIndicadores() {
 		return Arrays.asList(
-				new Indicador(1L, "Satisfa\u00E7\u00E3o do cliente", "Como está a satisfação do cliente com o projeto?", true, 1),
-				new Indicador(2L, "Satisfa\u00E7\u00E3o da equipe", "Como está a satisfação da equipe com o projeto?",true, 2),
+				new Indicador(1L, "Satisfação do cliente", "Como está a satisfação do cliente com o projeto?", true, 1),
+				new Indicador(2L, "Satisfação da equipe", "Como está a satisfação da equipe com o projeto?",true, 2),
 				new Indicador(3L, "Foco em entrega do valor", "Descrição 3",true, 3),
 				new Indicador(4L, "Qualidade funcional", "Como está a visão da equipe sobre a qualidade técnica do projeto? O time tem orgulho do que está produzindo?",false, 4),
 				new Indicador(5L, "Qualidade", "Como está a qualidade da experiência do usuário com o sistema?",true, 5),
