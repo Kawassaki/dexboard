@@ -19,46 +19,48 @@ public class QueryServlet extends HttpServlet {
 
 	public static final int CACHE_EXPIRATION_SECONDS = 60 * 60;
 	private static final String EQUIPE_HTTP_PARAMETER = "equipe";
+	private static final String TRIBO_HTTP_PARAMETER = "tribo";
 	private static final long serialVersionUID = -1248500946944090403L;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		resp.setCharacterEncoding("UTF-8");
 		resp.setContentType("application/json");
-		resp.getWriter().print(getJsonProjetosWithCache(req.getParameter(EQUIPE_HTTP_PARAMETER)));
+		resp.getWriter().print(getJsonProjetosWithCache(req.getParameter(EQUIPE_HTTP_PARAMETER),
+			req.getParameter(TRIBO_HTTP_PARAMETER)));
 	}
 
-	private String getJsonProjetosWithCache(String equipe) {
+	private String getJsonProjetosWithCache(String equipe, String tribo) {
 		MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
-		if (useCache(equipe)) {
+		if (useCache(equipe, tribo)) {
 			String cacheJson = (String) memcacheService.get(ProjetoDao.KEY_CACHE);
 			if (cacheJson != null) {
 				return cacheJson;
 			}
 		}
 
-		String json = getJsonProjetos(equipe);
+		String json = getJsonProjetos(equipe, tribo);
 
-		if (useCache(equipe)) {
+		if (useCache(equipe, tribo)) {
 			memcacheService.put(ProjetoDao.KEY_CACHE, json);
 		}
 
 		return json;
 	}
 
-	private String getJsonProjetos(String equipe) {
+	private String getJsonProjetos(String equipe, String tribo) {
 		ProjetoDao dao = new ProjetoDao();
-		List<Projeto> projetos = dao.buscarTodosProjetos(equipe);
-		Collections.sort(projetos, new ProjetoComparator());
+		List<Projeto> projetos = dao.buscarTodosProjetos(equipe, tribo);
 
+		Collections.sort(projetos, new ProjetoComparator());
 		List<ProjetoJson> projetosJson = Projeto.toProjetoJson(projetos);
 		JSONSerializer serializer = new JSONSerializer();
 		serializer.exclude("*.class", "*.projeto");
 		return serializer.deepSerialize(projetosJson);
 	}
 
-	private boolean useCache(String equipe) {
-		return equipe == null;
+	private boolean useCache(String equipe, String tribo) {
+		return ((equipe == null) && (tribo == null));
 	}
 }

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProjetoDao {
 
@@ -89,26 +90,33 @@ public class ProjetoDao {
 
 		List<Projeto> list = query.list();
 		List<Projeto> ativos = new ArrayList<>();
-		list.size();
-
-		for (Projeto projeto : list) {
-			if (projeto.isAtivo()) {
-				ativos.add(projeto);
-			}
-		}
-
-		return ativos;
+		return list.stream().filter(Projeto::isAtivo).collect(Collectors.toList());
 	}
 
-	public List<Projeto> buscarTodosProjetos(String equipe) {
-		boolean hasEquipe = equipe == null || equipe.trim().isEmpty();
-		return hasEquipe ? buscarTodosProjetos() : buscarProjetosEquipe(equipe);
+	public List<Projeto> buscarProjetosTribo(String tribo) {
+		Query<Projeto> query = ofy.load()
+				.type(Projeto.class)
+				.filter("tribo", tribo.toUpperCase());
+
+		List<Projeto> list = query.list();
+		List<Projeto> ativos = new ArrayList<>();
+
+		return list.stream().filter(Projeto::isAtivo).collect(Collectors.toList());
+	}
+
+	public List<Projeto> buscarTodosProjetos(String equipe, String tribo) {
+
+		boolean hasEquipe = equipe != null;
+		boolean hasTribo = tribo != null;
+
+		if (hasEquipe) return buscarProjetosEquipe(equipe);
+		if (hasTribo) return buscarProjetosTribo(tribo);
+		return buscarTodosProjetos();
 	}
 
 	public List<Indicador> buscarIndicadoresDoProjeto(Long idPma) {
 		Projeto projeto = buscarProjeto(idPma);
-		List<Indicador> list = ofy.load().type(Indicador.class).filter("projeto", projeto).list();
-		return list;
+		return ofy.load().type(Indicador.class).filter("projeto", projeto).list();
 	}
 
 	public List<RegistroAlteracao> buscarRegistrosDeAlteracoes(Indicador indicador) {

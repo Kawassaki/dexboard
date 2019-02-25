@@ -79,6 +79,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 				LOG.info(String.format("Ativando projeto \"%s\"", p.getNome()));
 				projeto.setNome(p.getNome());
 				projeto.setCpi(p.getCpi());
+				projeto.setTribo(p.getTribo());
 				projeto.setAtivo(true);
 				dao.salvarProjeto(projeto);
 			}
@@ -103,6 +104,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 					projetoEmCache.setEquipe(projetoAtual.getEquipe());
 					projetoEmCache.setEmail(projetoAtual.getEmail());
 					projetoEmCache.setApresentacao(projetoAtual.getApresentacao());
+					projetoEmCache.setTribo(projetoAtual.getTribo());
 					dao.salvarProjeto(projetoEmCache);
 					LOG.info(String.format("Projeto \"%s\" salvo", projetoAtual.getNome()));
 				}
@@ -122,7 +124,8 @@ public class ReloadProjetosServlet extends HttpServlet {
 		return alterou(projetoEmCache.getCpi(), projetoAtual.getCpi()) || alterou(projetoEmCache.getNome(), projetoAtual.getNome())
 				|| alterou(projetoEmCache.getEquipe(), projetoAtual.getEquipe())
 				|| alterou(projetoEmCache.getEmail(), projetoAtual.getEmail())
-				|| alterou(projetoEmCache.getApresentacao(), projetoAtual.getApresentacao());
+				|| alterou(projetoEmCache.getApresentacao(), projetoAtual.getApresentacao())
+				|| alterou(projetoEmCache.getTribo(), projetoAtual.getTribo());
 	}
 
 	private boolean alterou(Object valorEmCache, Object valorAtual) {

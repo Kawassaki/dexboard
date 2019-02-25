@@ -27,6 +27,9 @@ public class Projeto {
 	@Ignore // Lazy
 	private ProjetoJson projetoJson;
 
+	@Index
+	private String tribo;
+
 	public static List<ProjetoJson> toProjetoJson(List<Projeto> projetos) {
 		ArrayList<ProjetoJson> projetosJson = new ArrayList<>(projetos.size());
 		for (Projeto p : projetos) {
@@ -90,6 +93,14 @@ public class Projeto {
 
 	public void setApresentacao(String apresentacao) {
 		this.apresentacao = apresentacao;
+	}
+
+	public String getTribo() {
+		return tribo;
+	}
+
+	public void setTribo(String tribo) {
+		this.tribo = tribo.toUpperCase();
 	}
 
 	public ProjetoJson toProjetoJson() {
