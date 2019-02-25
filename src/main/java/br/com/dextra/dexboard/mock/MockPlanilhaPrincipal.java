@@ -17,7 +17,7 @@ public class MockPlanilhaPrincipal implements PlanilhaPrincipal {
 		projeto.setEmail(email);
 		projeto.setCpi(cpi);
 		projeto.setApresentacao(apresentacao);
-		projeto.setTribo((tribo));
+		projeto.setTribo(tribo);
 		return projeto;
 	}
 
