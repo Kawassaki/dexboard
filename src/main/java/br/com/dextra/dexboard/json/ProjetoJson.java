@@ -43,7 +43,7 @@ public class ProjetoJson {
 	}
 
 	private void ordenaIndicadores() {
-		this.indicadores.sort(Comparator.comparing(IndicadorJson::getNome));
+		this.indicadores.sort(Comparator.comparing(IndicadorJson::getPosicao));
 	}
 
 	public boolean getAtrasado() {

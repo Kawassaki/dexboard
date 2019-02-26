@@ -28,6 +28,11 @@ dexboard.projeto = (function ($, Handlebars) {
         return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
     };
 
+    var queryTribo = function () {
+        var query = document.location.search.substr(1).split("=");
+        return (query.length > 1 && query[0] === "tribo") ? query[1] : undefined;
+    };
+
     var queryResumo = function () {
         var query = document.location.search.substr(1).split("=");
         return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
@@ -136,8 +141,9 @@ dexboard.projeto = (function ($, Handlebars) {
 
     service.query = function () {
         var equipe = queryEquipe();
+        var tribo = queryTribo();
 
-        return $.getJSON("/query", {"equipe": equipe}).done(function (projetos) {
+        return $.getJSON("/query", {"equipe": equipe, "tribo": tribo}).done(function (projetos) {
             var queryWrapper = new model.QueryWrapper(projetos);
             (new view.Projeto()).init(queryWrapper);
         });

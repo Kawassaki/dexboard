@@ -55,8 +55,8 @@
         {{#each indicadores}}
             {{#if ativo}}
                 <td data-index="{{@index}}" class="indicador {{lowercase classificacao}}{{#if atrasado}} atrasado{{/if}}">
-                    {{#ifCond @index 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
-                    {{#ifCond @index 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
+                    {{#ifCond nome "CPI"}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
+                    {{#ifCond nome "Satisfação da equipe"}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
                 </td>
             {{/if}}
         {{/each}}

@@ -48,3 +48,4 @@ Para deployar, rode:
 
 Por exemplo, `-Pdextra`.
 
+Para homolog, rode `mvn appengine:update -Pdextra-homolog`.

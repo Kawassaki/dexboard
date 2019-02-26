@@ -11,11 +11,11 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.cmd.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import static java.util.stream.Collectors.toList;
 
 public class ProjetoDao {
 
@@ -56,7 +56,7 @@ public class ProjetoDao {
 		list = queryByDate.list();
 
 		if (list == null || list.size() == 0) {
-			return new ArrayList<RegistroAlteracao>();
+			return new ArrayList<>();
 		}
 
 		Collections.reverse(list);
@@ -88,33 +88,38 @@ public class ProjetoDao {
 				.filter("equipe", equipe.toUpperCase());
 
 		List<Projeto> list = query.list();
-		List<Projeto> ativos = new ArrayList<>();
-		list.size();
-
-		for (Projeto projeto : list) {
-			if (projeto.isAtivo()) {
-				ativos.add(projeto);
-			}
-		}
-
-		return ativos;
+		return list.stream().filter(Projeto::isAtivo).collect(toList());
 	}
 
-	public List<Projeto> buscarTodosProjetos(String equipe) {
-		boolean hasEquipe = equipe == null || equipe.trim().isEmpty();
-		return hasEquipe ? buscarTodosProjetos() : buscarProjetosEquipe(equipe);
+	public List<Projeto> buscarProjetosTribo(String tribo) {
+		Query<Projeto> query = ofy.load()
+				.type(Projeto.class)
+				.filter("tribo", tribo.toUpperCase());
+
+		List<Projeto> list = query.list();
+
+		return list.stream().filter(Projeto::isAtivo).collect(toList());
+	}
+
+	public List<Projeto> buscarTodosProjetos(String equipe, String tribo) {
+
+		boolean hasEquipe = equipe != null;
+		boolean hasTribo = tribo != null;
+
+		if (hasEquipe) return buscarProjetosEquipe(equipe);
+		if (hasTribo) return buscarProjetosTribo(tribo);
+		return buscarTodosProjetos();
 	}
 
 	public List<Indicador> buscarIndicadoresDoProjeto(Long idPma) {
 		Projeto projeto = buscarProjeto(idPma);
-		List<Indicador> list = ofy.load().type(Indicador.class).filter("projeto", projeto).list();
-		return list;
+		return ofy.load().type(Indicador.class).filter("projeto", projeto).list();
 	}
 
 	public List<RegistroAlteracao> buscarRegistrosDeAlteracoes(Indicador indicador) {
 		List<RegistroAlteracao> list = ofy.load().type(RegistroAlteracao.class).filter("indicador", indicador).list();
 		if (list == null) {
-			list = new ArrayList<RegistroAlteracao>();
+			list = new ArrayList<>();
 		}
 
 		if (indicador.getProjeto().getId() == 619) {
