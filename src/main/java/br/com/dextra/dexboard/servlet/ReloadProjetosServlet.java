@@ -81,6 +81,7 @@ public class ReloadProjetosServlet extends HttpServlet {
 				projeto.setCpi(p.getCpi());
 				projeto.setTribo(p.getTribo());
 				projeto.setAtivo(true);
+				projeto.setEquipe(p.getEquipe());
 				dao.salvarProjeto(projeto);
 			}
 		}

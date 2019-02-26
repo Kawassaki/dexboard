@@ -25,17 +25,12 @@ dexboard.projeto = (function ($, Handlebars) {
 
     var queryEquipe = function () {
         var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
+        return (query.length > 1 && query[0] === "equipe") ? decodeURIComponent(query[1]) : undefined;
     };
 
     var queryTribo = function () {
         var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "tribo") ? query[1] : undefined;
-    };
-
-    var queryResumo = function () {
-        var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
+        return (query.length > 1 && query[0] === "tribo") ? decodeURIComponent(query[1]) : undefined;
     };
     
     var semanasEmPerigo = function (indicador) {
@@ -129,7 +124,9 @@ dexboard.projeto = (function ($, Handlebars) {
         this.status = new model.StatusHistogram();
 
         projetos.forEach(function (projeto) {
-            projeto.semanasEmPerigoSatisfacaoEquipe = labelSemanasEmPerigo(semanasEmPerigo(projeto.indicadores[4]));
+		    var indicadorSatisfacaoEquipe = projeto.indicadores.find(e => e.nome === "Satisfação da equipe");
+
+            projeto.semanasEmPerigoSatisfacaoEquipe = labelSemanasEmPerigo(semanasEmPerigo(indicadorSatisfacaoEquipe));
 
             var status = projeto.atrasado ? "ATRASADO" : projeto.classificacao;
             self.status.addQuantidade(status);
