@@ -124,7 +124,9 @@ dexboard.projeto = (function ($, Handlebars) {
         this.status = new model.StatusHistogram();
 
         projetos.forEach(function (projeto) {
-            projeto.semanasEmPerigoSatisfacaoEquipe = labelSemanasEmPerigo(semanasEmPerigo(projeto.indicadores[4]));
+			var indicadorSatisfacaoEquipe = projeto.indicadores.find(e => e.nome === "Satisfação da equipe")
+
+            projeto.semanasEmPerigoSatisfacaoEquipe = labelSemanasEmPerigo(semanasEmPerigo(indicadorSatisfacaoEquipe));
 
             var status = projeto.atrasado ? "ATRASADO" : projeto.classificacao;
             self.status.addQuantidade(status);
