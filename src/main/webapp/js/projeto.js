@@ -6,13 +6,6 @@ dexboard.projeto = (function ($, Handlebars) {
         return str.toLowerCase();
     });
 
-    Handlebars.registerHelper('ifCond', function(v1, v2, options) {
-        if(v1 === v2) {
-            return options.fn(this);
-        }
-        return options.inverse(this);
-    });
-
     var model = {};
     var service = {};
     var template = null;

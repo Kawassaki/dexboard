@@ -130,6 +130,49 @@ dexboard.resumo = (function ($, Handlebars) {
         });
     };
 
+	service.obterRespostasIndicador = function(projeto, indicador) {
+	    $.ajax({
+            "type" : "GET",
+            "url" : "/indicador/respostas",
+            "data" : {
+                "projeto" : projeto,
+                "indicador" : indicador
+            }
+        }).then(function(response) {
+
+            $('#respostas-indicador-btn-' + indicador).addClass('hidden');
+            $('#respostas-indicador-btn-hide-' + indicador).removeClass('hidden');
+
+            if(response.length === 0){
+                $('#respostas-indicador-' + indicador)
+                .addClass('respostas-indicador')
+                .html('<span>Nenhuma resposta encontrada :(</span>');
+                return;
+            }
+
+            var questionsByCategory = orderQuestionsByCategory(response);
+
+            $('#respostas-indicador-' + indicador)
+            .addClass('respostas-indicador')
+            .html('<ul>' +
+                questionsByCategory.map(category => {
+                    return '<li><div>'
+                     + '<span class="resposta-indicador-categoria-titulo">' + category.name + '</span><ul>' +
+                     category.questions.map(question => {
+                        return '<li style="padding: 5px 0px"><div class="resposta-indicador-semaforo ' + question.resposta + '"></div>' + question.questao +'</li>'
+                     }).toString().replaceAll(',', '')
+                     + '</ul></div></li>'
+                }).toString().replaceAll(',', '')
+            + '</ul>');
+        });
+	}
+
+    view.esconderRespostasIndicador = function(indicador) {
+        $('#respostas-indicador-btn-' + indicador).removeClass('hidden');
+        $('#respostas-indicador-btn-hide-' + indicador).addClass('hidden');
+        $('#respostas-indicador-' + indicador).removeClass('respostas-indicador');
+    }
+
     view.init = function () {
         service.query();
     };
@@ -143,6 +186,12 @@ dexboard.resumo = (function ($, Handlebars) {
 		projeto.indicadores.forEach((indicador) => {
 			indicador.registros.forEach((registro) => {
 				registro.comentarioFormatado = registro.comentario.split("\n");
+				var date = new Date(registro.data);
+				registro.dataFormatada = date.getDate().toString().padStart(2, '0')
+				+ '/' + date.getMonth().toString().padStart(2, '0')
+				 + '/' + date.getFullYear().toString().padStart(2, '0')
+				  + ' às ' + date.getHours().toString().padStart(2, '0')
+				   + ':' + date.getMinutes().toString().padStart(2, '0');
 			});
 		});
 

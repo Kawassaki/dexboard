@@ -5,6 +5,14 @@
 	version="2.5">
 
 	<servlet>
+		<servlet-name>IndicadorRespostasServlet</servlet-name>
+		<servlet-class>br.com.dextra.dexboard.servlet.IndicadorRespostasServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>IndicadorRespostasServlet</servlet-name>
+		<url-pattern>/indicador/respostas</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>NotificacaoServlet</servlet-name>
 		<servlet-class>br.com.dextra.dexboard.servlet.NotificacaoServlet</servlet-class>
 	</servlet>

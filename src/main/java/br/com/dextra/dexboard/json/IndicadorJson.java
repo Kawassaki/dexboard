@@ -2,9 +2,8 @@ package br.com.dextra.dexboard.json;
 
 import br.com.dextra.dexboard.dao.NotificacaoDao;
 import br.com.dextra.dexboard.dao.ProjetoDao;
-import br.com.dextra.dexboard.domain.Classificacao;
-import br.com.dextra.dexboard.domain.Indicador;
-import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.domain.*;
+import com.googlecode.objectify.Key;
 import flexjson.JSON;
 
 import java.util.*;
@@ -13,6 +12,7 @@ public class IndicadorJson {
 
 	private Indicador indicador;
 	private List<RegistroAlteracao> registros;
+	private List<IndicadorQuestao> questoes;
 
 	public IndicadorJson() {
 		super();
@@ -23,6 +23,7 @@ public class IndicadorJson {
 
 		ProjetoDao projetoDao = new ProjetoDao();
 		this.registros = projetoDao.buscarRegistrosDeAlteracoes(indicador);
+		this.questoes = projetoDao.buscarQuestoesPelaKeyDoIndicador(Key.create(Indicador.class, indicador.getId()));
 
 		Collections.sort(this.registros, new Comparator<RegistroAlteracao>() {
 			@Override
@@ -78,4 +79,11 @@ public class IndicadorJson {
 		return calendar.getTime().compareTo(new Date()) > -1;
 	}
 
+	public List<IndicadorQuestao> getQuestoes() {
+		return questoes;
+	}
+
+	public void setQuestoes(List<IndicadorQuestao> questoes) {
+		this.questoes = questoes;
+	}
 }

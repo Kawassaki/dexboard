@@ -1,7 +1,10 @@
 package br.com.dextra.dexboard.servlet;
 
 import br.com.dextra.dexboard.dao.ProjetoDao;
+import br.com.dextra.dexboard.domain.IndicadorQuestao;
+import br.com.dextra.dexboard.domain.IndicadorResposta;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.service.IndicadorService;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import flexjson.JSONDeserializer;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 public class IndicadorServlet extends HttpServlet {
 
@@ -30,13 +34,16 @@ public class IndicadorServlet extends HttpServlet {
 		String json = req.getParameter("registro");
 		RegistroAlteracao regAlteracao = des.deserialize(json, RegistroAlteracao.class);
 
+		String respostasJson = req.getParameter("respostas");
+		List respostas = new JSONDeserializer<List<IndicadorResposta>>().use("values", IndicadorResposta.class).deserialize(respostasJson);
+
+
 		UserService userService = UserServiceFactory.getUserService();
 
 		regAlteracao.setUsuario(userService.getCurrentUser().getEmail());
 		regAlteracao.setData(new Date());
 
-		ProjetoDao dao = new ProjetoDao();
-		RegistroAlteracao registro = dao.salvaAlteracao(idProjeto, idIndicador, regAlteracao);
+		RegistroAlteracao registro = new IndicadorService().salvarAlteracao(idProjeto, idIndicador, regAlteracao, respostas);
 
 		JSONSerializer serializer = new JSONSerializer();
 		resp.getWriter().println(serializer.serialize(registro));

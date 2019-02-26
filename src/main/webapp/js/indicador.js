@@ -49,12 +49,31 @@ dexboard.indicador = (function($, Handlebars) {
 			var popup = new view.Dialog();
 			
 			self.change.click(function(e) {
+
+                var respostas = [];
+
+                if(indicador.questoes && indicador.questoes.length > 0){
+
+                    $.each($('#questoes-form').serializeArray(), function(i, field) {
+                        respostas.push({
+                            composeId: field.name,
+                            conteudo: field.value
+                        });
+                    });
+
+                    if(respostas.length > 0 && respostas.length != indicador.questoes.length){
+                        alert('Responda todas as questões para continuar.');
+                        return;
+                    }
+
+                }
+
 				var button = $(this);
 				
 				if (!button.prop("disabled")) {
 					var comentario = textArea.val();
 					var status = button.prop("name");
-					service.novoStatus(projeto, indicador, status, comentario);
+					service.novoStatus(projeto, indicador, status, comentario, respostas);
 					popup.close();
 				}
 			});
@@ -133,13 +152,14 @@ dexboard.indicador = (function($, Handlebars) {
 		
 	};
 	
-	service.novoStatus = function(projeto, indicador, status, comentario) {
+	service.novoStatus = function(projeto, indicador, status, comentario, respostas = []) {
 		return $.ajax({
 				"type" : "POST",
 				"url" : "/indicador",
 				"data" : {
 					"projeto" : projeto.idPma,
 					"indicador" : indicador.id,
+					"respostas": JSON.stringify(respostas),
 					"registro" : JSON.stringify({
 						"classificacao" : status,
 						"comentario" : comentario
@@ -187,7 +207,9 @@ dexboard.indicador = (function($, Handlebars) {
 		};
 		
 		this.open = function(projeto, indicador) {
-			
+
+		    indicador.questionsByCategory = orderQuestionsByCategory(indicador.questoes);
+
 			self.container.html(template({
 				"projeto" : projeto,
 				"indicador" : indicador
@@ -216,10 +238,10 @@ dexboard.indicador = (function($, Handlebars) {
 			
 			self.container.dialog({
 				"autoOpen" : false,
-				"dialogClass" : "no-close",
-				"draggable" : true,
+				"dialogClass" : "no-close dialog-overflow",
+				"draggable" : false,
 				"position" : {"my" : "bottom+50", "at" : "center", "of" : window},
-				"width" : 642
+				"width" : 850
 			});
 			
 			self.container.dialog("widget").draggable("option", "cursor", "move");

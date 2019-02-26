@@ -7,8 +7,10 @@
     <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/lib/handlebars-v4.0.5.js"></script>
     <script type="text/javascript" src="js/indicador.js"></script>
+    <script type="text/javascript" src="js/indicador-formulario.js"></script>
     <script type="text/javascript" src="js/projeto.js"></script>
     <script type="text/javascript" src="js/slides.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/reveal-theme-black.css">
     <link rel="stylesheet" type="text/css" href="css/dx-board.css"/>
@@ -19,6 +21,7 @@
 <div id="dialog-overlay"></div>
 <div id="presentation-overlay"></div>
 <div id="tabela-principal" class="dx-table dx-table-flip"></div>
+<div id="teste"></div>
 <div id="reload-projects"><i class="fa fa-refresh realodProjetos"></i></div>
 <div id="dialog"></div>
 
@@ -52,8 +55,8 @@
         </td>
         {{#each indicadores}}
         <td data-index="{{@index}}" class="indicador {{lowercase classificacao}}{{#if atrasado}} atrasado{{/if}}">
-            {{#ifCond @index 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
-            {{#ifCond @index 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
+            {{#ifCond @index '==' 0}}<span class="cpi">{{../cpi}}</span>{{/ifCond}}
+            {{#ifCond @index '==' 4}}<span class="cpi">{{../semanasEmPerigoSatisfacaoEquipe}}</span>{{/ifCond}}
         </td>
         {{/each}}
     </tr>
@@ -77,9 +80,52 @@
     <div class="dialog-content">
         <div class="dialog-close-button" title="Fechar janela">X</div>
         <div class="card">
-
             <h4>{{indicador.nome}}<span>{{projeto.nome}}</span></h4>
             <h5>{{indicador.descricao}}</h5>
+            {{#if indicador.questionsByCategory}}
+                <div class="questoes">
+                    <form id="questoes-form">
+                    {{#each indicador.questionsByCategory}}
+                        <div class="categoria-container">
+                            <span class="categoria-titulo">{{name}}</span>
+                            {{#each questions}}
+                                <div class="questao-container">
+                                    <div class="questao-conteudo">
+                                        <span>{{conteudo}}</span>
+                                    </div>
+                                     <div class="questao-opcoes custom-radios">
+                                         <div>
+                                            <input type="radio" name="{{composeId}}" id="{{id}}-green" class="color-1" value="OK">
+                                             <label for="{{id}}-green">
+                                                 <span>
+                                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                                 </span>
+                                             </label>
+                                         </div>
+                                         <div>
+                                             <input type="radio" name="{{composeId}}" id="{{id}}-yellow" class="color-3" value="ATENCAO">
+                                             <label for="{{id}}-yellow">
+                                                 <span>
+                                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                                 </span>
+                                             </label>
+                                         </div>
+                                         <div>
+                                             <input type="radio" name={{composeId}} id="{{id}}-red" class="color-4" value="PERIGO">
+                                             <label for="{{id}}-red">
+                                                 <span>
+                                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg" alt="Checked Icon" />
+                                                 </span>
+                                             </label>
+                                         </div>
+                                     </div>
+                                </div>
+                            {{/each}}
+                        </div>
+                    {{/each}}
+                    </form>
+                </div>
+            {{/if}}
             <fieldset>
                 <legend>Novo status</legend>
                 <textarea rows="3" cols="35" tabindex="1"></textarea>

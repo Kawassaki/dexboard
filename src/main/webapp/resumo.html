@@ -7,11 +7,12 @@
     <script type="text/javascript" src="js/lib/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/lib/handlebars-v4.0.5.js"></script>
     <script type="text/javascript" src="js/projeto-resumo.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
     <link rel="stylesheet" type="text/css" href="css/dx-board.css"/>
     <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
     <link href='img/favicon.png' rel='shortcut icon' type='image/png'/>
 </head>
-<body>
+<body style="background: #efefef">
 <div id="resumo-overlay"></div>
 <script type="text/x-handlebars-template" id="slides-apresentacao-resumo">
     <div class="box">
@@ -21,19 +22,27 @@
                 <p class="texto-projeto-name"> {{projeto.nome}} </p>
             </div>
             {{#each projeto.indicadores}}
-                <div class="{{lowercase classificacao}} atrasado borda-resumo">
+                <div class="{{lowercase classificacao}} atrasado resumo-indicador-container">
                     {{#if registros.[0]}}
                         {{#with registros.[0]}}
                             <div id="info" class="{{lowercase classificacao}} {{#if atrasado}}atrasado{{/if}} borda-resumo"></div>
                         {{/with}}
                     {{/if}}
-                    <p class="texto-indicador-italico">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}</p>
+                    <p class="texto-indicador">{{nome}} {{#if @first}}<span class="cpi">({{../projeto.cpi}})</span>{{/if}}{{#if atrasado}}<span class="badge">Desatualizado</span>{{/if}}</p>
                     {{#if registros.[0]}}
                         {{#with registros.[0]}}
                             {{#each comentarioFormatado}}
                                 <p class="texto-indicador-15px">{{this}}</p>
                             {{/each}}
+                            <p class="texto-indicador-usuario-registro">Último registro enviado por {{usuario}} em {{dataFormatada}}</p>
                         {{/with}}
+                        {{#ifCond questoes.length '>' 0 }}
+                            <button id="respostas-indicador-btn-{{id}}" onclick="dexboard.resumo.service.obterRespostasIndicador({{../projeto.idPma}}, {{id}})" class="resumo-indicador-formulario-btn" type="button">+ ver respostas das questões</button>
+                            <button id="respostas-indicador-btn-hide-{{id}}" onclick="dexboard.resumo.view.esconderRespostasIndicador({{id}})" class="resumo-indicador-formulario-btn hidden" type="button">- esconder respostas</button>
+                            <div id="respostas-indicador-{{id}}" class="hidden"></div>
+                        {{/ifCond}}
+                    {{else}}
+                        <div class="resumo-indicador-nao-respondido"></div>
                     {{/if}}
                 </div>
             {{/each}}
@@ -43,7 +52,6 @@
 
 <script type="text/javascript">
     dexboard.resumo.view.init();
-
 </script>
 
 <script src="js/lib/reveal.js"></script>
