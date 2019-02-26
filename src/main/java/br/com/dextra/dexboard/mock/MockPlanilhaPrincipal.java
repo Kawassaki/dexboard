@@ -28,7 +28,7 @@ public class MockPlanilhaPrincipal implements PlanilhaPrincipal {
 		// TODO: trazer da build
 		String email = "fernando@dextra-sw.com";
 		String apresentacao = "https://docs.google.com/presentation/d/1ID6Oh3Dm0HHFQb9h8A32WJYy5Z-gufbLiTEcrdKAtM8/embed";
-		map.put(495L, p(495L, "A4C", "Chaos", email, 1.01d, apresentacao, "tribo1"));
+		map.put(495L, p(495L, "A4C", "Equipe Chaos", email, 1.01d, apresentacao, "Tribo de teste"));
 		map.put(565L, p(565L, "Confidence", "Rocket", email, 0.99d, apresentacao, "tribo1"));
 		map.put(530L, p(530L, "DPaschoal", "Heisenberg", email, 1.05d, apresentacao, "tribo2"));
 		map.put(568L, p(568L, "FAB SDAB", "Mustache", email, 0.92d, apresentacao, "tribo2"));

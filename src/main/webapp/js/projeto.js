@@ -142,6 +142,8 @@ dexboard.projeto = (function ($, Handlebars) {
     service.query = function () {
         var equipe = queryEquipe();
         var tribo = queryTribo();
+		tribo = tribo != undefined ? decodeURIComponent(tribo);
+		equipe = equipe != undefined ? decodeURIComponent(equipe);
 
         return $.getJSON("/query", {"equipe": equipe, "tribo": tribo}).done(function (projetos) {
             var queryWrapper = new model.QueryWrapper(projetos);
