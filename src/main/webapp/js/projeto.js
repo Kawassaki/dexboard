@@ -25,17 +25,12 @@ dexboard.projeto = (function ($, Handlebars) {
 
     var queryEquipe = function () {
         var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
+        return (query.length > 1 && query[0] === "equipe") ? decodeURIComponent(query[1]) : undefined;
     };
 
     var queryTribo = function () {
         var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "tribo") ? query[1] : undefined;
-    };
-
-    var queryResumo = function () {
-        var query = document.location.search.substr(1).split("=");
-        return (query.length > 1 && query[0] === "equipe") ? query[1] : undefined;
+        return (query.length > 1 && query[0] === "tribo") ? decodeURIComponent(query[1]) : undefined;
     };
     
     var semanasEmPerigo = function (indicador) {
@@ -142,8 +137,6 @@ dexboard.projeto = (function ($, Handlebars) {
     service.query = function () {
         var equipe = queryEquipe();
         var tribo = queryTribo();
-		tribo = tribo != undefined ? decodeURIComponent(tribo);
-		equipe = equipe != undefined ? decodeURIComponent(equipe);
 
         return $.getJSON("/query", {"equipe": equipe, "tribo": tribo}).done(function (projetos) {
             var queryWrapper = new model.QueryWrapper(projetos);
