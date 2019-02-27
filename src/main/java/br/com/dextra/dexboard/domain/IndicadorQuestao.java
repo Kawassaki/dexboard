@@ -13,16 +13,19 @@ public class IndicadorQuestao {
     private String conteudo;
     private String categoria;
     @Index
+    private boolean ativo;
+    @Index
     private Key<Indicador> indicador;
 
     public IndicadorQuestao() {
         super();
     }
 
-    public IndicadorQuestao(Long id, String conteudo, String categoria) {
+    public IndicadorQuestao(Long id, String conteudo, String categoria, boolean ativo) {
         this.id = id;
         this.conteudo = conteudo;
         this.categoria = categoria;
+        this.ativo = ativo;
     }
 
     public void setCategoria(String categoria) {
@@ -66,4 +69,11 @@ public class IndicadorQuestao {
         this.composeId = value;
     }
 
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
 }

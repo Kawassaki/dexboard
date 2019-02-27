@@ -10,6 +10,7 @@ public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQu
     private final String COLUNA_ID = "Id";
     private final String COLUNA_CATEGORIA = "Categoria";
     private final String COLUNA_QUESTAO = "Questão";
+    private final String COLUNA_ATIVO = "Status";
 
     public PlanilhaQuestoesImpl(String nomePlanilha) {
         super(nomePlanilha);
@@ -31,16 +32,25 @@ public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQu
         return recuperarConteudoCelula(indice, this.COLUNA_QUESTAO);
     }
 
+    private String buscarAtivoInativo(int indice){
+        return recuperarConteudoCelula(indice, this.COLUNA_ATIVO);
+    }
+
     @Override
     public List<IndicadorQuestao> criarListaDeQuestoes() {
         List<IndicadorQuestao> questoes = new ArrayList<>();
         int indice = 0;
-        while(true){
+        while (true) {
             final String nomeCategoria = this.buscarCategoria(indice);
-            if(nomeCategoria == null){
+            if (nomeCategoria == null) {
                 break;
             }
-            questoes.add(new IndicadorQuestao(this.buscarId(indice), this.buscarQuestao(indice), nomeCategoria));
+            Long id = this.buscarId(indice);
+            String questao = this.buscarQuestao(indice);
+            String ativoInativo = this.buscarAtivoInativo(indice);
+            if(!(id == null || questao == null || ativoInativo == null)){
+                questoes.add(new IndicadorQuestao(id, questao, nomeCategoria, ativoInativo.equals("Ativo")));
+            }
             indice++;
         }
         return questoes;

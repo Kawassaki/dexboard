@@ -50,7 +50,7 @@ public class ProjetoDao {
 	}
 
 	public List<IndicadorQuestao> buscarQuestoesPelaKeyDoIndicador(Key<Indicador> key){
-		List<IndicadorQuestao> questoes =  ofy.load().type(IndicadorQuestao.class).filter("indicador", key).list();
+		List<IndicadorQuestao> questoes =  ofy.load().type(IndicadorQuestao.class).filter("indicador", key).filter("ativo", true).list();
 		return questoes;
 	}
 
@@ -154,7 +154,6 @@ public class ProjetoDao {
 	}
 
 	private void salvarQuestoesDoIndicador(Long idIndicador, List<IndicadorQuestao> questoes){
-		ofy.delete().type(IndicadorQuestao.class);
 		for(IndicadorQuestao questao: questoes){
 			Key<Indicador> keyIndicador = Key.create(Indicador.class, idIndicador);
 			questao.setIndicador(keyIndicador);

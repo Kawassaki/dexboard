@@ -239,14 +239,17 @@ dexboard.indicador = (function($, Handlebars) {
 			self.container.dialog({
 				"autoOpen" : false,
 				"dialogClass" : "no-close dialog-overflow",
-				"draggable" : false,
-				"position" : {"my" : "bottom+50", "at" : "center", "of" : window},
-				"width" : 850
+//				"draggable" : false,
+//				"position" : {"my" : "bottom+50", "at" : "center", "of" : window},
+				"width" : 850,
+				open: function (){
+				    $(".ui-dialog").scrollTop(0);
+				}
 			});
 			
-			self.container.dialog("widget").draggable("option", "cursor", "move");
+//			self.container.dialog("widget").draggable("option", "cursor", "move");
 		};
-		
+
 	};
 	
 	view.init = function() {
