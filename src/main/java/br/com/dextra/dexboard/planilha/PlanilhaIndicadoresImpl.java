@@ -41,7 +41,7 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 	public List<Indicador> criarListaDeIndicadores() {
 		List<Indicador> indicadores = new ArrayList<>();
 
-		int i = 1;
+		int i = 0;
 		while (true) {
 			String nomeIndicador = buscarNomeDoIndicador(i);
 			if (!StringUtils.isNullOrEmpty(nomeIndicador)) {

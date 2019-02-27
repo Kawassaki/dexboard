@@ -173,6 +173,9 @@ public class ProjetoDao {
 	}
 
     private void salvarQuestoesDoIndicador(Long idIndicador, List<IndicadorQuestao> questoes) {
+		if(questoes == null){
+			return;
+		}
         for (IndicadorQuestao questao : questoes) {
             Key<Indicador> keyIndicador = Key.create(Indicador.class, idIndicador);
             questao.setIndicador(keyIndicador);
