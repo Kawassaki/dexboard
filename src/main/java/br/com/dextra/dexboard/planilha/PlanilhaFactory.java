@@ -1,6 +1,7 @@
 package br.com.dextra.dexboard.planilha;
 
 import br.com.dextra.dexboard.mock.MockPlanilhaIndicadores;
+import br.com.dextra.dexboard.mock.MockPlanilhaIndicadoresQuestoes;
 import br.com.dextra.dexboard.mock.MockPlanilhaPrincipal;
 import br.com.dextra.dexboard.servlet.Context;
 
@@ -18,7 +19,7 @@ public class PlanilhaFactory {
     }
 
     public static PlanilhaQuestoes questoes(String nomeIndicador) {
-        return (MOCK) ? null : new PlanilhaQuestoesImpl(nomeIndicador); // TODO MOCK
+        return (MOCK) ? new MockPlanilhaIndicadoresQuestoes() : new PlanilhaQuestoesImpl(nomeIndicador); // TODO MOCK
     }
 
 }
