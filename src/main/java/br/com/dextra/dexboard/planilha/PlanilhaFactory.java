@@ -7,7 +7,7 @@ import br.com.dextra.dexboard.servlet.Context;
 
 public class PlanilhaFactory {
 
-    private static final boolean MOCK = false; //Context.isDevelopmentEnvironment();
+    private static final boolean MOCK = Context.isDevelopmentEnvironment();
 
     public static PlanilhaIndicadores indicadores() {
         return (MOCK) ? new MockPlanilhaIndicadores() : new PlanilhaIndicadoresImpl();
