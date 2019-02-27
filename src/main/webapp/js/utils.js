@@ -44,6 +44,7 @@ function orderQuestionsByCategory(questions){
     return questionsByCategory;
 }
 
+
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;
     return target.split(search).join(replacement);
@@ -64,3 +65,7 @@ if (!String.prototype.padStart) {
         }
     };
 }
+
+Number.prototype.padStart = function padStart(targetLength, padString) {
+    return this.toString().padStart(targetLength, padString);
+};

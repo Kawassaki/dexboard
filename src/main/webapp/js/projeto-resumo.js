@@ -155,14 +155,12 @@ dexboard.resumo = (function ($, Handlebars) {
             $('#respostas-indicador-' + indicador)
             .addClass('respostas-indicador')
             .html('<ul>' +
-                questionsByCategory.map(category => {
-                    return '<li><div>'
-                     + '<span class="resposta-indicador-categoria-titulo">' + category.name + '</span><ul>' +
-                     category.questions.map(question => {
-                        return '<li style="padding: 5px 0px"><div class="resposta-indicador-semaforo ' + question.resposta + '"></div>' + question.questao +'</li>'
-                     }).toString().replaceAll(',', '')
-                     + '</ul></div></li>'
-                }).toString().replaceAll(',', '')
+                questionsByCategory.map(category => (
+                    `<li><div><span class="resposta-indicador-categoria-titulo">${category.name}</span><ul>` +
+                     category.questions.map(question => (
+                        `<li style="padding: 5px 0px"><div class="resposta-indicador-semaforo ${question.resposta}"></div>${question.questao}</li>`
+                     )) + '</ul></div></li>'
+                )).toString().replaceAll(',', '')
             + '</ul>');
         });
 	}
@@ -185,13 +183,14 @@ dexboard.resumo = (function ($, Handlebars) {
 
 		projeto.indicadores.forEach((indicador) => {
 			indicador.registros.forEach((registro) => {
-				registro.comentarioFormatado = registro.comentario.split("\n");
+				registro.comentarioFormatado = registro.comentario.split('\n');
 				var date = new Date(registro.data);
-				registro.dataFormatada = date.getDate().toString().padStart(2, '0')
-				+ '/' + date.getMonth().toString().padStart(2, '0')
-				 + '/' + date.getFullYear().toString().padStart(2, '0')
-				  + ' às ' + date.getHours().toString().padStart(2, '0')
-				   + ':' + date.getMinutes().toString().padStart(2, '0');
+				var day = date.getDate().padStart(2, '0');
+				var month = date.getMonth().padStart(2, '0');
+				var year = date.getFullYear().padStart(2, '0');
+				var hours = date.getHours().padStart(2, '0');
+				var minutes = date.getMinutes().padStart(2, '0');
+				registro.dataFormatada = `${day}/${month}/${year} às ${hours}:${minutes}`;
 			});
 		});
 

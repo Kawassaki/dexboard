@@ -5,7 +5,7 @@ import br.com.dextra.dexboard.domain.IndicadorQuestao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQuestoes{
+public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQuestoes {
 
     private final String COLUNA_ID = "Id";
     private final String COLUNA_CATEGORIA = "Categoria";
@@ -16,23 +16,23 @@ public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQu
         super(nomePlanilha);
     }
 
-    private Long buscarId(int indice){
+    private Long buscarId(int indice) {
         return Long.parseLong(recuperarConteudoCelula(indice, COLUNA_ID));
     }
 
-    private String buscarCategoria(int indice){
+    private String buscarCategoria(int indice) {
         try {
             return recuperarConteudoCelula(indice, this.COLUNA_CATEGORIA);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return null;
         }
     }
 
-    private String buscarQuestao(int indice){
+    private String buscarQuestao(int indice) {
         return recuperarConteudoCelula(indice, this.COLUNA_QUESTAO);
     }
 
-    private String buscarAtivoInativo(int indice){
+    private String buscarAtivoInativo(int indice) {
         return recuperarConteudoCelula(indice, this.COLUNA_ATIVO);
     }
 
@@ -48,7 +48,7 @@ public class PlanilhaQuestoesImpl extends PlanilhaDexboard implements PlanilhaQu
             Long id = this.buscarId(indice);
             String questao = this.buscarQuestao(indice);
             String ativoInativo = this.buscarAtivoInativo(indice);
-            if(!(id == null || questao == null || ativoInativo == null)){
+            if (!(id == null || questao == null || ativoInativo == null)) {
                 questoes.add(new IndicadorQuestao(id, questao, nomeCategoria, ativoInativo.equals("Ativo")));
             }
             indice++;

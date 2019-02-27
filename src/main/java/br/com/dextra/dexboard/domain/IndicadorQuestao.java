@@ -18,7 +18,6 @@ public class IndicadorQuestao {
     private Key<Indicador> indicador;
 
     public IndicadorQuestao() {
-        super();
     }
 
     public IndicadorQuestao(Long id, String conteudo, String categoria, boolean ativo) {
@@ -44,9 +43,13 @@ public class IndicadorQuestao {
         return conteudo;
     }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getId() { return this.id; }
+    public Long getId() {
+        return this.id;
+    }
 
     public void setIndicador(Key<Indicador> indicador) {
         this.indicador = indicador;

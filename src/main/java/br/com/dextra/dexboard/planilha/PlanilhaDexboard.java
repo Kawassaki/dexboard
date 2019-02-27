@@ -13,11 +13,10 @@ class PlanilhaDexboard extends Planilha {
     }
 
     private static String getChavePlanilha() {
-//        if (Context.isIntegrationTestEnvironment()) {
-//            return CHAVE_PLANILHA_DEXBOARD_TESTE;
-//        }
-//        return CHAVE_PLANILHA_DEXBOARD_PRODUCAO;
-        return CHAVE_PLANILHA_DEXBOARD_TESTE;
+        if (Context.isIntegrationTestEnvironment()) {
+            return CHAVE_PLANILHA_DEXBOARD_TESTE;
+        }
+        return CHAVE_PLANILHA_DEXBOARD_PRODUCAO;
     }
 
 }

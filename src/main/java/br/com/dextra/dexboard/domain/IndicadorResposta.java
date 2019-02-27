@@ -22,8 +22,7 @@ public class IndicadorResposta {
     @Index
     private Date data = new Date();
 
-    public IndicadorResposta(){
-        super();
+    public IndicadorResposta() {
     }
 
     public IndicadorResposta(String conteudo, Key<Projeto> projeto, Key<Indicador> indicador, Key<IndicadorQuestao> questao) {

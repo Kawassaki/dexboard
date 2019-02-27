@@ -433,7 +433,7 @@ div.ui-dialog-titlebar {
   background-color: #ccc;
 }
 
-.dialog-overflow{
+.dialog-overflow {
     overflow: auto;
     max-height: 100vh;
 }
@@ -633,7 +633,7 @@ div.ui-dialog-titlebar {
     margin-bottom: 3px;
 }
 
-.box .slides .respostas-indicador{
+.box .slides .respostas-indicador {
     margin-left: 30px;
     padding: 10px;
     box-sizing: border-box;
@@ -649,14 +649,14 @@ div.ui-dialog-titlebar {
     margin: 0;
 }
 
-.box .slides .resposta-indicador-categoria-titulo{
+.box .slides .resposta-indicador-categoria-titulo {
     font-size: 16px;
     font-weight: bold;
     padding: 10px 0px;
     display: block;
 }
 
-.box .slides .respostas-indicador .resposta-indicador-semaforo{
+.box .slides .respostas-indicador .resposta-indicador-semaforo {
     width: 15px;
     height: 15px;
     margin: -1px 4px 0 0;
@@ -675,19 +675,19 @@ div.ui-dialog-titlebar {
     display: inline-block;
  }
 
-.box .slides .respostas-indicador .OK{
+.box .slides .respostas-indicador .OK {
     background: #2ecc71;
 }
 
-.box .slides .respostas-indicador .ATENCAO{
+.box .slides .respostas-indicador .ATENCAO {
     background: #f1c40f;
 }
 
-.box .slides .respostas-indicador .PERIGO{
+.box .slides .respostas-indicador .PERIGO {
     background: #e74c3c;
 }
 
-.box .slides .resumo-indicador-formulario-btn{
+.box .slides .resumo-indicador-formulario-btn {
     margin-left: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -700,11 +700,11 @@ div.ui-dialog-titlebar {
     text-align: center;
 }
 
-.box .slides .resumo-indicador-formulario-btn:hover{
+.box .slides .resumo-indicador-formulario-btn:hover {
     background-color: #ddd;
 }
 
-.box .slides .resumo-indicador-nao-respondido{
+.box .slides .resumo-indicador-nao-respondido {
     width: 200px;
     height: 1px;
     background-color: #ededed;
@@ -798,12 +798,12 @@ div.ui-dialog-titlebar {
     margin: 10px 0px;
 }
 
-.categoria-container{
+.categoria-container {
     padding: 10px;
     border: 1px solid #ddd;
 }
 
-.categoria-titulo{
+.categoria-titulo {
     font-size: 19px;
     color: #333;
     font-weight: 900;
@@ -811,7 +811,7 @@ div.ui-dialog-titlebar {
     display: block;
 }
 
-.questao-container{
+.questao-container {
     width: 100%;
     border: 1px solid #ddd;
     padding: 10px 7.5px;
@@ -820,13 +820,13 @@ div.ui-dialog-titlebar {
     box-sizing: border-box;
 }
 
-.questao-conteudo{
+.questao-conteudo {
     width: 70%;
     font-size: 13px;
     color: #333;
 }
 
-.questao-opcoes{
+.questao-opcoes {
     width: 30%;
     text-align: right;
 }

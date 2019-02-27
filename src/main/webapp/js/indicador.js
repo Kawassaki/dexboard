@@ -49,23 +49,19 @@ dexboard.indicador = (function($, Handlebars) {
 			var popup = new view.Dialog();
 			
 			self.change.click(function(e) {
-
                 var respostas = [];
 
                 if(indicador.questoes && indicador.questoes.length > 0){
-
                     $.each($('#questoes-form').serializeArray(), function(i, field) {
                         respostas.push({
                             composeId: field.name,
                             conteudo: field.value
                         });
                     });
-
                     if(respostas.length > 0 && respostas.length != indicador.questoes.length){
                         alert('Responda todas as questões para continuar.');
                         return;
                     }
-
                 }
 
 				var button = $(this);
@@ -239,15 +235,11 @@ dexboard.indicador = (function($, Handlebars) {
 			self.container.dialog({
 				"autoOpen" : false,
 				"dialogClass" : "no-close dialog-overflow",
-//				"draggable" : false,
-//				"position" : {"my" : "bottom+50", "at" : "center", "of" : window},
 				"width" : 850,
 				open: function (){
 				    $(".ui-dialog").scrollTop(0);
 				}
 			});
-			
-//			self.container.dialog("widget").draggable("option", "cursor", "move");
 		};
 
 	};

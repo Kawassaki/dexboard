@@ -20,38 +20,36 @@ import java.util.List;
 
 public class IndicadorServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -7416705488396246559L;
+    private static final long serialVersionUID = -7416705488396246559L;
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		resp.setCharacterEncoding("UTF-8");
-		resp.setContentType("application/json");
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
 
-		Long idProjeto = Long.valueOf(req.getParameter("projeto"));
-		Long idIndicador = Long.valueOf(req.getParameter("indicador"));
+        Long idProjeto = Long.valueOf(req.getParameter("projeto"));
+        Long idIndicador = Long.valueOf(req.getParameter("indicador"));
 
-		JSONDeserializer<RegistroAlteracao> des = new JSONDeserializer<RegistroAlteracao>();
-		String json = req.getParameter("registro");
-		RegistroAlteracao regAlteracao = des.deserialize(json, RegistroAlteracao.class);
+        JSONDeserializer<RegistroAlteracao> des = new JSONDeserializer<RegistroAlteracao>();
+        String json = req.getParameter("registro");
+        RegistroAlteracao regAlteracao = des.deserialize(json, RegistroAlteracao.class);
 
-		String respostasJson = req.getParameter("respostas");
-		List respostas = new JSONDeserializer<List<IndicadorResposta>>().use("values", IndicadorResposta.class).deserialize(respostasJson);
+        String respostasJson = req.getParameter("respostas");
+        List<IndicadorResposta> respostas = new JSONDeserializer<List<IndicadorResposta>>().use("values", IndicadorResposta.class).deserialize(respostasJson);
 
+        UserService userService = UserServiceFactory.getUserService();
 
-		UserService userService = UserServiceFactory.getUserService();
+        regAlteracao.setUsuario(userService.getCurrentUser().getEmail());
+        regAlteracao.setData(new Date());
 
-		regAlteracao.setUsuario(userService.getCurrentUser().getEmail());
-		regAlteracao.setData(new Date());
+        RegistroAlteracao registro = new IndicadorService().salvarAlteracao(idProjeto, idIndicador, regAlteracao, respostas);
 
-		RegistroAlteracao registro = new IndicadorService().salvarAlteracao(idProjeto, idIndicador, regAlteracao, respostas);
+        JSONSerializer serializer = new JSONSerializer();
+        resp.getWriter().println(serializer.serialize(registro));
+    }
 
-		JSONSerializer serializer = new JSONSerializer();
-		resp.getWriter().println(serializer.serialize(registro));
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		doPost(req, resp);
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        doPost(req, resp);
+    }
 }
