@@ -5,6 +5,14 @@
 	version="2.5">
 
 	<servlet>
+		<servlet-name>TaskQueueServlet</servlet-name>
+		<servlet-class>br.com.dextra.dexboard.servlet.TaskQueueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TaskQueueServlet</servlet-name>
+		<url-pattern>/reload/projetos</url-pattern>
+	</servlet-mapping>
+	<servlet>
 		<servlet-name>IndicadorRespostasServlet</servlet-name>
 		<servlet-class>br.com.dextra.dexboard.servlet.IndicadorRespostasServlet</servlet-class>
 	</servlet>
@@ -29,10 +37,6 @@
 		<servlet-name>ReloadProjetosServlet</servlet-name>
 		<servlet-class>br.com.dextra.dexboard.servlet.ReloadProjetosServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>ReloadProjetosServlet</servlet-name>
-		<url-pattern>/reload/projetos</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>ReloadProjetosServlet</servlet-name>
 		<url-pattern>/cron/reload/projetos</url-pattern>
