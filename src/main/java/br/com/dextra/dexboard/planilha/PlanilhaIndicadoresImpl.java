@@ -22,8 +22,10 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 
 	private String buscarSituacaoDoIndicador(int linha) { return recuperarConteudoCelula(linha, 5); }
 
-	private Integer buscaIDIndicador(int linha) { return  recuperarConteudoCelulaInt(linha, 3);
-	}
+	private Integer buscaIDIndicador(int linha) { return recuperarConteudoCelulaInt(linha, 3); }
+	
+	private String buscarPlanilhaDeQuestoes(int linha) { return recuperarConteudoCelula(linha, 4); }
+
 	@Override
 	public List<Indicador> criarListaDeIndicadores() {
 		List<Indicador> indicadores = new ArrayList<>();
@@ -34,9 +36,10 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 			if (!StringUtils.isNullOrEmpty(nomeIndicador)) {
 				String descricao = buscarDescricaoDoIndicador(i);
 				String situacao = buscarSituacaoDoIndicador(i);
+				String planilhaDeQuestoes = buscarPlanilhaDeQuestoes(i);
 				Long id = (long) buscaIDIndicador(i);
 				boolean sitBool = situacao.equalsIgnoreCase("Ativo");
-				indicadores.add(new Indicador(id, nomeIndicador, descricao, sitBool, i));
+				indicadores.add(new Indicador(id, nomeIndicador, descricao, sitBool, i, planilhaDeQuestoes));
 				i++;
 			} else {
 				return indicadores;

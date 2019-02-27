@@ -3,7 +3,10 @@ package br.com.dextra.dexboard.domain;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Ignore;
 import com.googlecode.objectify.annotation.Index;
+
+import java.util.List;
 
 @Entity
 public class Indicador {
@@ -17,17 +20,19 @@ public class Indicador {
 	private String descricao;
 	private boolean ativo;
 	private int posicao;
+    private String planilhaQuestoes;
+    @Ignore
+    private List<IndicadorQuestao> questoes;
 
-	public Indicador() {
-		super();
-	}
+	public Indicador() {}
 
-	public Indicador(Long id, String nomeIndicador, String descricao, boolean ativo, int posicao) {
+	public Indicador(Long id, String nomeIndicador, String descricao, boolean ativo, int posicao, String planilhaQuestoes) {
 		this.id = id;
 		this.nome = nomeIndicador;
 		this.descricao = descricao;
 		this.ativo = ativo;
 		this.posicao = posicao;
+        this.planilhaQuestoes = planilhaQuestoes;
 	}
 
 	public Long getId() {
@@ -68,4 +73,20 @@ public class Indicador {
 		String value = String.format("%s;%s", this.getProjeto().getId(), this.getId().toString());
 		this.composeId = value;
 	}
+
+    public String getPlanilhaQuestoes() {
+        return planilhaQuestoes;
+    }
+
+    public void setPlanilhaQuestoes(String planilhaQuestoes) {
+        this.planilhaQuestoes = planilhaQuestoes;
+    }
+
+    public void setQuestoes(List<IndicadorQuestao> questoes) {
+        this.questoes = questoes;
+    }
+
+    public List<IndicadorQuestao> getQuestoes() {
+        return questoes;
+    }
 }

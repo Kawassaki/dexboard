@@ -1,13 +1,13 @@
 package br.com.dextra.dexboard.dao;
 
-import br.com.dextra.dexboard.domain.Indicador;
-import br.com.dextra.dexboard.domain.Projeto;
-import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.domain.*;
+import br.com.dextra.dexboard.json.IndicadorRespostaJson;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.LoadResult;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.cmd.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,13 +131,31 @@ public class ProjetoDao {
 		return list;
 	}
 
+    public List<IndicadorQuestao> buscarQuestoesPelaKeyDoIndicador(Key<Indicador> key) {
+        List<IndicadorQuestao> questoes = ofy.load().type(IndicadorQuestao.class).filter("indicador", key).filter("ativo", true).list();
+        return questoes;
+    }
+
+    public List<IndicadorRespostaJson> buscarRespostasDasQuestoesDoIndicador(Key<Projeto> projeto, Key<Indicador> indicador) {
+        List<IndicadorRespostaJson> respostasJson = new ArrayList<IndicadorRespostaJson>();
+        List<IndicadorResposta> respostas = ofy.load().type(IndicadorResposta.class).filter("projeto", projeto).filter("indicador", indicador).list();
+        for (IndicadorResposta indicadorResposta : respostas) {
+            LoadResult<IndicadorQuestao> questao = ofy.load().type(IndicadorQuestao.class).id(indicadorResposta.getQuestao().getName());
+            respostasJson.add(new IndicadorRespostaJson(questao.now().getCategoria(), questao.now().getConteudo(), indicadorResposta.getConteudo()));
+        }
+        return respostasJson;
+    }
+
 	public void salvaIndicador(Long idProjetoPma, Indicador indicador) {
 		MemcacheServiceFactory.getMemcacheService().delete(KEY_CACHE);
 		MemcacheServiceFactory.getMemcacheService().delete(HISTORY_CACHE);
 		Key<Projeto> keyProjeto = Key.create(Projeto.class, idProjetoPma);
 		indicador.setProjeto(keyProjeto);
 		indicador.defineComposeId();
-		ofy.save().entity(indicador);
+		ofy.transact(() -> {
+            salvarQuestoesDoIndicador(indicador.getId(), indicador.getQuestoes());
+            ofy.save().entity(indicador);
+        });
 	}
 
 	public RegistroAlteracao salvaAlteracao(Long idProjetoPma, Long idIndicador, RegistroAlteracao registroAlteracao) {
@@ -153,5 +171,18 @@ public class ProjetoDao {
 
 		return registroAlteracao;
 	}
+
+    private void salvarQuestoesDoIndicador(Long idIndicador, List<IndicadorQuestao> questoes) {
+        for (IndicadorQuestao questao : questoes) {
+            Key<Indicador> keyIndicador = Key.create(Indicador.class, idIndicador);
+            questao.setIndicador(keyIndicador);
+            questao.defineComposeId();
+            ofy.save().entity(questao);
+        }
+    }
+
+    public void salvarRespostasDoIndicador(IndicadorResposta resposta) {
+        ofy.save().entity(resposta);
+    }
 
 }

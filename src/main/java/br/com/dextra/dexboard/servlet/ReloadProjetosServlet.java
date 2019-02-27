@@ -5,6 +5,7 @@ import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.planilha.PlanilhaFactory;
 import br.com.dextra.dexboard.planilha.PlanilhaIndicadores;
+import br.com.dextra.dexboard.planilha.PlanilhaQuestoes;
 import br.com.dextra.dexboard.service.ProjetoPlanilhaService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,9 @@ public class ReloadProjetosServlet extends HttpServlet {
 		LOG.info("Buscando lista de indicadores ...");
 		this.indicadores = planilhaIndicadores.criarListaDeIndicadores();
 
+        LOG.info("Buscando lista de questões dos indicadores...");
+        incluirListaDeQuestoesNosIndicadores();
+
 		LOG.info("Buscando projetos ativos ...");
 		Map<Long, Projeto> projetosPlanilha = ProjetoPlanilhaService.buscarDadosProjetosAtivos();
 		LOG.info(projetosPlanilha.size() + " projetos ativos encontrados ...");
@@ -55,6 +59,13 @@ public class ReloadProjetosServlet extends HttpServlet {
 		adicionaProjetosNovos(mapProjetosDataStore, projetosPlanilha.values());
 		LOG.info("Sucesso!");
 	}
+
+    private void incluirListaDeQuestoesNosIndicadores() {
+        for (Indicador indicador : indicadores) {
+            PlanilhaQuestoes planilhaQuestoes = PlanilhaFactory.questoes(indicador.getPlanilhaQuestoes());
+            indicador.setQuestoes(planilhaQuestoes.criarListaDeQuestoes());
+        }
+    }
 
 	private Map<Long, Projeto> createMapProjetos(List<Projeto> projetos) {
 		Map<Long, Projeto> map = new HashMap<>();
@@ -109,7 +120,6 @@ public class ReloadProjetosServlet extends HttpServlet {
 					dao.salvarProjeto(projetoEmCache);
 					LOG.info(String.format("Projeto \"%s\" salvo", projetoAtual.getNome()));
 				}
-
 				indicadores.forEach(indicador -> {
 					dao.salvaIndicador(projetoAtual.getIdPma(), indicador);
 				});
