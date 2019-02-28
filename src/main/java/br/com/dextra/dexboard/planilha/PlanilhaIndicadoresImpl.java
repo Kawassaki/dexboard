@@ -10,7 +10,7 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 
 	private final String COLUNA_ID = "ID";
 	private final String COLUNA_NOME = "Nome";
-	private final String COLUNA_DESCICAO = "Descição";
+	private final String COLUNA_DESCICAO = "Descrição";
 	private final String COLUNA_QUESTIONARIO = "Questionario";
 	private final String COLUNA_SITUACAO = "Situação";
 

@@ -165,7 +165,7 @@ dexboard.resumo = (function ($, Handlebars) {
                 questionsByCategory.map(category => (
                     `<li><div><span class="resposta-indicador-categoria-titulo">${category.name}</span><ul>` +
                      category.questions.map(question => (
-                        `<li style="padding: 5px 0px"><div class="resposta-indicador-semaforo ${question.resposta}"></div>${question.questao}</li>`
+                        `<li style="padding: 5px 0px"><div class="resposta-indicador-semaforo opacidade ${question.resposta}"></div>${question.questao}</li>`
                      )) + '</ul></div></li>'
                 )).toString().replaceAll(',', '')
             + '</ul>');

@@ -675,6 +675,10 @@ div.ui-dialog-titlebar {
     display: inline-block;
  }
 
+.box .slides .respostas-indicador .opacidade {
+    opacity: 1;
+
+ }
 .box .slides .respostas-indicador .OK {
     background: #2ecc71;
 }
