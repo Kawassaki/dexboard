@@ -43,7 +43,11 @@ public class HistoryServlet extends HttpServlet {
 
 		String json = getJsonHistory();
 
-		memcacheService.put(ProjetoDao.HISTORY_CACHE, json);
+		try {
+			memcacheService.put(ProjetoDao.HISTORY_CACHE, json);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
 
 		return json;
 	}

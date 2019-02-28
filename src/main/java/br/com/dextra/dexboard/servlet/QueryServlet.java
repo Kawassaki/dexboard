@@ -43,7 +43,11 @@ public class QueryServlet extends HttpServlet {
 		String json = getJsonProjetos(equipe, tribo);
 
 		if (useCache(equipe, tribo)) {
-			memcacheService.put(ProjetoDao.KEY_CACHE, json);
+			try {
+				memcacheService.put(ProjetoDao.KEY_CACHE, json);
+			} catch (Exception e) {
+				System.out.println(e.toString());
+			}
 		}
 
 		return json;
