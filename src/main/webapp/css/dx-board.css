@@ -606,13 +606,19 @@ div.ui-dialog-titlebar {
     text-align: center;
     border: 1px solid #DDD;
     border-radius: 3px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.23) inset;
+    box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.23) inset;
     max-height: 170px;
     max-width: 170px;
     padding: 4px;
     margin: 10px;
     float: right;
     cursor: pointer;
+}
+
+.resumoClicavel:hover {
+    border-color: #00ff00;
+    color: white;
+    background-color: #59be00;
 }
 
 .box .slides .resumo-indicador-container {
@@ -626,6 +632,7 @@ div.ui-dialog-titlebar {
     text-align: left;
     overflow: hidden;
 }
+
 .box .slides .resumo-indicador-container p {
     margin-left: 30px;
     text-align: initial;

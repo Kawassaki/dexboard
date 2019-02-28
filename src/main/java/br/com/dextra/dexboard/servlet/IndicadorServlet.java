@@ -30,7 +30,7 @@ public class IndicadorServlet extends HttpServlet {
         Long idProjeto = Long.valueOf(req.getParameter("projeto"));
         Long idIndicador = Long.valueOf(req.getParameter("indicador"));
 
-        JSONDeserializer<RegistroAlteracao> des = new JSONDeserializer<RegistroAlteracao>();
+        JSONDeserializer<RegistroAlteracao> des = new JSONDeserializer<>();
         String json = req.getParameter("registro");
         RegistroAlteracao regAlteracao = des.deserialize(json, RegistroAlteracao.class);
 

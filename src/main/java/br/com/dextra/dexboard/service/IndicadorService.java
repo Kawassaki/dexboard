@@ -12,7 +12,7 @@ public class IndicadorService {
     public RegistroAlteracao salvarAlteracao(Long idProjeto, Long idIndicador, RegistroAlteracao regAlteracao, List<IndicadorResposta> respostas){
         ProjetoDao dao = new ProjetoDao();
 
-        if(respostas != null && respostas.size() > 0){
+        if (respostas != null && respostas.size() > 0) {
             for (IndicadorResposta resposta: respostas){
                IndicadorResposta indicadorResposta = new IndicadorResposta(
                     resposta.getConteudo(),
