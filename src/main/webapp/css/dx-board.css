@@ -433,6 +433,11 @@ div.ui-dialog-titlebar {
   background-color: #ccc;
 }
 
+.dialog-overflow {
+    overflow: auto;
+    max-height: 100vh;
+}
+
 .dialog-content {
   background-color: #e5e5e5;
   border: 1px solid #aaa;
@@ -440,8 +445,9 @@ div.ui-dialog-titlebar {
   margin: 0 auto;
   padding: 20px;
   position: relative;
-  width: 600px;
+  width: 100%;
   z-index: 50;
+  box-sizing: border-box;
 }
 
 .dialog-content h2 {
@@ -473,7 +479,7 @@ div.ui-dialog-titlebar {
 
 .dialog-content h4 {
   color: #000000;
-  font-size: 18px;
+  font-size: 25px;
   margin: 0 0 10px 0;
   padding: 7px 14px;
 }
@@ -600,7 +606,7 @@ div.ui-dialog-titlebar {
     text-align: center;
     border: 1px solid #DDD;
     border-radius: 3px;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.23) inset;
+    box-shadow: 0px 3px 6px 3px rgba(0, 0, 0, 0.23) inset;
     max-height: 170px;
     max-width: 170px;
     padding: 4px;
@@ -609,18 +615,112 @@ div.ui-dialog-titlebar {
     cursor: pointer;
 }
 
-.box .slides .borda-resumo {
+.resumoClicavel:hover {
+    border-color: #00ff00;
+    color: white;
+    background-color: #59be00;
+}
+
+.box .slides .resumo-indicador-container {
     margin: 10px;
     position: relative;
-    border: 1px solid;
-    border-radius: 8px;
-    text-shadow: 0 0 1px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(0, 0, 0, 0.3);
+    border: 1px solid #ddd !important;
+    background-color: #fff !important;
+    color: #000 !important;
+    border-radius: 5px;
+    min-height: 85px;
+    text-align: left;
+    overflow: hidden;
 }
-.box .slides .borda-resumo p {
-    margin-left: 70px;
+
+.box .slides .resumo-indicador-container p {
+    margin-left: 30px;
     text-align: initial;
-    margin-top: 3px;
+    margin-top: 15px;
     margin-bottom: 3px;
+}
+
+.box .slides .respostas-indicador {
+    margin-left: 30px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border: 1px solid #efefef;
+    margin-right: 30px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.box .slides .respostas-indicador ul {
+    padding: 0;
+    margin: 0;
+}
+
+.box .slides .resposta-indicador-categoria-titulo {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 0px;
+    display: block;
+}
+
+.box .slides .respostas-indicador .resposta-indicador-semaforo {
+    width: 15px;
+    height: 15px;
+    margin: -1px 4px 0 0;
+    margin-right: 10px;
+    vertical-align: middle;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0.4;
+    display: inline-block;
+ }
+
+.box .slides .respostas-indicador .opacidade {
+    opacity: 1;
+
+ }
+.box .slides .respostas-indicador .OK {
+    background: #2ecc71;
+}
+
+.box .slides .respostas-indicador .ATENCAO {
+    background: #f1c40f;
+}
+
+.box .slides .respostas-indicador .PERIGO {
+    background: #e74c3c;
+}
+
+.box .slides .resumo-indicador-formulario-btn {
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 2.5px;
+    padding: 5px 10px;
+    font-size: 12px;
+    background-color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.box .slides .resumo-indicador-formulario-btn:hover {
+    background-color: #ddd;
+}
+
+.box .slides .resumo-indicador-nao-respondido {
+    width: 200px;
+    height: 1px;
+    background-color: #ededed;
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
 .presentation-resumo .box .slides {
@@ -645,19 +745,27 @@ div.ui-dialog-titlebar {
     color: black;
 }
 
-.box .slides .texto-indicador-italico {
+.box .slides .texto-indicador-15px {
     font-size: 15px;
-    font-style: italic;
+}
+
+.box .slides .texto-indicador {
     font-weight: bold;
 }
 
-.box .slides .texto-indicador-15px {
-    font-size: 15px;
+.box .slides .texto-indicador-usuario-registro {
+    font-size: 11px;
+    color: #ccc;
+    font-weight: 100;
+    position: absolute;
+    right: 15px;
+    top: 0;
 }
 
 .box .slides .texto-projeto-name {
     font-size: 30px;
     margin: 20px;
+    color: #000;
 }
 
 .box .slides .atrasado {
@@ -679,13 +787,13 @@ div.ui-dialog-titlebar {
 }
 
 #info {
-    width: 40px;
-    left: 10px;
-    height: 20px;
+    width: 17px;
+    height: 100%;
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     margin: 0;
+    border-radius: 0;
 }
 
 .logoResumo {
@@ -694,6 +802,109 @@ div.ui-dialog-titlebar {
     margin-left: 10px;
     display: flex;
 }
+
+.questoes {
+    padding: 10px 10px;
+    border: 1px solid #ddd;
+    margin: 10px 0px;
+}
+
+.categoria-container {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.categoria-titulo {
+    font-size: 19px;
+    color: #333;
+    font-weight: 900;
+    padding: 5px 0px 10px 0px;
+    display: block;
+}
+
+.questao-container {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 7.5px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.questao-conteudo {
+    width: 70%;
+    font-size: 13px;
+    color: #333;
+}
+
+.questao-opcoes {
+    width: 30%;
+    text-align: right;
+}
+
+.custom-radios div {
+  display: inline-block;
+}
+
+.custom-radios input[type="radio"] {
+  display: none;
+}
+
+.custom-radios input[type="radio"] + label {
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.custom-radios input[type="radio"] + label span {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: -1px 4px 0 0;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  opacity: 0.4;
+}
+
+.custom-radios input[type="radio"] + label span img {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.custom-radios input[type="radio"].color-1 + label span {
+  background-color: #2ecc71;
+}
+
+.custom-radios input[type="radio"].color-2 + label span {
+  background-color: #3498db;
+}
+
+.custom-radios input[type="radio"].color-3 + label span {
+  background-color: #f1c40f;
+}
+
+.custom-radios input[type="radio"].color-4 + label span {
+  background-color: #e74c3c;
+}
+
+.custom-radios input[type="radio"]:checked + label span {
+  opacity: 1;
+}
+
+.custom-radios input[type="radio"]:checked + label span img {
+  opacity: 1;
+}
+
+
 /******************** FIM POPUP ********************/
 
 #reload-projects {
@@ -714,4 +925,18 @@ div.ui-dialog-titlebar {
 
 #reload-projects:hover {
     color: rgba(255,255,255,0.5);
+}
+
+.hidden {
+    display: none;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 12px;
+    color: #fff;
+    padding: 5px 10px;
+    background-color: #ff0000;
+    margin: 0 10px;
+    border-radius: 2.5px;
 }
