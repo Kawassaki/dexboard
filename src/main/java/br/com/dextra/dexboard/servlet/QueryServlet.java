@@ -61,7 +61,7 @@ public class QueryServlet extends HttpServlet {
 			projetosJson.forEach(projeto -> {
 				i.add(projeto.getIdPma());
 				try {
-					memcacheService.put(projeto.getIdPma(), serializer.serialize(projeto));
+					memcacheService.put(projeto.getIdPma(), serializer.deepSerialize(projeto));
 				} catch (Exception e) {
 					System.out.println(e.getMessage());
 				}

@@ -3,8 +3,12 @@ package br.com.dextra.dexboard.servlet;
 import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.IndicadorQuestao;
 import br.com.dextra.dexboard.domain.IndicadorResposta;
+import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.json.ProjetoJson;
 import br.com.dextra.dexboard.service.IndicadorService;
+import com.google.appengine.api.memcache.MemcacheService;
+import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import flexjson.JSONDeserializer;
@@ -27,6 +31,9 @@ public class IndicadorServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
 
+        ProjetoDao dao = new ProjetoDao();
+        JSONSerializer serializer = new JSONSerializer();
+
         Long idProjeto = Long.valueOf(req.getParameter("projeto"));
         Long idIndicador = Long.valueOf(req.getParameter("indicador"));
 
@@ -44,7 +51,19 @@ public class IndicadorServlet extends HttpServlet {
 
         RegistroAlteracao registro = new IndicadorService().salvarAlteracao(idProjeto, idIndicador, regAlteracao, respostas);
 
-        JSONSerializer serializer = new JSONSerializer();
+        Projeto project = dao.buscarProjeto(idProjeto);
+        ProjetoJson projetoJson = project.toProjetoJson();
+        MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
+        try {
+            if (projetoJson.getAtrasado()) {
+                memcacheService.put(project.getIdPma(), serializer.deepSerialize(projetoJson));
+            } else {
+                memcacheService.delete(ProjetoJson.KEY_CACHE);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         resp.getWriter().println(serializer.serialize(registro));
     }
 

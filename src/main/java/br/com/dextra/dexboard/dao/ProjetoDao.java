@@ -2,6 +2,7 @@ package br.com.dextra.dexboard.dao;
 
 import br.com.dextra.dexboard.domain.*;
 import br.com.dextra.dexboard.json.IndicadorRespostaJson;
+import br.com.dextra.dexboard.json.ProjetoJson;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.LoadResult;
@@ -32,6 +33,7 @@ public class ProjetoDao {
     public void salvarProjeto(Projeto p) {
         MemcacheServiceFactory.getMemcacheService().delete(KEY_CACHE);
         MemcacheServiceFactory.getMemcacheService().delete(HISTORY_CACHE);
+        MemcacheServiceFactory.getMemcacheService().delete(ProjetoJson.KEY_CACHE);
         ofy.save().entity(p).now();
     }
 
