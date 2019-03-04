@@ -38,29 +38,36 @@ public class QueryServlet extends HttpServlet {
 
 	private String getJsonProjetos(String equipe, String tribo) {
 		JSONSerializer serializer = new JSONSerializer();
-
 		serializer.exclude("*.class", "*.projeto");
 		MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
+
 		ProjetoDao dao = new ProjetoDao();
-		List cache = (List) memcacheService.get(ProjetoJson.KEY_CACHE);
-		if (cache != null) {
-			List<String> projetosRetorno = new ArrayList<>();
-			cache.forEach(id -> projetosRetorno.add( (String) memcacheService.get(id)));
-			return String.valueOf((projetosRetorno));
+
+		if (useCache(equipe, tribo)) {
+			List cache = (List) memcacheService.get(ProjetoJson.KEY_CACHE);
+			if (cache != null) {
+				List<String> projetosRetorno = new ArrayList<>();
+				cache.forEach(id -> projetosRetorno.add( (String) memcacheService.get(id)));
+				return String.valueOf((projetosRetorno));
+			}
 		}
+
 		List<Projeto> projetos = dao.buscarTodosProjetos(equipe, tribo);
 
-		Collections.sort(projetos, new ProjetoComparator());
+		projetos.sort(new ProjetoComparator());
 		List<ProjetoJson> projetosJson = Projeto.toProjetoJson(projetos);
 
-		List<Long> i = new ArrayList<>();
-		projetosJson.forEach(projeto -> {
-			i.add(projeto.getIdPma());
-			memcacheService.put(projeto.getIdPma(), serializer.serialize(projeto));
-		});
+		if (useCache(equipe, tribo)) {
+			List<Long> i = new ArrayList<>();
+			projetosJson.forEach(projeto -> {
+				i.add(projeto.getIdPma());
+				memcacheService.put(projeto.getIdPma(), serializer.serialize(projeto));
+			});
 
-		if (projetosJson.size() > 0) { memcacheService.put(ProjetoJson.KEY_CACHE, i); }
-
+			if (projetosJson.size() > 0) {
+				memcacheService.put(ProjetoJson.KEY_CACHE, i);
+			}
+		}
 
 		return serializer.deepSerialize(projetosJson);
 	}
