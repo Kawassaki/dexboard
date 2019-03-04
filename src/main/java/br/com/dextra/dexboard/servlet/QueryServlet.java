@@ -6,7 +6,6 @@ import br.com.dextra.dexboard.json.ProjetoJson;
 import br.com.dextra.dexboard.repository.ProjetoComparator;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
-import com.google.gson.JsonDeserializer;
 import flexjson.JSONSerializer;
 
 import javax.servlet.http.HttpServlet;
@@ -61,11 +60,19 @@ public class QueryServlet extends HttpServlet {
 			List<Long> i = new ArrayList<>();
 			projetosJson.forEach(projeto -> {
 				i.add(projeto.getIdPma());
-				memcacheService.put(projeto.getIdPma(), serializer.serialize(projeto));
+				try {
+					memcacheService.put(projeto.getIdPma(), serializer.serialize(projeto));
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 			});
 
 			if (projetosJson.size() > 0) {
-				memcacheService.put(ProjetoJson.KEY_CACHE, i);
+				try {
+					memcacheService.put(ProjetoJson.KEY_CACHE, i);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 
