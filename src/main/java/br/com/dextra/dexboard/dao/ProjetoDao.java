@@ -7,7 +7,6 @@ import com.googlecode.objectify.Key;
 import com.googlecode.objectify.LoadResult;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.cmd.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,6 +130,10 @@ public class ProjetoDao {
 		return list;
 	}
 
+	public RegistroAlteracao obterUltimoRegistroDeAlteracaoDoIndicadorDoProjeto(Key<Indicador> indicadorKey) {
+		return ofy.load().type(RegistroAlteracao.class).filter("indicador", indicadorKey).order("-data").first().now();
+	}
+
     public List<IndicadorQuestao> buscarQuestoesPelaKeyDoIndicador(Key<Indicador> key) {
         List<IndicadorQuestao> questoes = ofy.load().type(IndicadorQuestao.class).filter("indicador", key).filter("ativo", true).list();
         return questoes;
@@ -187,5 +190,9 @@ public class ProjetoDao {
     public void salvarRespostasDoIndicador(IndicadorResposta resposta) {
         ofy.save().entity(resposta);
     }
+
+    public List<Indicador> buscarTodosIndicadores() {
+		return ofy.load().type(Indicador.class).filter("ativo", true).project("id", "nome", "descricao").distinct(true).list();
+	}
 
 }

@@ -5,11 +5,19 @@
 	version="2.5">
 
 	<servlet>
-		<servlet-name>TaskQueueServlet</servlet-name>
-		<servlet-class>br.com.dextra.dexboard.servlet.TaskQueueServlet</servlet-class>
+		<servlet-name>ExportServlet</servlet-name>
+		<servlet-class>br.com.dextra.dexboard.servlet.ExportServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>TaskQueueServlet</servlet-name>
+		<servlet-name>ExportServlet</servlet-name>
+		<url-pattern>/cron/export</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ReloadTaskQueueServlet</servlet-name>
+		<servlet-class>br.com.dextra.dexboard.servlet.ReloadTaskQueueServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReloadTaskQueueServlet</servlet-name>
 		<url-pattern>/reload/projetos</url-pattern>
 	</servlet-mapping>
 	<servlet>
@@ -83,6 +91,7 @@
 			<web-resource-name>cron jobs</web-resource-name>
 			<url-pattern>/cron/reload/projetos</url-pattern>
 			<url-pattern>/cron/notificacao/projetos</url-pattern>
+			<url-pattern>/cron/export</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
