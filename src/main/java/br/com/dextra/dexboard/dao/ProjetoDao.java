@@ -192,7 +192,7 @@ public class ProjetoDao {
     }
 
     public List<Indicador> buscarTodosIndicadores() {
-		return ofy.load().type(Indicador.class).filter("ativo", true).project("id", "nome", "descricao").distinct(true).list();
+		return ofy.load().type(Indicador.class).filter("ativo", true).project("id", "nome").distinct(true).list();
 	}
 
 }

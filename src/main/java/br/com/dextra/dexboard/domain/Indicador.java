@@ -19,7 +19,6 @@ public class Indicador {
 	private Key<Projeto> projeto;
 	@Index
 	private String nome;
-	@Index
 	private String descricao;
 	@Index
 	private boolean ativo;
