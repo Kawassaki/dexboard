@@ -3,12 +3,11 @@ package br.com.dextra.dexboard.dao;
 import br.com.dextra.dexboard.domain.*;
 import br.com.dextra.dexboard.json.IndicadorRespostaJson;
 import br.com.dextra.dexboard.json.ProjetoJson;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import br.com.dextra.dexboard.utils.MemCache;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.LoadResult;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.annotation.Load;
 import com.googlecode.objectify.cmd.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +22,8 @@ public class ProjetoDao {
     public static final String KEY_CACHE = "dexboard.cache.key";
     public static final String HISTORY_CACHE = "dexlife.cache.key";
     private static final Logger LOG = LoggerFactory.getLogger(ProjetoDao.class);
+    public static final MemCache cacheService = new MemCache();
+
     private Objectify ofy;
 
     public ProjetoDao() {
@@ -30,10 +31,13 @@ public class ProjetoDao {
         ofy = ObjectifyService.ofy();
     }
 
+    private void deleteCaches() {
+        cacheService.doDelete(KEY_CACHE);
+        cacheService.doDelete(HISTORY_CACHE);
+        cacheService.doDelete(ProjetoJson.KEY_CACHE);
+    }
     public void salvarProjeto(Projeto p) {
-        MemcacheServiceFactory.getMemcacheService().delete(KEY_CACHE);
-        MemcacheServiceFactory.getMemcacheService().delete(HISTORY_CACHE);
-        MemcacheServiceFactory.getMemcacheService().delete(ProjetoJson.KEY_CACHE);
+        this.deleteCaches();
         ofy.save().entity(p).now();
     }
 
@@ -149,8 +153,7 @@ public class ProjetoDao {
     }
 
     public void salvaIndicador(Long idProjetoPma, Indicador indicador) {
-        MemcacheServiceFactory.getMemcacheService().delete(KEY_CACHE);
-        MemcacheServiceFactory.getMemcacheService().delete(HISTORY_CACHE);
+        this.deleteCaches();
         Key<Projeto> keyProjeto = Key.create(Projeto.class, idProjetoPma);
         indicador.setProjeto(keyProjeto);
         indicador.defineComposeId();
@@ -161,8 +164,7 @@ public class ProjetoDao {
     }
 
     public RegistroAlteracao salvaAlteracao(Long idProjetoPma, Long idIndicador, RegistroAlteracao registroAlteracao) {
-        MemcacheServiceFactory.getMemcacheService().delete(KEY_CACHE);
-        MemcacheServiceFactory.getMemcacheService().delete(HISTORY_CACHE);
+        this.deleteCaches();
         Key<Projeto> keyProjeto = Key.create(Projeto.class, idProjetoPma);
         Key<Indicador> keyIndicador = Key.create(Indicador.class, idProjetoPma + ";" + idIndicador);
 

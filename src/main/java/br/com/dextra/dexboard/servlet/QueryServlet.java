@@ -4,12 +4,8 @@ import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.json.ProjetoJson;
 import br.com.dextra.dexboard.repository.ProjetoComparator;
-import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import br.com.dextra.dexboard.utils.MemCache;
 import flexjson.JSONSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +19,7 @@ public class QueryServlet extends HttpServlet {
     private static final String EQUIPE_HTTP_PARAMETER = "equipe";
     private static final String TRIBO_HTTP_PARAMETER = "tribo";
     private static final long serialVersionUID = -1248500946944090403L;
-    private static final Logger LOG = LoggerFactory.getLogger(QueryServlet.class);
+    private static final MemCache cacheService = new MemCache();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -40,16 +36,15 @@ public class QueryServlet extends HttpServlet {
     private String getJsonProjetos(String equipe, String tribo) {
         JSONSerializer serializer = new JSONSerializer();
         serializer.exclude("*.class", "*.projeto");
-        MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
         ProjetoDao dao = new ProjetoDao();
 
         if (useCache(equipe, tribo)) {
-            List<Long> cache = (List<Long>) memcacheService.get(ProjetoJson.KEY_CACHE);
+            List<Long> cache = (List<Long>) cacheService.doGetGeneric(ProjetoJson.KEY_CACHE);
             if (cache != null) {
                 List<String> projetosRetorno = new ArrayList<>();
                 cache.forEach(id -> {
-                    String proj = (String) memcacheService.get(id);
+                    String proj = cacheService.doGet(id.toString());
                     if (proj != null) {
                         projetosRetorno.add(proj);
                     } else {
@@ -70,19 +65,11 @@ public class QueryServlet extends HttpServlet {
             List<Long> ids = new ArrayList<>();
             projetosJson.forEach(projeto -> {
                 ids.add(projeto.getIdPma());
-                try {
-                    memcacheService.put(projeto.getIdPma(), serializer.deepSerialize(projeto));
-                } catch (Exception e) {
-                    LOG.info(e.getMessage());
-                }
+                cacheService.doPutGeneric(projeto.getIdPma().toString(), serializer.deepSerialize(projeto));
             });
 
             if (projetosJson.size() > 0) {
-                try {
-                    memcacheService.put(ProjetoJson.KEY_CACHE, ids);
-                } catch (Exception e) {
-                    LOG.info(e.getMessage());
-                }
+                cacheService.doPutGeneric(ProjetoJson.KEY_CACHE, ids);
             }
         }
 
