@@ -13,8 +13,10 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +27,7 @@ import java.util.List;
 public class IndicadorServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7416705488396246559L;
-
+    private static final Logger LOG = LoggerFactory.getLogger(IndicadorServlet.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setCharacterEncoding("UTF-8");
@@ -61,7 +63,7 @@ public class IndicadorServlet extends HttpServlet {
                 memcacheService.delete(ProjetoJson.KEY_CACHE);
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            LOG.info(e.getMessage());
         }
 
         resp.getWriter().println(serializer.serialize(registro));

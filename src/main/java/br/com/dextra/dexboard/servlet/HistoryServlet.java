@@ -9,6 +9,8 @@ import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.googlecode.objectify.Key;
 import flexjson.JSONSerializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +25,7 @@ public class HistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 892806850164024145L;
 	private Map<Key<Indicador>, Object> cacheIndicador = new HashMap<Key<Indicador>, Object>();
 	private Map<Key<Projeto>, Object> cacheProjeto = new HashMap<Key<Projeto>, Object>();
+	private static final Logger LOG = LoggerFactory.getLogger(IndicadorServlet.class);
 
 	private ProjetoDao dao;
 
@@ -46,7 +49,7 @@ public class HistoryServlet extends HttpServlet {
 		try {
 			memcacheService.put(ProjetoDao.HISTORY_CACHE, json);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			LOG.info(e.toString());
 		}
 
 		return json;
