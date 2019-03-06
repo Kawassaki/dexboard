@@ -3,6 +3,7 @@ package br.com.dextra.dexboard.json;
 import br.com.dextra.dexboard.dao.NotificacaoDao;
 import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.*;
+import br.com.dextra.dexboard.service.IndicadorService;
 import com.googlecode.objectify.Key;
 import flexjson.JSON;
 
@@ -21,9 +22,9 @@ public class IndicadorJson {
 	public IndicadorJson(Indicador indicador) {
 		this.indicador = indicador;
 
-		ProjetoDao projetoDao = new ProjetoDao();
-		this.registros = projetoDao.buscarRegistrosDeAlteracoes(indicador);
-		this.questoes = projetoDao.buscarQuestoesPelaKeyDoIndicador(Key.create(Indicador.class, indicador.getId()));
+		IndicadorService service = new IndicadorService();
+		this.registros = service.buscarRegistrosDeAlteracoes(indicador);
+		this.questoes = service.buscarQuestoesPelaKeyDoIndicador(Key.create(Indicador.class, indicador.getId()));
 
 		Collections.sort(this.registros, (r1, r2) -> r2.getData().compareTo(r1.getData()));
 	}

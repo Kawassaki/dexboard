@@ -19,7 +19,7 @@ public class PlanilhaFactory {
     }
 
     public static PlanilhaQuestoes questoes(String nomeIndicador) {
-        return (MOCK) ? new MockPlanilhaIndicadoresQuestoes() : new PlanilhaQuestoesImpl(nomeIndicador); // TODO MOCK
+        return (MOCK) ? new MockPlanilhaIndicadoresQuestoes() : new PlanilhaQuestoesImpl(nomeIndicador);
     }
 
 }

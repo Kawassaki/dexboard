@@ -9,10 +9,14 @@ import java.util.List;
 
 public class IndicadorService {
 
-    public RegistroAlteracao salvarAlteracao(Long idProjeto, Long idIndicador, RegistroAlteracao regAlteracao, List<IndicadorResposta> respostas){
-        ProjetoDao dao = new ProjetoDao();
+    private ProjetoDao dao;
 
-        if (respostas != null && respostas.size() > 0) {
+    public IndicadorService() {
+        this.dao = new ProjetoDao();
+    }
+
+    public RegistroAlteracao salvarAlteracao(Long idProjeto, Long idIndicador, RegistroAlteracao regAlteracao, List<IndicadorResposta> respostas){
+        if(respostas != null && respostas.size() > 0){
             for (IndicadorResposta resposta: respostas){
                IndicadorResposta indicadorResposta = new IndicadorResposta(
                     resposta.getConteudo(),
@@ -29,12 +33,18 @@ public class IndicadorService {
     }
 
     public List<IndicadorRespostaJson> buscarRespostasDasQuestoesDoIndicador(Long projetoId, Long indicadorId){
-        ProjetoDao dao = new ProjetoDao();
-
         return dao.buscarRespostasDasQuestoesDoIndicador(
                 Key.create(Projeto.class, projetoId),
                 Key.create(Indicador.class, indicadorId)
         );
+    }
+
+    public List<IndicadorQuestao> buscarQuestoesPelaKeyDoIndicador(Key<Indicador> key){
+        return dao.buscarQuestoesPelaKeyDoIndicador(key);
+    }
+
+    public List<RegistroAlteracao> buscarRegistrosDeAlteracoes(Indicador indicador) {
+        return dao.buscarRegistrosDeAlteracoes(indicador);
     }
 
 }
