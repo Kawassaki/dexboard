@@ -48,8 +48,8 @@ public class QueryServlet extends HttpServlet {
                     if (proj != null) {
                         projetosRetorno.add(proj);
                     } else {
-						Projeto p = dao.buscarProjeto(id);
-						projetosRetorno.add(serializer.deepSerialize(p.toProjetoJson()));
+                        Projeto p = dao.buscarProjeto(id);
+                        projetosRetorno.add(serializer.deepSerialize(p.toProjetoJson()));
                     }
                 });
                 return String.valueOf((projetosRetorno));

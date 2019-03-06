@@ -8,9 +8,6 @@ import br.com.dextra.dexboard.json.HistoricoJson;
 import br.com.dextra.dexboard.utils.MemCache;
 import com.googlecode.objectify.Key;
 import flexjson.JSONSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +21,6 @@ public class HistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 892806850164024145L;
 	private Map<Key<Indicador>, Object> cacheIndicador = new HashMap<Key<Indicador>, Object>();
 	private Map<Key<Projeto>, Object> cacheProjeto = new HashMap<Key<Projeto>, Object>();
-	private static final Logger LOG = LoggerFactory.getLogger(IndicadorServlet.class);
 	private static final MemCache cacheService = new MemCache();
 
 	private ProjetoDao dao;

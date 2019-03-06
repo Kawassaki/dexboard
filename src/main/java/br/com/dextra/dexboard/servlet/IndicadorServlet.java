@@ -11,8 +11,6 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +21,6 @@ import java.util.List;
 public class IndicadorServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7416705488396246559L;
-    private static final Logger LOG = LoggerFactory.getLogger(IndicadorServlet.class);
     private static final MemCache cacheService = new MemCache();
 
     @Override
