@@ -8,6 +8,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import javax.ws.rs.core.Form;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 import static org.junit.Assert.assertEquals;
@@ -47,7 +49,11 @@ public class ApiTest {
     public static void carregaProjetos() {
         JsonObject response = service.get("/reload/projetos").getAsJsonObject();
         String status = response.get("status").getAsString();
-
+        try {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         assertEquals("success", status);
     }
 
@@ -58,6 +64,8 @@ public class ApiTest {
         form.param("projeto", Long.toString(idProjeto));
         form.param("indicador", Integer.toString(idIndicador));
         form.param("registro", String.format(registro, classificacao));
+        form.param("respostas", String.valueOf(new ArrayList<String>()));
+
 
         service.post("/indicador", form);
     }
