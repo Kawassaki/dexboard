@@ -27,23 +27,25 @@ Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 });
 
 function orderQuestionsByCategory(questions){
-    var questionsByCategory = [];
-    questions.forEach(question => {
-        var indexCategory = questionsByCategory.findIndex(category => category.name === question.categoria);
-        if(indexCategory !== -1){
-            questionsByCategory[indexCategory].questions.push(question);
-        }else{
-            questionsByCategory.push({ name: question.categoria, questions: [ question ]});
-        }
-    });
-    questionsByCategory.sort(function(a, b){
-        if(a.name < b.name) { return -1; }
-        if(a.name > b.name) { return 1; }
+    questions.sort(function(a, b){
+        if(a.id < b.id) { return -1; }
+        if(a.id > b.id) { return 1; }
         return 0;
-    })
+    });
+
+    var questionsByCategory = [];
+
+    questions.forEach(question => {
+      var lastCategoryIndex = questionsByCategory.length - 1;
+      if (questionsByCategory[lastCategoryIndex] && questionsByCategory[lastCategoryIndex].name === question.categoria) {
+            questionsByCategory[lastCategoryIndex].questions.push(question);
+       } else {
+            questionsByCategory.push({ name: question.categoria, questions: [ question ]});
+       }
+    });
+
     return questionsByCategory;
 }
-
 
 String.prototype.replaceAll = function(search, replacement) {
     var target = this;

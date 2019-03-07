@@ -150,8 +150,8 @@ public class ProjetoDao {
         List<IndicadorRespostaJson> respostasJson = new ArrayList<>();
         List<IndicadorResposta> respostas = ofy.load().type(IndicadorResposta.class).filter("projeto", projeto).filter("indicador", indicador).list();
         for (IndicadorResposta indicadorResposta : respostas) {
-            LoadResult<IndicadorQuestao> questao = ofy.load().type(IndicadorQuestao.class).id(indicadorResposta.getQuestao().getName());
-            respostasJson.add(new IndicadorRespostaJson(questao.now().getCategoria(), questao.now().getConteudo(), indicadorResposta.getConteudo()));
+            IndicadorQuestao questao = ofy.load().type(IndicadorQuestao.class).id(indicadorResposta.getQuestao().getName()).now();
+            respostasJson.add(new IndicadorRespostaJson(questao.getId(), questao.getCategoria(), questao.getConteudo(), indicadorResposta.getConteudo()));
         }
         return respostasJson;
     }
