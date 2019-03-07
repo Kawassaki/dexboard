@@ -15,7 +15,6 @@ public class PlanilhaFactory {
 
     public static PlanilhaPrincipal principal() {
         return (MOCK) ? new MockPlanilhaPrincipal() : new PlanilhaPrincipalImpl();
-
     }
 
     public static PlanilhaQuestoes questoes(String nomeIndicador) {

@@ -8,7 +8,7 @@ import com.github.feroult.gapi.spreadsheet.SpreadsheetBatch;
 import com.googlecode.objectify.Key;
 import java.util.*;
 
-public class PlanilhaExportImpl extends PlanilhaDexboard {
+public class PlanilhaExportImpl extends PlanilhaExport {
 
     private PlanilhaService service;
     private List<Indicador> indicadores;

@@ -171,6 +171,7 @@
                 <gae.application.version>release</gae.application.version>
                 <gae.application.id>dexboard-reload-homolog</gae.application.id>
                 <dxb.spreadsheet>1FscxFI4WAg12QhzVdj4SsYxHNeuXZch3BzompOHQBtk</dxb.spreadsheet>
+                <dxb.export.spreadsheet>1t2E0eymq8CVdWX9MCozxGhMwDSWfwjK-7NSUknSWPr4</dxb.export.spreadsheet>
                 <dxb.bcc>luan.nico@dextra-sw.com,elias.reis@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
             </properties>
@@ -187,6 +188,7 @@
             <properties>
                 <gae.application.version>release</gae.application.version>
                 <gae.application.id>dexboard-reload</gae.application.id>
+                <dxb.export.spreadsheet>1YCafq9Xwaw-JvPNqtDYvra7oKEceo53LGwDSxhBCdps</dxb.export.spreadsheet>
                 <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
                 <dxb.bcc>jose.guedes@dextra-sw.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>

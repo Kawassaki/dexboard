@@ -14,7 +14,6 @@ class PlanilhaIndicadoresImpl extends PlanilhaDexboard implements PlanilhaIndica
 	private final String COLUNA_QUESTIONARIO = "Questionario";
 	private final String COLUNA_SITUACAO = "Situação";
 
-
 	public PlanilhaIndicadoresImpl() {
 		super("Indicadores");
 	}

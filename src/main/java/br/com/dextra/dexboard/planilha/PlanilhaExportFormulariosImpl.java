@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PlanilhaExportFormulariosImpl extends PlanilhaDexboard {
+public class PlanilhaExportFormulariosImpl extends PlanilhaExport {
 
     private PlanilhaService service;
     private IndicadorService indicadorService;

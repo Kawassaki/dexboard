@@ -91,7 +91,7 @@
 			<web-resource-name>cron jobs</web-resource-name>
 			<url-pattern>/cron/reload/projetos</url-pattern>
 			<url-pattern>/cron/notificacao/projetos</url-pattern>
-			<!--<url-pattern>/cron/export</url-pattern>-->
+			<url-pattern>/cron/export</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<role-name>admin</role-name>
