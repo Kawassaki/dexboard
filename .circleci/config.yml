@@ -14,5 +14,16 @@ jobs:
           name: Decrypt p12
           command: './cmd/decrypt.sh'
       - run:
+          name: Setup custom environment GAPI_SERVICE_ACCOUNT_KEY
+          command: export GAPI_SERVICE_ACCOUNT_KEY=$(pwd)/src/main/resources/dexboard-reload-a4ade2e84e5e.p12
+      - run:
+          name: Print GAPI_SERVICE_ACCOUNT_KEY
+          command: 'echo $GAPI_SERVICE_ACCOUNT_KEY'
+
+      - run:
+          name: Print GAPI_SERVICE_ACCOUNT_EMAIL
+          command: 'echo $GAPI_SERVICE_ACCOUNT_EMAIL'
+
+      - run:
           name: Backend Build and Tets
-          command: 'mvn integration-test -Dit'
+          command: 'mvn verify -Dit'
