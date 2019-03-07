@@ -123,8 +123,6 @@ dexboard.projeto = (function ($, Handlebars) {
 
             var status = projeto.atrasado ? "ATRASADO" : projeto.classificacao;
             self.status.addQuantidade(status);
-
-            console.log('x', projeto);
         });
 
     };
