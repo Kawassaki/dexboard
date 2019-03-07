@@ -15,4 +15,4 @@ jobs:
           command: './cmd/decrypt.sh'
       - run:
           name: Backend Build and Tets
-          command: 'mvn verify -Dit'
+          command: 'mvn integration-test -Dit'
