@@ -15,7 +15,7 @@ jobs:
           command: './cmd/decrypt.sh'
       - run:
           name: Setup custom environment GAPI_SERVICE_ACCOUNT_KEY
-          command: export GAPI_SERVICE_ACCOUNT_KEY=$(pwd)/src/main/resources/dexboard-reload-a4ade2e84e5e.p12
+          command: echo 'export GAPI_SERVICE_ACCOUNT_KEY=$(pwd)/src/main/resources/dexboard-reload-a4ade2e84e5e.p12' >> $BASH_ENV
       - run:
           name: Print GAPI_SERVICE_ACCOUNT_KEY
           command: 'echo $GAPI_SERVICE_ACCOUNT_KEY'
