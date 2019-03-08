@@ -7,6 +7,7 @@ import br.com.dextra.dexboard.service.PlanilhaService;
 import com.github.feroult.gapi.spreadsheet.SpreadsheetBatch;
 import com.googlecode.objectify.Key;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PlanilhaExportImpl extends PlanilhaExport {
 
