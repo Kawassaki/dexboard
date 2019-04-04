@@ -204,6 +204,12 @@ dexboard.indicador = (function($, Handlebars) {
 		
 		this.open = function(projeto, indicador) {
 
+			var t = new dexboard.projeto.view.Projeto();
+			var column = t.container.find("tr.chosen");
+			if (column.length !== 0) {
+			    return;
+			}
+
 		    indicador.questionsByCategory = orderQuestionsByCategory(indicador.questoes);
 
 			self.container.html(template({
