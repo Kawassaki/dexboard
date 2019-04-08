@@ -3,12 +3,14 @@ package br.com.dextra.dexboard.json;
 import java.util.Date;
 
 public class IndicadorRespostaJson {
+    private Long id;
     private String categoria;
     private String questao;
     private String resposta;
     private Date data;
 
-    public IndicadorRespostaJson(String categoria, String questao, String resposta) {
+    public IndicadorRespostaJson(Long id, String categoria, String questao, String resposta) {
+        this.id = id;
         this.categoria = categoria;
         this.questao = questao;
         this.resposta = resposta;
@@ -44,5 +46,13 @@ public class IndicadorRespostaJson {
 
     public Date getData() {
         return data;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

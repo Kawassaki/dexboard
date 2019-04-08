@@ -18,6 +18,7 @@ public class ProjetoJson {
 	private Classificacao classificacao;
 	private boolean atrasado;
 
+	public static final String KEY_CACHE = "dexboard-projetojson.cache.key";
 	public ProjetoJson() {
 	}
 

@@ -15,11 +15,10 @@ public class PlanilhaFactory {
 
     public static PlanilhaPrincipal principal() {
         return (MOCK) ? new MockPlanilhaPrincipal() : new PlanilhaPrincipalImpl();
-
     }
 
     public static PlanilhaQuestoes questoes(String nomeIndicador) {
-        return (MOCK) ? new MockPlanilhaIndicadoresQuestoes() : new PlanilhaQuestoesImpl(nomeIndicador); // TODO MOCK
+        return (MOCK) ? new MockPlanilhaIndicadoresQuestoes() : new PlanilhaQuestoesImpl(nomeIndicador);
     }
 
 }

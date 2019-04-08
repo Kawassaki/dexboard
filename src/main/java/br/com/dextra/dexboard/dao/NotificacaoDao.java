@@ -118,6 +118,11 @@ public class NotificacaoDao {
 		LOG.info("Enviando email de notificacao: projeto=" + projeto.getNome() + ", equipe=" + projeto.getEquipe() + ", email="
 				+ projeto.getEmail());
 
+		if ((projeto.getEmail() == null || projeto.getEmail().isEmpty()) || (projeto.getEquipe() == null || projeto.getEquipe().isEmpty())) {
+			LOG.info("Notificacão cancelada pois não foi encontrado(a) o(a) e-mail/equipe.");
+			return;
+		}
+
 		try {
 			msg.setFrom(new InternetAddress("dexboard@dextra-sw.com", "Dexboard Reload"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(projeto.getEmail(), projeto.getEquipe()));

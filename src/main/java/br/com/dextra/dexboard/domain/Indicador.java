@@ -11,15 +11,18 @@ import java.util.List;
 @Entity
 public class Indicador {
 
-    @Id
-    private String composeId;
-    private Long id;
-    @Index
-    private Key<Projeto> projeto;
-    private String nome;
-    private String descricao;
-    private boolean ativo;
-    private int posicao;
+	@Id
+	private String composeId;
+	@Index
+	private Long id;
+	@Index
+	private Key<Projeto> projeto;
+	@Index
+	private String nome;
+	private String descricao;
+	@Index
+	private boolean ativo;
+	private int posicao;
     private String planilhaQuestoes;
     @Ignore
     private List<IndicadorQuestao> questoes;

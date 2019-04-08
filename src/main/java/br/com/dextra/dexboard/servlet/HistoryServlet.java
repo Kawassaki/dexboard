@@ -5,11 +5,9 @@ import br.com.dextra.dexboard.domain.Indicador;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
 import br.com.dextra.dexboard.json.HistoricoJson;
-import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import br.com.dextra.dexboard.utils.MemCache;
 import com.googlecode.objectify.Key;
 import flexjson.JSONSerializer;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +21,7 @@ public class HistoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 892806850164024145L;
 	private Map<Key<Indicador>, Object> cacheIndicador = new HashMap<Key<Indicador>, Object>();
 	private Map<Key<Projeto>, Object> cacheProjeto = new HashMap<Key<Projeto>, Object>();
+	private static final MemCache cacheService = new MemCache();
 
 	private ProjetoDao dao;
 
@@ -34,16 +33,14 @@ public class HistoryServlet extends HttpServlet {
 	}
 
 	private String getJsonHistoryWithCache() {
-		MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
-		String cacheJson = (String) memcacheService.get(ProjetoDao.HISTORY_CACHE);
+		String cacheJson = (String) cacheService.doGetGeneric(ProjetoDao.HISTORY_CACHE);
 		if (cacheJson != null) {
 			return cacheJson;
 		}
 
 		String json = getJsonHistory();
-
-		memcacheService.put(ProjetoDao.HISTORY_CACHE, json);
+		cacheService.doPutGeneric(ProjetoDao.HISTORY_CACHE, json);
 
 		return json;
 	}

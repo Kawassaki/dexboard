@@ -8,4 +8,8 @@
 		<url>/cron/notificacao/projetos</url>
 		<schedule>every 12 hours</schedule>
 	</cron>
+	<cron>
+		<url>/cron/export</url>
+		<schedule>every 15 minutes</schedule>
+	</cron>
 </cronentries>

@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class TaskQueueServlet extends HttpServlet {
+public class ReloadTaskQueueServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Queue queue = QueueFactory.getDefaultQueue();
 		queue.add(TaskOptions.Builder.withUrl("/cron/reload/projetos").method(TaskOptions.Method.GET));
-        resp.getWriter().print("Reload adicionado a fila.");
+        resp.getWriter().print("{\"status\": \"success\"}");
     }
 
 }

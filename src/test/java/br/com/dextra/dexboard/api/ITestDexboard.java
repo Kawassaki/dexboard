@@ -17,8 +17,8 @@ import static org.junit.Assert.assertEquals;
 public class ITestDexboard extends ApiTest {
 
     private static final int ID_PROJETO_CONTPLAY = 495;
-    private static final int ID_INDICADOR_1 = 1;
-    private static final int ID_INDICADOR_2 = 2;
+    private static final int ID_INDICADOR_1 = 6;
+    private static final int ID_INDICADOR_2 = 3;
 
     private static final String APRESENTACAO = "https://docs.google.com/presentation/d/1ID6Oh3Dm0HHFQb9h8A32WJYy5Z-gufbLiTEcrdKAtM8/embed";
 
@@ -82,7 +82,7 @@ public class ITestDexboard extends ApiTest {
 
     @Test
     public void testAtrasoIndicadorJson() {
-        for (int i = 1; i <= 6; i++) {
+        for (int i = 1; i <= 8; i++) {
             alteraIndicadorDeProjeto(ID_PROJETO_CONTPLAY, i, Classificacao.ATENCAO);
         }
 

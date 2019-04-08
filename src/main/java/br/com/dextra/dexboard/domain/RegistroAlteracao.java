@@ -19,7 +19,6 @@ public class RegistroAlteracao {
 	private Key<Indicador> indicador;
 	private String usuario;
 	private Classificacao classificacao;
-
 	@Index
 	private Date data;
 	private String comentario;
@@ -28,7 +27,6 @@ public class RegistroAlteracao {
 		this.id = String.format("%s;%s;%s", this.getProjeto().getId(), this.getIndicador().getName(), System.currentTimeMillis() + "");
 	}
 
-	@JSON(include = false)
 	public Key<Projeto> getProjeto() {
 		return projeto;
 	}

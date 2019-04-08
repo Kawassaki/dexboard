@@ -4,63 +4,79 @@ import br.com.dextra.dexboard.dao.ProjetoDao;
 import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.json.ProjetoJson;
 import br.com.dextra.dexboard.repository.ProjetoComparator;
-import com.google.appengine.api.memcache.MemcacheService;
-import com.google.appengine.api.memcache.MemcacheServiceFactory;
+import br.com.dextra.dexboard.utils.MemCache;
 import flexjson.JSONSerializer;
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class QueryServlet extends HttpServlet {
 
-	public static final int CACHE_EXPIRATION_SECONDS = 60 * 60;
-	private static final String EQUIPE_HTTP_PARAMETER = "equipe";
-	private static final String TRIBO_HTTP_PARAMETER = "tribo";
-	private static final long serialVersionUID = -1248500946944090403L;
+    public static final int CACHE_EXPIRATION_SECONDS = 60 * 60;
+    private static final String EQUIPE_HTTP_PARAMETER = "equipe";
+    private static final String TRIBO_HTTP_PARAMETER = "tribo";
+    private static final long serialVersionUID = -1248500946944090403L;
+    private static final MemCache cacheService = new MemCache();
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		resp.setCharacterEncoding("UTF-8");
-		resp.setContentType("application/json");
-		resp.getWriter().print(getJsonProjetosWithCache(req.getParameter(EQUIPE_HTTP_PARAMETER),
-			req.getParameter(TRIBO_HTTP_PARAMETER)));
-	}
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("application/json");
+        resp.getWriter().print(getJsonProjetosWithCache(req.getParameter(EQUIPE_HTTP_PARAMETER),
+                req.getParameter(TRIBO_HTTP_PARAMETER)));
+    }
 
-	private String getJsonProjetosWithCache(String equipe, String tribo) {
-		MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
+    private String getJsonProjetosWithCache(String equipe, String tribo) {
+        return getJsonProjetos(equipe, tribo);
+    }
 
-		if (useCache(equipe, tribo)) {
-			String cacheJson = (String) memcacheService.get(ProjetoDao.KEY_CACHE);
-			if (cacheJson != null) {
-				return cacheJson;
-			}
-		}
+    private String getJsonProjetos(String equipe, String tribo) {
+        JSONSerializer serializer = new JSONSerializer();
+        serializer.exclude("*.class", "*.projeto");
 
-		String json = getJsonProjetos(equipe, tribo);
+        ProjetoDao dao = new ProjetoDao();
 
-		if (useCache(equipe, tribo)) {
-			memcacheService.put(ProjetoDao.KEY_CACHE, json);
-		}
+        if (useCache(equipe, tribo)) {
+            List<Long> cache = (List<Long>) cacheService.doGetGeneric(ProjetoJson.KEY_CACHE);
+            if (cache != null) {
+                List<String> projetosRetorno = new ArrayList<>();
+                cache.forEach(id -> {
+                    String proj = cacheService.doGet(id.toString());
+                    if (proj != null) {
+                        projetosRetorno.add(proj);
+                    } else {
+                        Projeto p = dao.buscarProjeto(id);
+                        projetosRetorno.add(serializer.deepSerialize(p.toProjetoJson()));
+                    }
+                });
+                return String.valueOf((projetosRetorno));
+            }
+        }
 
-		return json;
-	}
+        List<Projeto> projetos = dao.buscarTodosProjetos(equipe, tribo);
 
-	private String getJsonProjetos(String equipe, String tribo) {
-		ProjetoDao dao = new ProjetoDao();
-		List<Projeto> projetos = dao.buscarTodosProjetos(equipe, tribo);
+        projetos.sort(new ProjetoComparator());
+        List<ProjetoJson> projetosJson = Projeto.toProjetoJson(projetos);
 
-		Collections.sort(projetos, new ProjetoComparator());
-		List<ProjetoJson> projetosJson = Projeto.toProjetoJson(projetos);
-		JSONSerializer serializer = new JSONSerializer();
-		serializer.exclude("*.class", "*.projeto");
-		return serializer.deepSerialize(projetosJson);
-	}
+        if (useCache(equipe, tribo)) {
+            List<Long> ids = new ArrayList<>();
+            projetosJson.forEach(projeto -> {
+                ids.add(projeto.getIdPma());
+                cacheService.doPutGeneric(projeto.getIdPma().toString(), serializer.deepSerialize(projeto));
+            });
 
-	private boolean useCache(String equipe, String tribo) {
-		return ((equipe == null) && (tribo == null));
-	}
+            if (projetosJson.size() > 0) {
+                cacheService.doPutGeneric(ProjetoJson.KEY_CACHE, ids);
+            }
+        }
+
+        return serializer.deepSerialize(projetosJson);
+    }
+
+    private boolean useCache(String equipe, String tribo) {
+        return ((equipe == null) && (tribo == null));
+    }
 }

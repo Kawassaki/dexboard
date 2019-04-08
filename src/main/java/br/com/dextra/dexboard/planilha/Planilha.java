@@ -2,6 +2,7 @@ package br.com.dextra.dexboard.planilha;
 
 import com.github.feroult.gapi.GoogleAPI;
 import com.github.feroult.gapi.SpreadsheetAPI;
+import com.github.feroult.gapi.spreadsheet.SpreadsheetBatch;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -30,6 +31,14 @@ abstract class Planilha {
 		}
 
 		this.spreadSheetMap = spreadSheet.worksheet(sheetName).asMap();
+	}
+
+	protected void salvarConteudoCelular(int linha, int coluna, String value) {
+		this.spreadSheet.worksheet(sheetName).setValue(linha, coluna, value);
+	}
+
+	protected void salvarBatch(SpreadsheetBatch batch){
+		this.spreadSheet.worksheet(sheetName).batch(batch);
 	}
 
 	protected String recuperarConteudoCelula(int linha, int coluna) {

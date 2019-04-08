@@ -1,16 +1,16 @@
 package br.com.dextra.dexboard.servlet;
 
 import br.com.dextra.dexboard.dao.ProjetoDao;
-import br.com.dextra.dexboard.domain.IndicadorQuestao;
 import br.com.dextra.dexboard.domain.IndicadorResposta;
+import br.com.dextra.dexboard.domain.Projeto;
 import br.com.dextra.dexboard.domain.RegistroAlteracao;
+import br.com.dextra.dexboard.json.ProjetoJson;
 import br.com.dextra.dexboard.service.IndicadorService;
+import br.com.dextra.dexboard.utils.MemCache;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,11 +21,15 @@ import java.util.List;
 public class IndicadorServlet extends HttpServlet {
 
     private static final long serialVersionUID = -7416705488396246559L;
+    private static final MemCache cacheService = new MemCache();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json");
+
+        ProjetoDao dao = new ProjetoDao();
+        JSONSerializer serializer = new JSONSerializer();
 
         Long idProjeto = Long.valueOf(req.getParameter("projeto"));
         Long idIndicador = Long.valueOf(req.getParameter("indicador"));
@@ -44,7 +48,15 @@ public class IndicadorServlet extends HttpServlet {
 
         RegistroAlteracao registro = new IndicadorService().salvarAlteracao(idProjeto, idIndicador, regAlteracao, respostas);
 
-        JSONSerializer serializer = new JSONSerializer();
+        Projeto project = dao.buscarProjeto(idProjeto);
+        ProjetoJson projetoJson = project.toProjetoJson();
+        if (projetoJson.getAtrasado()) {
+            cacheService.doPutGeneric(project.getIdPma(), serializer.deepSerialize(projetoJson));
+        } else {
+            cacheService.doDelete(ProjetoJson.KEY_CACHE);
+            serializer.deepSerialize(projetoJson);
+        }
+
         resp.getWriter().println(serializer.serialize(registro));
     }
 
