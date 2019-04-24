@@ -29,6 +29,7 @@
         <property name="dxb.spreadsheet" value="${dxb.spreadsheet}"/>
         <property name="dxb.bcc" value="${dxb.bcc}"/>
         <property name="dxb.domain" value="${dxb.domain}"/>
+        <property name="dxb.sender" value="${dxb.sender}"/>
     </system-properties>
 
     <sessions-enabled>false</sessions-enabled>

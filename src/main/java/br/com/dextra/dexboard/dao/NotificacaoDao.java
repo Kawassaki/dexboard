@@ -124,7 +124,8 @@ public class NotificacaoDao {
 		}
 
 		try {
-			msg.setFrom(new InternetAddress("dexboard@dextra-sw.com", "Dexboard Reload"));
+			msg.setFrom(new InternetAddress(Config.getProperty("dxb.sender", "dexboard-reload-homolog@appspot.gserviceaccount.com"),
+					"Dexboard Reload"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(projeto.getEmail(), projeto.getEquipe()));
 			addBccs(msg);
 			msg.setSubject("[dexboard] Atualizar projeto: " + projeto.getNome());
