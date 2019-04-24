@@ -29,9 +29,8 @@ public class PlanilhaExportImpl extends PlanilhaExport {
         this.matrixBuilder.setValueZeroBased(0, coluna++, "CPI");
         this.matrixBuilder.setValueZeroBased(0, coluna++, "Atrasado");
         for (Indicador indicador: this.indicadores){
-            this.matrixBuilder.setValueZeroBased(0, coluna + 1, String.format("(Status) %s", indicador.getNome()));
-            this.matrixBuilder.setValueZeroBased(0, coluna + 2, String.format("(Comentários) %s", indicador.getNome()));
-            coluna = coluna + 2;
+            this.matrixBuilder.setValueZeroBased(0,  coluna++, String.format("(Status) %s", indicador.getNome()));
+            this.matrixBuilder.setValueZeroBased(0,  coluna++, String.format("(Comentários) %s", indicador.getNome()));
         }
     }
 
