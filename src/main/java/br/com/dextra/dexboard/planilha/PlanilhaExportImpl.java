@@ -24,10 +24,10 @@ public class PlanilhaExportImpl extends PlanilhaExport {
     }
 
     private void criarColunasMatriz() {
-        this.matrixBuilder.setValueZeroBased(0, 0, "Projetos");
-        this.matrixBuilder.setValueZeroBased(0,  1, "CPI");
-        this.matrixBuilder.setValueZeroBased(0,  2, "Atrasado");
-        int coluna = 2;
+        int coluna = 0;
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "Projetos");
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "CPI");
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "Atrasado");
         for (Indicador indicador: this.indicadores){
             this.matrixBuilder.setValueZeroBased(0, coluna + 1, String.format("(Status) %s", indicador.getNome()));
             this.matrixBuilder.setValueZeroBased(0, coluna + 2, String.format("(Comentários) %s", indicador.getNome()));
