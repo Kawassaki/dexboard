@@ -174,7 +174,7 @@
                 <dxb.export.spreadsheet>1t2E0eymq8CVdWX9MCozxGhMwDSWfwjK-7NSUknSWPr4</dxb.export.spreadsheet>
                 <dxb.bcc>elias.reis@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
-                <dxb.sender>dexboard-reload-homolog@appspot.gserviceaccount.com</dxb.sender>
+                <dxb.sender>dexboard@dexboard-reload-homolog.appspotmail.com</dxb.sender>
             </properties>
         </profile>
 
@@ -193,7 +193,7 @@
                 <dxb.spreadsheet>1Fjul3zOetgENCTfnnd3gDaxOEh3WaIQr4uV3Th2wRQo</dxb.spreadsheet>
                 <dxb.bcc>jose.guedes@dextra-sw.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
-                <dxb.sender>dexboard-reload@appspot.gserviceaccount.com</dxb.sender>
+                <dxb.sender>dexboard@dexboard-reload.appspotmail.com</dxb.sender>
             </properties>
         </profile>
 
@@ -211,7 +211,7 @@
                 <dxb.spreadsheet>13OsiZ1TEgs5tpsjWDdZqkh5t_QhQcrl2-eDmRO9Fg0U</dxb.spreadsheet>
                 <dxb.bcc>gabriel.reis@mutantbr.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>mutantbr.com</dxb.domain>
-                <dxb.sender>dexboard-mutant@appspot.gserviceaccount.com</dxb.sender>
+                <dxb.sender>dexboard@dexboard-mutant.appspotmail.com</dxb.sender>
             </properties>
         </profile>
 

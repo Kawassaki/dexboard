@@ -9,6 +9,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.rmi.runtime.Log;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -124,8 +125,9 @@ public class NotificacaoDao {
 		}
 
 		try {
-			msg.setFrom(new InternetAddress(Config.getProperty("dxb.sender", "dexboard-reload-homolog@appspot.gserviceaccount.com"),
-					"Dexboard Reload"));
+			String from = Config.getProperty("dxb.sender", "dexboard@dexboard-reload-homolog.appspotmail.com");
+			LOG.info(String.format("Enviando email como %s", from));
+			msg.setFrom(new InternetAddress(from,"Dexboard Reload"));
 			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(projeto.getEmail(), projeto.getEquipe()));
 			addBccs(msg);
 			msg.setSubject("[dexboard] Atualizar projeto: " + projeto.getNome());
