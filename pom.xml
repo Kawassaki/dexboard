@@ -172,7 +172,7 @@
                 <gae.application.id>dexboard-reload-homolog</gae.application.id>
                 <dxb.spreadsheet>1FscxFI4WAg12QhzVdj4SsYxHNeuXZch3BzompOHQBtk</dxb.spreadsheet>
                 <dxb.export.spreadsheet>1t2E0eymq8CVdWX9MCozxGhMwDSWfwjK-7NSUknSWPr4</dxb.export.spreadsheet>
-                <dxb.bcc>luan.nico@dextra-sw.com,elias.reis@dextra-sw.com</dxb.bcc>
+                <dxb.bcc>elias.reis@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
                 <dxb.sender>dexboard@dexboard-reload-homolog.appspotmail.com</dxb.sender>
             </properties>
