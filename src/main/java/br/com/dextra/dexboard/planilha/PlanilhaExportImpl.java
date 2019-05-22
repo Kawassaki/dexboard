@@ -32,6 +32,10 @@ public class PlanilhaExportImpl extends PlanilhaExport {
             this.matrixBuilder.setValueZeroBased(0,  coluna++, String.format("(Status) %s", indicador.getNome()));
             this.matrixBuilder.setValueZeroBased(0,  coluna++, String.format("(Comentários) %s", indicador.getNome()));
         }
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "Id no PMA");
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "Equipe");
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "tribo");
+        this.matrixBuilder.setValueZeroBased(0, coluna++, "email");
     }
 
     private void preencherMatriz() {
@@ -50,6 +54,10 @@ public class PlanilhaExportImpl extends PlanilhaExport {
                 this.matrixBuilder.setValueInColumn(String.format("(Status) %s", indicador.getNome()), linha, registro.getClassificacao().toString());
                 this.matrixBuilder.setValueInColumn(String.format("(Comentários) %s", indicador.getNome()), linha, registro.getComentario());
             }
+            this.matrixBuilder.setValueZeroBased(linha, 19, projeto.getIdPma().toString());
+            this.matrixBuilder.setValueZeroBased(linha, 20, projeto.getEquipe());
+            this.matrixBuilder.setValueZeroBased(linha, 21, projeto.getTribo());
+            this.matrixBuilder.setValueZeroBased(linha, 22, projeto.getEmail());
             linha++;
         }
     }
