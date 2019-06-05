@@ -198,6 +198,25 @@
         </profile>
 
         <profile>
+            <id>serasa</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <gae.application.version>release</gae.application.version>
+                <gae.application.id>dexboard-reload-serasa</gae.application.id>
+                <dxb.export.spreadsheet>1WsSVMvEFd7RzSYoRlZdmYGThtYO2aNs1NFBQcunScTI</dxb.export.spreadsheet>
+                <dxb.spreadsheet>1njKmYENBalfWka9KJfHIx_UPVMUb_gU9cq_lBLBxQbg</dxb.spreadsheet>
+                <dxb.bcc>thiago.feustel@dextra-sw.com,serasa.dexboard@gmail.com</dxb.bcc>
+                <dxb.singleLoginEmail>serasa.dexboard@gmail.com</dxb.singleLoginEmail>
+                <dxb.sender>dexboard@dexboard-reload-serasa.appspotmail.com</dxb.sender>
+            </properties>
+        </profile>
+
+        <profile>
             <id>mutant</id>
             <activation>
                 <property>
