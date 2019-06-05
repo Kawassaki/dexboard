@@ -38,7 +38,7 @@ public class NotificacaoDao {
 		if (validadeProp != null) {
 			return Integer.parseInt(validadeProp);
 		}
-		return 25;
+		return 30;
 	}
 
 	public List<Projeto> buscarProjetosParaNotificar() {
