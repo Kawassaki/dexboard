@@ -4,6 +4,8 @@ import br.com.dextra.dexboard.utils.Config;
 import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +15,10 @@ import java.io.PrintWriter;
 
 public class AuthFilter implements Filter {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthFilter.class);
+
 	private static final String ORG_DOMAIN = Context.isProductionEnvironment() ? Config.getProperty("dxb.domain", "dextra-sw.com") : "dextra-sw.com";
-	private static final String SINGLE_LOGIN_EMAIL = Context.isProductionEnvironment() ? Config.getProperty("singleLoginEmail", null) : null;
+	private static final String SINGLE_LOGIN_EMAIL = Context.isProductionEnvironment() ? Config.getProperty("dxb.singleLoginEmail", null) : null;
 
 	@Override
 	public void destroy() {
@@ -83,6 +87,7 @@ public class AuthFilter implements Filter {
 		if (service.isUserAdmin()) {
 			return true;
 		}
+		LOGGER.info("Logging in; singleLoginEmail = " + SINGLE_LOGIN_EMAIL + "; email: " + user.getEmail() + "; domain: " + ORG_DOMAIN);
 		if (user.getEmail().equals(SINGLE_LOGIN_EMAIL)) {
 			return true;
 		}
