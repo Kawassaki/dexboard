@@ -23,7 +23,7 @@
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
         <property name="dev-environment" value="${dev.environment}"/>
         <property name="integration-test" value="${integration.test}"/>
-        <property name="validade" value="21"/>
+        <property name="validade" value="30"/>
         <property name="gapi.use.appengine.credentials" value="true"/>
         <property name="dxb.export.spreadsheet" value="${dxb.export.spreadsheet}"/>
         <property name="dxb.spreadsheet" value="${dxb.spreadsheet}"/>
