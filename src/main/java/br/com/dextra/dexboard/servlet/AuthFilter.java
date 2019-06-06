@@ -13,11 +13,11 @@ import java.io.PrintWriter;
 
 public class AuthFilter implements Filter {
 
-	public static final String ORG_DOMAIN = Context.isProductionEnvironment() ? Config.getProperty("dxb.domain", "dextra-sw.com") : "dextra-sw.com";
+	private static final String ORG_DOMAIN = Context.isProductionEnvironment() ? Config.getProperty("dxb.domain", "dextra-sw.com") : "dextra-sw.com";
+	private static final String SINGLE_LOGIN_EMAIL = Context.isProductionEnvironment() ? Config.getProperty("singleLoginEmail", null) : null;
 
 	@Override
 	public void destroy() {
-
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class AuthFilter implements Filter {
 				return;
 			}
 
-			unautorizedRequest(response, service);
+			unauthorizedRequest(response, service);
 			return;
 		}
 
@@ -57,7 +57,7 @@ public class AuthFilter implements Filter {
 		return uri.startsWith("/_ah") || uri.startsWith("/cron/") || uri.startsWith("/_tools");
 	}
 
-	private void unautorizedRequest(HttpServletResponse response, UserService service) throws IOException {
+	private void unauthorizedRequest(HttpServletResponse response, UserService service) throws IOException {
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		response.setContentType("text/html");
 		PrintWriter writer = response.getWriter();
@@ -83,11 +83,16 @@ public class AuthFilter implements Filter {
 		if (service.isUserAdmin()) {
 			return true;
 		}
+		if (user.getEmail().equals(SINGLE_LOGIN_EMAIL)) {
+			return true;
+		}
+		if (ORG_DOMAIN == null) {
+			return false;
+		}
 		return user.getEmail().endsWith("@" + ORG_DOMAIN);
 	}
 
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-
+	public void init(FilterConfig filterConfig) {
 	}
 }

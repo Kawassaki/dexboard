@@ -11,7 +11,7 @@
 
     <properties>
         <downloadSources>true</downloadSources>
-        <gae.version>1.9.71</gae.version>
+        <gae.version>1.9.74</gae.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <skip.integration.tests>true</skip.integration.tests>
@@ -194,6 +194,25 @@
                 <dxb.bcc>jose.guedes@dextra-sw.com,fernando@dextra-sw.com</dxb.bcc>
                 <dxb.domain>dextra-sw.com</dxb.domain>
                 <dxb.sender>dexboard@dexboard-reload.appspotmail.com</dxb.sender>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>serasa</id>
+            <activation>
+                <property>
+                    <name>performRelease</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <properties>
+                <gae.application.version>release</gae.application.version>
+                <gae.application.id>dexboard-reload-serasa</gae.application.id>
+                <dxb.export.spreadsheet>1WsSVMvEFd7RzSYoRlZdmYGThtYO2aNs1NFBQcunScTI</dxb.export.spreadsheet>
+                <dxb.spreadsheet>1njKmYENBalfWka9KJfHIx_UPVMUb_gU9cq_lBLBxQbg</dxb.spreadsheet>
+                <dxb.bcc>thiago.feustel@dextra-sw.com,serasa.dexboard@gmail.com</dxb.bcc>
+                <dxb.singleLoginEmail>serasa.dexboard@gmail.com</dxb.singleLoginEmail>
+                <dxb.sender>dexboard@dexboard-reload-serasa.appspotmail.com</dxb.sender>
             </properties>
         </profile>
 

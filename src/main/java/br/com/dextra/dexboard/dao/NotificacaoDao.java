@@ -9,7 +9,6 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -38,7 +37,7 @@ public class NotificacaoDao {
 		if (validadeProp != null) {
 			return Integer.parseInt(validadeProp);
 		}
-		return 25;
+		return 30;
 	}
 
 	public List<Projeto> buscarProjetosParaNotificar() {
