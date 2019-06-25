@@ -192,12 +192,9 @@ dexboard.resumo = (function ($, Handlebars) {
 			indicador.registros.forEach((registro) => {
 				registro.comentarioFormatado = registro.comentario.split('\n');
 				var date = new Date(registro.data);
-				var day = date.getDate().padStart(2, '0');
-				var month = date.getMonth().padStart(2, '0');
-				var year = date.getFullYear().padStart(2, '0');
 				var hours = date.getHours().padStart(2, '0');
 				var minutes = date.getMinutes().padStart(2, '0');
-				registro.dataFormatada = `${day}/${month}/${year} às ${hours}:${minutes}`;
+				registro.dataFormatada = `${registro.ultimaAlteracaoString} às ${hours}:${minutes}`;
 			});
 		});
 
