@@ -68,19 +68,21 @@ public class NotificacaoDao {
 		for (Projeto projeto : projetos) {
 			List<Indicador> indicadores = buscarIndicadores(projeto);
 			for (Indicador indicador : indicadores) {
-				RegistroAlteracao registroAlteracao = buscarRegistrosAlteracoes(projeto, indicador);
+				if (indicador.getAtivo() == true) {
+					RegistroAlteracao registroAlteracao = buscarRegistrosAlteracoes(projeto, indicador);
 
-				if (registroAlteracao == null) {
-					projetosAtrasados.add(projeto);
-					break;
-				}
+					if (registroAlteracao == null) {
+						projetosAtrasados.add(projeto);
+						break;
+					}
 
-				Date dataAlteracao = registroAlteracao.getData();
-				long diasAtras = calculaDiasAtras(dataAlteracao);
+					Date dataAlteracao = registroAlteracao.getData();
+					long diasAtras = calculaDiasAtras(dataAlteracao);
 
-				if (diasAtras >= validadeAlteracao) {
-					projetosAtrasados.add(projeto);
-					break;
+					if (diasAtras >= validadeAlteracao) {
+						projetosAtrasados.add(projeto);
+						break;
+					}
 				}
 			}
 
