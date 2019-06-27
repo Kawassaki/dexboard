@@ -34,7 +34,7 @@ public class ITestDexboard extends ApiTest {
         JsonObject adv = projetos.get(1).getAsJsonObject();
         JsonObject facti = projetos.get(4).getAsJsonObject();
 
-        assertProjeto(495, "A4C", "CHAOS", 1.01, a4c);
+        assertProjeto(495, "A4C", "EQUIPE CHAOS", 1.01, a4c);
         assertProjeto(585, "ADV: Fase II", "MUSTACHE", 1.39, adv);
         assertEquals(APRESENTACAO, facti.get("apresentacao").getAsString());
     }
