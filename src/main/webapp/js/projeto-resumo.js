@@ -185,7 +185,7 @@ dexboard.resumo = (function ($, Handlebars) {
 	view.render = function(projetos) {
 		var projetoQuery = decodeURIComponent(queryProjeto());
 		var projeto = projetos.projetos.find(item => {
-			return item.nome.toLowerCase() == projetoQuery.toLowerCase();
+			return item.nome.toLowerCase().trim() == projetoQuery.toLowerCase().trim();
 		})
 
 		projeto.indicadores.forEach((indicador) => {
