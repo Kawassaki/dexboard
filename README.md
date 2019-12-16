@@ -20,7 +20,7 @@ Na raiz do projeto, execute o seguinte comando:
 
 Depois execute
 
-` mvn appengine:devserver `
+`mvn appengine:devserver`
 
 Se tudo estiver ok, você poderá acessar a URL:
 
@@ -33,6 +33,16 @@ Irá aparecer uma tela de login, onde é necessário utilizar um email `@dextra-
 
 A princípio os projetos não serão listados. Para isso você precisa atualizar os projetos.
 Isso pode ser feito chamando a URL: [localhost:8080/reload/projetos](http://localhost:8080/reload/projetos)
+
+## Crons
+
+Uma vez ao dia o Dexboard roda três crons. Um para atualizar o dashboard com informações da planilha de importação (`dxb.spreadsheet`), um para exportar todos os dados para outra planilha (´dxb.export.spreadsheet´) e um para enviar os emails com notificações a cerca de atrasos de preenchimento.
+
+Para rodar a importação imediatamente acesse:
+https://dexboard-reload.appspot.com/cron/reload/projetos
+
+Para rodar a exportação imediatamente acesse:
+https://dexboard-reload.appspot.com/cron/export
 
 ## Deploy
 

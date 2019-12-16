@@ -2,14 +2,14 @@
 <cronentries>
 	<cron>
 		<url>/cron/reload/projetos</url>
-		<schedule>every 15 minutes</schedule>
+		<schedule>every day 01:00</schedule>
 	</cron>
 	<cron>
 		<url>/cron/notificacao/projetos</url>
-		<schedule>every 12 hours</schedule>
+		<schedule>every day 02:00</schedule>
 	</cron>
 	<cron>
 		<url>/cron/export</url>
-		<schedule>every 15 minutes</schedule>
+		<schedule>every day 03:00</schedule>
 	</cron>
 </cronentries>
