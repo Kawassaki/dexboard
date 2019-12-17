@@ -1,5 +1,6 @@
 package br.com.dextra.dexboard.planilha;
 
+import com.github.feroult.gapi.BatchOptions;
 import com.github.feroult.gapi.GoogleAPI;
 import com.github.feroult.gapi.SpreadsheetAPI;
 import com.github.feroult.gapi.spreadsheet.SpreadsheetBatch;
@@ -38,7 +39,7 @@ abstract class Planilha {
 	}
 
 	protected void salvarBatch(SpreadsheetBatch batch){
-		this.spreadSheet.worksheet(sheetName).batch(batch);
+		this.spreadSheet.worksheet(sheetName).batch(batch, BatchOptions.SHRINK);
 	}
 
 	protected String recuperarConteudoCelula(int linha, int coluna) {
