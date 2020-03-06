@@ -8,8 +8,6 @@ Para contribuir com esse projeto acesso o nosso [Trello](https://trello.com/b/5G
 
 O Dexboard é um projeto interno da Dextra responsável por acompanhar a saúde dos projetos. Ele possui indicadores sobre cada projeto e é preenchido pelos colaboradores de cada equipe.
 
-Essa aplicação foi desenvolvida utilizando .
-
 O projeto está armazenado no Google App Engine.
 
 Para informações sobre a configuração do ambiente de desevolvimento e deploy, leia o nosso ***README***.
